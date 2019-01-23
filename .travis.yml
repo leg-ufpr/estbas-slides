@@ -13,6 +13,7 @@ apt_packages:
   - cm-super
 
 before_script:
+  - updmap
   - chmod +x ./_build.sh
   - chmod +x ./_deploy.sh
 
