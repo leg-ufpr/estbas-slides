@@ -31,7 +31,7 @@ Esta página abrange o conteúdo das seguintes disciplinas e cursos:
 
 # Slides
 
-1. [Análise Exploratória]()
+1. [Análise Exploratória](slides/01_Analise_Exploratoria.pdf)
 
 <!-- links -->
 
