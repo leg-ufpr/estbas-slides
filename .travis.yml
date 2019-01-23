@@ -17,6 +17,7 @@ apt_packages:
   - cm-super
 
 before_script:
+  - texhash
   - updmap-sys
   - chmod +x ./_build.sh
   - chmod +x ./_deploy.sh
