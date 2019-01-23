@@ -14,9 +14,7 @@ department: |
   | Universidade Federal do Paraná
   | Departamento de Estatística
 safe-columns: true
-fontfamily: inconsolata
-header-includes:
-  - \usepackage[T1]{fontenc}
+# fontfamily: inconsolata
 output:
   legtheme::beamer_leg
 ---
