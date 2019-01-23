@@ -10,6 +10,10 @@ r_packages:
   - plyr
   - TeachingDemos
 apt_packages:
+  - texlive-fonts-recommended
+  - texlive-fonts-extra
+  - texlive-latex-extra
+  - fonts-inconsolata
   - cm-super
 
 before_script:
