@@ -9,6 +9,8 @@ r_packages:
   - latticeExtra
   - plyr
   - TeachingDemos
+apt_packages:
+  - cm-super
 
 before_script:
   - chmod +x ./_build.sh
