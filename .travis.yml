@@ -3,6 +3,12 @@ cache: packages
 pandoc_version: 2.5
 r_github_packages:
   - leg-ufpr/legtheme
+r_packages:
+  - xtable
+  - printr
+  - latticeExtra
+  - plyr
+  - TeachingDemos
 
 before_script:
   - chmod +x ./_build.sh
