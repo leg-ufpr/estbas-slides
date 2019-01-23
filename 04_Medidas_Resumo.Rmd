@@ -1,0 +1,719 @@
+---
+title: "Medidas resumo"
+short-title: "Medidas resumo"
+author: |
+  | Wagner H. Bonat
+  | Elias T. Krainski
+  | Fernando P. Mayer
+short-author: "LEG/DEST/UFPR"
+# date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+# short-date: "2018/1"
+institute: "Laboratório de Estatística e Geoinformação"
+# short-institute: "LEG/DEST/UFPR"
+department: |
+  | Universidade Federal do Paraná
+  | Departamento de Estatística
+safe-columns: true
+fontfamily: inconsolata
+output:
+  legtheme::beamer_leg
+---
+
+```{r setup, cache=FALSE, include=FALSE}
+source("setup_knitr_slides.R")
+library(xtable)
+op <- par(no.readonly = TRUE)
+```
+
+# Introdução
+
+### Introdução
+
+Características importantes de qualquer conjunto de dados
+ou de uma variável aleatória
+
+- Centro
+- Variação
+- Distribuição
+- Valores atípicos
+
+\pause
+
+Classificaremos as medidas descritivas em dois grupos
+
+- de posição
+- de dispersão
+
+# Medidas de posição
+
+## Medidas de posição para um conjunto de dados
+
+### Definição
+
+- medidas de posição central
+    - úteis para **resumo** e **análise** de dados
+        - Média, Mediana, Moda
+
+- outras medidas de posição
+    - extremos: mínimo, máximo
+    - quantis: 1$^\circ$ quartil, 3$^\circ$ quartil, percentil 5%, entre
+      outras
+
+### Moda
+
+Valor **mais frequente** em um conjunto de dados
+
+- Dependendo do conjunto de dados, ele pode ser
+   - **Sem moda** quando nenhum valor se repete
+   - **Unimodal** quando existe apenas um valor repetido com maior frequência
+   - **Bimodal** quando existem dois valores com a mesma maior frequência
+   - **Multimodal** quando mais de dois valores se repetem com a mesma frequência
+
+\pause
+
+Valor com **maior probabilidade** de ocorrer numa **VA discreta**
+
+- Ex.: lançamento de duas moedas
+    - $X$: número de caras, $X = \{0, 1, 2\}$
+    - $P(x)$ = $0.25$, $0.5$ e $0.25$, respectivamente
+    - moda: 1
+
+### Mediana
+
+O **valor do meio** da amostra **ordenada**
+
+- Separa o conjunto de dados em duas partes iguais, 50% abaixo e 50% acima
+
+Observações ordenadas:
+
+- a menor observação por $x_{(1)}$, a segunda por $x_{(2)}$, e assim por diante:
+$$
+x_{(1)} \leq x_{(2)} \leq \, \cdots \, \leq x_{(n-1)} \leq x_{(n)}
+$$
+
+As observações odenadas são chamadas de **estatísticas de ordem**
+
+- $x_{(1)}$ é o mínimo da amostra
+- $x_{(n)}$ é o máximo da amostra
+
+### Média de dados brutos
+
+Divide-se a soma de todos os dados pelo número total deles:
+
+$$
+\bar{x}_{obs} = \frac{x_1 + x_2 + \cdots + x_n}{n} = \frac{\sum_{i=1}^n
+x_i}{n}.
+$$
+
+### Média de dados agrupados
+
+Soma dos produtos dos valores pelas respectivas frequências e divide
+pela frequência total
+
+$$
+\bar{x}_{obs} = \frac{n_1 x_1 + n_2 x_2 + \cdots + n_k x_k}{n_1 + n_2 +
+\cdots + n_k} = \frac{\sum_{i=1}^k n_i x_i}{n}.
+$$
+
+### Exemplo: média de dados discretos agrupados
+
+Considere a tabela de frequência abaixo:
+
+\begin{table}[h]
+\centering
+    \small
+    \begin{tabular}{ccc}
+      \hline
+      \textbf{Número} & \textbf{$n_i$} & \textbf{$f_i$} \\
+      \hline
+      0 & 4 & 0,20 \\
+      1 & 5 & 0,25 \\
+      2 & 7 & 0,35 \\
+      3 & 3 & 0,15 \\
+      5 & 1 & 0,05 \\
+      \hline
+      \textbf{Total} & 20 & 1 \\
+      \hline
+    \end{tabular}
+\end{table}
+
+A média é calculada por:
+\begin{align*}
+\bar{x}_{obs} &= \frac{ 0 \cdot 4 + 1 \cdot 5 + 2 \cdot 7 + 3 \cdot 3 + 5 \cdot 1 }{4 + 5 + 7 + 3 + 1}\\
+  &= \frac{33}{20} \\
+  &= 1,65
+\end{align*}
+
+### Exemplo: média de dados agrupados em classes
+
+Usar **ponto médio** de cada classe e respectivas frequências
+
+\begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{lcc}
+      \hline
+      \textbf{Classe} & \textbf{$n_i$} & \textbf{$f_i$} \\
+      \hline
+      $[4,8)$ & 10 & 0,278 \\
+      $[8,12)$ & 12 & 0,333 \\
+      $[12,16)$ & 8 & 0,222 \\
+      $[16,20)$ & 5 & 0,139 \\
+      $[20,24)$ & 1 & 0,028 \\
+      \hline
+      \textbf{Total} & 36 & 1 \\
+      \hline
+    \end{tabular}
+\end{table}
+Considerando os pontos médios de cada classe, a média é calculada por
+\begin{align*}
+\bar{x}_{obs} &= \frac{ (6 \cdot 10 + 10 \cdot 12 + \cdots + 22 \cdot 1) }{10 + 12 + 8 + 5 + 1}\\
+  &= \frac{404}{36} \\
+  &= 11,22
+\end{align*}
+
+### Exemplo $4.1$
+
+Suponha que parafusos a serem utilizados em tomadas elétricas
+são embalados em caixas rotuladas como contendo $100$ unidades. Em
+uma construção, $10$ caixas de um lote tiveram o número de parafusos
+contados, fornecendo os valores:
+
+$98$, $102$, $100$, $100$, $99$, $97$, $96$, $95$, $99$ e $100$
+
+Calcular média, mediana e moda.
+
+- $\bar{x}_{obs} = 98.6.$
+- $md_{obs} = 99.$
+- $mo_{obs} = 100.$
+
+### Média e mediana
+
+Notar a influência de valores extremos na média
+(se ao invés de 95, o valor fosse 45):
+
+\begin{center}
+\texttt{95 96 97 98 99 99 100 100 100 102} $\quad \Rightarrow \quad $
+  $\bar{x}_{obs} = 98,6$ e $Md = 99$
+\end{center}
+\begin{center}
+\texttt{45 96 97 98 99 99 100 100 100 102} $\quad \Rightarrow \quad $
+  $\bar{x}_{obs} = 93,6$ e $Md = 99$
+\end{center}
+
+Devido a esse fato, a mediana é uma medida de posição central
+**robusta**, ou seja, *não influenciada por valores extremos*.
+
+### Média, mediana e moda
+
+```{r, out.width='90%', echo=FALSE}
+knitr::include_graphics("img/medidas-crop.pdf")
+```
+
+### Exemplo $4.4$
+
+Um estudante está procurando um estágio para o próximo ano.
+As companhias A e B têm programas de estágios e oferecem uma
+remuneração por $20$ horas semanais com as seguintes características.
+
+\begin{table}
+\centering
+\begin{tabular}{lcc}
+\hline
+Companhia   & A     & B  \\ \hline
+média       & $2,5$ & $2,0$ \\
+mediana     & $1,7$ & $1,9$ \\
+moda        & $1,5$ &  $1,9$ \\ \hline
+\end{tabular}
+\end{table}
+
+Qual companhia você escolheria?
+
+<!-- ### Exemplo $4.2$ -->
+
+<!-- Nas caixas de parafusos do Exemplo $4.1$, vamos admitir um custo -->
+<!-- de $c$ por parafuso e de $e$ pela embalagem da caixa. Desejamos -->
+<!-- calcular as medidas de posição do custo total ($T$), definido como a -->
+<!-- soma dos custos dos parafusos e da embalagem. -->
+
+### Exemplo $4.3$
+
+Foram coletadas $150$ observações da variável $X$, representando
+o número de vestibulares FUVEST (um por ano) que um mesmo estudande
+prestou. Com os dados da tabela abaixo, calcule as medidas de posição de
+$X$.
+
+\begin{table}
+\centering
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{l}{X} & \multicolumn{1}{l}{$n_i$} \\ \hline
+1                       & 75                        \\
+2                       & 47                        \\
+3                       & 21                        \\
+4                       & 7                        \\ \hline
+\end{tabular}
+\end{table}
+
+Suponha ainda que o interesse é estudar o gasto dos alunos associado com
+as despesas do vestibular. Para simplificar, suponha que se atribui para
+cada aluno, uma despesa fixa de R\$ $1300,00$ relativa a preparação e
+mais R\$ $50$ para cada vestibular prestado. Calcule as medidas de
+posição central para a variável $D$ (despesa com vestibular).
+
+## Medidas de posição para VAs discretas
+
+### Medidas de posição para VAs discretas
+
+Sabemos que a descrição completa do comportamento de uma VA discreta é
+feita através de sua **função de probabilidade**.
+
+Assim como fizemos para um conjunto de dados qualquer, podemos obter as
+medidas de posição para qualquer variável aleatória.
+
+Lembrando que se os possíveis valores de uma VA $X$ são $x_1, x_2,
+\ldots, x_k$, com correspondentes probabilidades $p_1, p_2, \ldots,
+p_k$, então as medidas de posição podem ser definidas a seguir.
+
+### Medidas de posição para VAs discretas
+
+A Média é chamada de **valor esperado** ou **esperança**
+$$
+E(X) = \sum_{i=1}^k x_i p_i.
+$$
+A Mediana é o valor $Md$ que satisfaz as seguintes condições
+$$
+P(X \geq Md) \geq 1/2 \quad \text{e} \quad P(X \leq Md) \leq 1/2.
+$$
+A Moda é o valor (ou valores) com maior probabilidade de ocorrência
+$$
+P(X = Mo) = \max\{p_1, p_2, ..., p_k\}.
+$$
+
+### Exemplo $4.5$
+
+Considere a VA $X$ com a seguinte função discreta de probabilidade:
+
+\begin{table}
+\centering
+\begin{tabular}{l|llll}
+$X$    & -5  & 10  & 15  & 20  \\ \hline
+$p_i$ & 0.3 & 0.2 & 0.4 & 0.1 \\
+\end{tabular}
+\end{table}
+
+Calcule as medidas de tendência central.
+
+### Exemplo $4.6$
+
+Considere uma VA $X$ com função de probabilidade dada por
+
+\begin{table}
+\centering
+\begin{tabular}{l|lllll}
+X    & 2  & 5  & 8  & 15 & 20  \\ \hline
+$p_i$ & 0.1 & 0.3 & 0.2 & 0.2 & 0.2
+\end{tabular}
+\end{table}
+
+Calcule as medidas de posição para a VA $Y = 5X - 10$.
+
+# Medidas de dispersão
+
+## Medidas de dispersão para um conjunto de dados
+
+### Introdução
+
+O resumo de um conjunto de dados exclusivamente por uma medida de
+centro, **esconde** toda a informação sobre a variabilidade do
+conjunto de observações.
+
+Não é possível analisar um conjunto de dados apenas através de uma
+medida de tendência central.
+
+Por isso precisamos de medidas que resumam a **variabilidade** dos
+dados em relação à um valor central.
+
+### Exemplo: mesma média, diferente dispersão
+
+```{r, echo=FALSE, out.width='80%', fig.width=8, fig.height=6}
+par(mfrow=c(2,1), mar = c(4.1, 4.1, 3.1, 1.1))
+set.seed(2)
+hist(rnorm(1000, 100, 2), main = "Média = 100", freq = FALSE,
+     ylab = "Densidade", xlab = "x",
+     xlim = c(40, 160)); box()
+abline(v=100, col="red", lwd = 3)
+hist(rnorm(1000, 100, 10), main = "Média = 100", freq = FALSE,
+     ylab = "Densidade", xlab = "x",
+     xlim = c(40, 160)); box()
+abline(v=100, col="red", lwd = 3)
+par(op)
+```
+
+### Exemplo
+
+<!-- Bussab, pg 37 -->
+Cinco grupos de alunos se submeteram a um teste, obtendo as seguintes
+notas
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{crr}
+      \hline
+      \textbf{Grupo} & \textbf{Notas} & $\bar{x}$ \\ \hline
+      A & 3, 4, 5, 6, 7 & 5 \\
+      B & 1, 3, 5, 7, 9 & 5\\
+      C & 5, 5, 5, 5, 5 & 5\\
+      D & 3, 5, 5, 7 & 5\\
+      E & 3, 5, 5, 6, 6 & 5\\
+      \hline
+    \end{tabular}
+\end{table}
+
+O que a média diz a respeito das notas quando comparamos os grupos?
+
+### Definição
+
+São medidas estatísticas que caracterizam o quanto um conjunto de
+dados está disperso em torno de sua tendência central.
+
+Ferramentas para **resumo** e **análise** de dados:
+
+- Amplitude
+- Desvio-médio (ou mediano)
+- Variância
+- Desvio-padrão
+- Coeficiente de Variação
+
+### Amplitude
+
+A **amplitude** de um conjunto de dados é a diferença entre o
+maior e o menor valor:
+$$
+\Delta = \max - \min = x_{(n)} - x_{(1)}
+$$
+
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{crr}
+      \hline
+      \textbf{Grupo} & \textbf{Notas} & $\Delta$ \\ \hline
+      A & 3, 4, 5, 6, 7 & 4 \\
+      B & 1, 3, 5, 7, 9 & 8\\
+      C & 5, 5, 5, 5, 5 & 0\\
+      D & 3, 5, 5, 7 & 4\\
+      E & 3, 5, 5, 6, 6 & 3\\
+      \hline
+    \end{tabular}
+\end{table}
+
+- **Apenas** usar máximo e mínimo torna **sensível** a valores extremos
+    - Melhor medida de variabilidade: considerar **todos os dados
+      disponíveis**
+    - **Desvio** de cada valor em relação à uma medida de posição
+      central (média ou mediana)
+
+### Desvio médio e mediano
+
+Um **resumo** da variabilidade: **média** dos desvios **absolutos**
+
+- **Desvio mediano**: a **mediana** como medida de posição central
+$$
+\text{desvio mediano} = \frac{1}{n}\sum_{i=1}^n | x_i - md_{obs}|.
+$$
+- **Desvio médio**: a **média** como medida de posição central
+$$
+\text{desvio médio} = \frac{1}{n}\sum_{i=1}^n | x_i - \bar{x}_{obs}|.
+$$
+
+### Exemplo: Desvio médio
+
+Considere as notas do grupo A do exemplo acima ($\bar{x}_{obs} = 5$)
+
+O desvio médio (DM) pode ser calculado da seguinte forma:
+
+\begin{table}[htbp]
+ \centering
+ \small
+ \begin{tabular}{ccc}
+ \hline
+ \textbf{Grupo A} & $x_i - \bar{x}$ & $|x_i - \bar{x}|$ \\ \hline
+ 3 & -2 & 2 \\
+ 4 & -1 & 1\\
+ 5 & 0 & 0\\
+ 6 & 1 & 1\\
+ 7 & 2 & 2\\
+ \hline
+ Soma & 0 & 6\\
+ \hline
+ \end{tabular}
+\end{table}
+
+$\text{DM} = \frac{1}{n}\sum_{i=1}^n | x_i - \bar{x}_{obs}| =
+\frac{6}{5} = 1,2$
+
+O desvio médio é baseado em uma operação **não algébrica**
+(módulo), o que torna mais difícil o estudo de suas propriedades.
+
+### Variância e desvio-padrão de um conjunto de dados
+
+Uma alternativa melhor é usar a **soma dos quadrados dos desvios**,
+que dá origem à **variância** de um conjunto de dados
+$$
+var_{obs} = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x}_{obs})^2
+$$
+Para manter a mesma unidade de medida dos dados originais,
+definimos o **desvio padrão** como
+$$
+dp_{obs} = \sqrt{var_{obs}}
+$$
+Uma expressão alternativa da variância (mais fácil de calcular) é
+$$
+var_{obs} = \frac{1}{n}\sum_{i=1}^n x_i^2 - \bar{x}_{obs}^2
+$$
+
+### Exemplo
+
+No exemplo anterior
+
+\begin{table}[htbp]
+ \centering
+ \small
+\begin{tabular}{ccccc}
+ \hline
+ \textbf{Grupo A} & $x_i - \bar{x}$ & $|x_i - \bar{x}|$ & $(x_i -
+ \bar{x})^2$ & $x_i^2$ \\ \hline
+ 3 & -2 & 2 & 4 & 9 \\
+ 4 & -1 & 1 & 1 & 16 \\
+ 5 & 0 & 0 & 0 & 25 \\
+ 6 & 1 & 1 & 1 & 36 \\
+ 7 & 2 & 2 & 4 & 49 \\
+ \hline
+ Soma & 0 & 6 & 10 & 135 \\
+ \hline
+ \end{tabular}
+\end{table}
+
+A variância é
+
+$var_{obs} = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x}_{obs})^2 =
+ \frac{10}{5} = 2.$
+
+Ou, usando a fórmula alternativa
+
+$var_{obs} = \frac{1}{n}\sum_{i=1}^n x_i^2 - \bar{x}_{obs}^2 =
+  \frac{135}{5} - 5^2 = 2.$
+
+### Coeficiente de variação
+
+O **coeficiente de variação** para um conjunto de dados é definido
+por
+$$
+cv_{obs} = \frac{dp_{obs}}{\bar{x}_{obs}}
+$$
+É uma medida **adimensional**, e geralmente apresentada na forma de
+porcentagem.
+
+No exemplo anterior: $dp_{obs} = \sqrt{var_{obs}} = \sqrt{2} = 1,414214$.
+
+Portanto:
+$$
+cv_{obs} = \frac{dp_{obs}}{\bar{x}_{obs}} = \frac{1,414214}{5} = 0,2828427
+\approx 28,3\%
+$$
+
+### Variância em tabelas de frequência
+
+Assim como no caso da média, se tivermos $n$ observações da variável
+$X$, das quais $n_1$ são iguais a $x_1$, $n_2$ são iguais a $x_2$,
+\ldots, $n_k$ são iguais a $x_k$, então a variância pode ser definida
+por:
+
+$$
+var_{obs}(X) = \frac{1}{n} \sum_{i=1}^{k} n_i (x_i - \bar{x}_{obs})^2
+$$
+
+Ou, pela fórmula alternativa:
+
+$$
+var_{obs}(X) = \frac{1}{n} \sum_{i=1}^{k} n_i x_{i}^{2} -
+\bar{x}_{obs}^2
+$$
+
+### Exemplo
+
+Como exemplo, considere a tabela de frequência abaixo ($\bar{x} = 1,65$):
+
+\begin{table}[h]
+  \centering
+  \small
+  \begin{tabular}{ccccc}
+  \hline
+  \textbf{Número} & \textbf{$n_i$} & \textbf{$f_i$}
+  & \textbf{$x_i - \bar{x}$} & \textbf{$(x_i - \bar{x})^2$} \\
+  \hline
+  0 & 4 & 0,20 & -1,65 & 2,72 \\
+  1 & 5 & 0,25 & -0,65 & 0,42 \\
+  2 & 7 & 0,35 & 0,35 & 0,12 \\
+  3 & 3 & 0,15 & 1,35 & 1,82 \\
+  5 & 1 & 0,05 & 3,35 & 11,22 \\
+  \hline
+  \textbf{Total} & 20 & 1 & &  \\
+  \hline
+  \end{tabular}
+\end{table}
+
+A variância pode ser calculada por:
+\begin{align*}
+var_{obs} =& \frac{(4 \cdot 2,72 + 5 \cdot 0,42 + \cdots + 1 \cdot 11,22 ) } {4 + 5 + 7 + 3 + 1} \\
+  =& \frac{30,55}{20} \\
+  =& 1,528
+\end{align*}
+
+```{r, include=FALSE}
+x <- c(0,1,2,3,5)
+f <- c(4, 5, 7, 3, 1)
+n <- sum(f)
+(mx <- sum(x*f)/n)
+x - mx
+(x - mx)^2
+f*(x - mx)^2
+sum(f*(x - mx)^2)
+sum(f*(x - mx)^2)/n
+```
+
+### Exemplo
+
+Considere a seguinte tabela de distribuição de frequência ($\bar{x} =
+11,22$):
+
+\begin{table}[h]
+ \centering
+ \small
+ \begin{tabular}{lccccc}
+ \hline
+ \textbf{Classe} & \textbf{PM = $x_i$} & \textbf{$n_i$}
+ & \textbf{$f_i$} & \textbf{$x_i - \bar{x}$} & \textbf{$(x_i - \bar{x})^2$} \\
+ \hline
+ $[4,8)$ & 6 & 10 & 0,278 & -5,222 & 27,272 \\
+ $[8,12)$ & 10 & 12 & 0,333 & -1,222 & 1,494 \\
+ $[12,16)$ & 14 & 8 & 0,222 & 2,778 & 7,716 \\
+ $[16,20)$ & 18 & 5 & 0,139 & 6,778 & 45,938 \\
+ $[20,24)$ & 22 & 1 & 0,028 & 10, 778 & 116,160 \\
+ \hline
+ \textbf{Total} & & 36 & 1 & & \\
+ \hline
+ \end{tabular}
+\end{table}
+
+Considerando os **pontos médios** de cada classe como os valores $x_i$,
+a variância pode ser calculada por
+\begin{align*}
+ var_{obs} &= \frac{( 10 \cdot 27,272 + 12 \cdot 1,494 +
+           \cdots + 1 \cdot 116,160 ) } {10 + 12 + 8 + 5 + 1}\\
+ &= \frac{698,22}{36} = 19,395
+\end{align*}
+
+```{r,  include=FALSE}
+x <- c(6, 10, 14, 18, 22)
+f <- c(10, 12, 8, 5, 1)
+n <- sum(f)
+(mx <- sum(x*f)/n)
+x - mx
+(x - mx)^2
+f*(x - mx)^2
+sum(f*(x - mx)^2)
+sum(f*(x - mx)^2)/n
+```
+
+### Exemplo $4.9$
+
+No Exemplo $4.3$, definimos a quantidade $D$, despesa no
+vestibular, obtida a partir de $X$ pela expressão $D =  50X + 1300$,
+com $X$ indicando o número de vestibulares prestados.
+
+\begin{table}
+\centering
+\begin{tabular}{ll}
+\hline
+\multicolumn{1}{l}{X} & \multicolumn{1}{l}{$n_i$} \\ \hline
+1                       & 75                        \\
+2                       & 47                        \\
+3                       & 21                        \\
+4                       & 7                        \\ \hline
+\end{tabular}
+\end{table}
+
+Calcule a variância de $D$.
+
+Fazer também: Exemplo $4.10$.
+
+## Medidas de dispersão para VAs discretas
+
+### Variância de uma VA discreta
+
+Calcula o valor esperado:
+ $\mu = E(X) = \sum_{i=1}^k x_i p_i$
+
+Multiplica o quadrado dos desvios em torno do valor esperado pela probabilidade e soma
+
+\[ Var(X) =  \sum_{i=1}^k (x_i - \mu)^2 p_i \]
+
+Alternativamente, podemos usar
+
+\[ Var(X) = E[(X - \mu)^2] = E(X^2) - E(X)^2 \]
+
+com $E(X^2) = \sum_{i=1}^k x_i^2 p_i$
+
+- Ver Tabelas resumo $4.2$ e $4.3$.
+
+### Exemplo $4.11$
+
+Uma pequena cirurgia dentária pode ser realizada por três métodos
+diferentes cujos tempos de recuperação (em dias) são modelados pelas
+variáveis $X_1$, $X_2$ e $X_3$. Admita suas funções de probabilidades
+são dadas por
+
+\begin{table}
+\centering
+\begin{tabular}{l|lllll}
+$X_1$ & 0  & 4  & 5  & 6 & 10  \\ \hline
+$p_i$ & 0.2 & 0.2 & 0.2 & 0.2 & 0.2
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{l|lll}
+$X_2$ & 1     & 5     & 9    \\ \hline
+$p_i$ & $1/3$ & $1/3$ & $1/3$
+\end{tabular}
+\end{table}
+
+\begin{table}
+\centering
+\begin{tabular}{l|lll}
+$X_3$ & 4   & 5   & 6   \\ \hline
+$p_i$ & 0.3 & 0.4 & 0.3
+\end{tabular}
+\end{table}
+
+Calcule as medidas de posição central e dispersão para cada VA
+e decida sobre o método mais eficiente.
+
+### Esperança e variância de modelos teóricos
+
+- Exemplo $4.14$: Seja $X$ com distribuição Bernoulli de parâmetro $p$. Calcule
+a esperança e a variância de $X$.
+- Exemplo $4.15$: Seja $X$ com distribuição Binomial de parâmetros $n$ e $p$.
+Calcule a esperança e a variância de $X$.
+- Ver resultados da Tabela $4.4$.
+
+# Exercícios recomendados
+
+### Exercícios recomendados
+
+- Seção $4.2$ - $1,2,3,4$ e $6$.
+- Seção $4.3$ - $1,2,3,4,5$ e $6$.
+- Extras: Seção 4.4 - 2, 4, 7, 10 e 15.

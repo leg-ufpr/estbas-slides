@@ -1,0 +1,981 @@
+---
+title: "Estimação: (A) Propriedades e Distribuições Amostrais"
+short-title: "Estimação: Parte A"
+author: |
+  | Wagner H. Bonat
+  | Fernando P. Mayer
+  | Elias T. Krainski
+short-author: "LEG/DEST/UFPR"
+# date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+# short-date: "2018/1"
+institute: "Laboratório de Estatística e Geoinformação"
+# short-institute: "LEG/DEST/UFPR"
+department: |
+  | Universidade Federal do Paraná
+  | Departamento de Estatística
+safe-columns: true
+fontfamily: inconsolata
+output:
+  legtheme::beamer_leg
+---
+
+```{r setup, cache=FALSE, include=FALSE}
+source("setup_knitr_slides.R")
+library(xtable)
+library(lattice)
+library(latticeExtra)
+library(plyr)
+op <- par(no.readonly = TRUE)
+```
+
+# Introdução
+
+### Inferência estatística
+
+Seja $X$ uma variável aleatória com função densidade (ou de
+probabilidade) denotada por $f(x,\theta)$, em que $\theta$ é um
+parâmetro desconhecido. Chamamos de **inferência estatística** o
+problema que consiste em especificar um ou mais valores para $\theta$,
+baseado em um conjunto de valores $X$.
+
+A inferência pode ser feita de duas formas:
+
+- estimativa pontual
+- estimativa intervalar
+
+### Redução de dados
+
+Um experimentador usa as informações em uma amostra aleatória $X_1,
+\ldots, X_n$ para se fazer inferências sobre $\theta$.
+
+Normalmente $n$ é grande e fica inviável tirar conclusões baseadas em
+uma longa **lista** de números.
+
+Por isso, um dos objetivos da inferência estatística é **resumir** as
+informações de uma amostra, da maneira mais **compacta** possível, mas
+que ao mesmo tempo seja também **informativa**.
+
+Normalmente esse resumo é feito por meio de **estatísticas**, por
+exemplo, a média amostral e a variância amostral.
+
+### População e amostra
+
+O  conjunto de valores de uma característica associada a uma coleção
+de indivíduos ou objetos de interesse é dito ser uma população.
+
+Uma sequência $X_1, \ldots, X_n$ de $n$ variáveis aleatórias
+independentes e identicamente distribuídas (iid) com função
+densidade (ou de probabilidade) $f(x,\theta)$ é dita ser uma amostra
+aleatória de tamanho $n$ da distribuição de $X$.
+
+Como normalmente $n>1$, então temos que a fdp ou fp conjunta será
+$$
+f(\boldsymbol{x, \theta}) = f(x_1, \ldots, x_n, \theta) = \prod_{i=1}^n
+f(x_i, \theta).
+$$
+
+### População e amostra
+
+```{r, out.width='80%'}
+knitr::include_graphics("img/populacao_amostra.png")
+```
+
+# Estimação pontual
+
+## Parâmetros, estimadores e estimativas
+
+### Parâmetro e Estatística
+
+**População** $\rightarrow$ **censo** $\rightarrow$ **parâmetro**
+
+*Uma medida numérica que descreve alguma
+característica da **população**, usualmente representada
+por letras gregas: $\theta$, $\mu$, $\sigma$, $\ldots$*
+
+Exemplo: média populacional = $\mu$
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+**População** $\rightarrow$ **amostra** $\rightarrow$ **estatística**
+
+*Uma medida numérica que descreve alguma
+característica da **amostra**, usualmente denotada pela
+letra grega do respectivo parâmetro com um acento circunflexo:
+$\hat\theta$, $\hat\mu$, $\hat\sigma$, $\ldots$, ou por letras do
+alfabeto comum: $\bar x$, $s$, $\ldots$*
+
+Exemplo: média amostral = $\bar{x}$
+
+### Parâmetros
+
+É importante notar que um parâmetro não é restrito aos modelos de
+probabilidade. Por exemplo:
+
+- $X \sim \text{N}(\mu, \sigma^2)$ $\Rightarrow$ parâmetros: $\mu$, $\sigma^2$
+- $Y \sim \text{Poisson}(\lambda)$ $\Rightarrow$ parâmetro: $\lambda$
+- $Y = \beta_0 + \beta_1 X$ $\Rightarrow$ parâmetros: $\beta_0$, $\beta_1$
+- $L_t = L_{\infty}[1 - e^{-k(t - t_0)}]$ $\Rightarrow$ parâmetros:
+$L_{\infty}$, $k$, $t_0$
+
+### Estatística
+
+Qualquer função da amostra que não depende de parâmetros desconhecidos é
+denominada uma estatística, denotada por $T(\mathbf{X}) = T(X_1, X_2,
+\ldots, X_n)$
+
+Exemplos:
+
+- $T_1(\mathbf{X}) = \sum_{i=1}^{n} X_i = X_1 + X_2 + \cdots + X_n$
+- $T_2(\mathbf{X}) = \prod_{i=1}^{n} X_i = X_1 \cdot X_2 \cdots X_n$
+- $T_3(\mathbf{X}) = X_{(1)}$
+- $T_4(\mathbf{X}) = \sum_{i=1}^{n} (X_i - \mu)^2$
+
+\pause
+
+Verificamos que $T_1$, $T_2$, $T_3$ são estatístcas, mas $T_4$
+não.
+
+Como é uma função da amostra, então uma estatística também é uma
+**variável aleatória** $\rightarrow$ distribuições amostrais
+
+### Estimador
+
+#### Espaço paramétrico
+O conjunto $\Theta$ em que $\theta$ pode assumir seus valores é
+chamado de **espaço paramétrico**
+
+#### Estimador
+Qualquer estatística que assume valores em $\Theta$ é um estimador
+para $\theta$.
+
+#### Estimador pontual
+Dessa forma, um **estimador pontual** para $\theta$ é qualquer
+estatística que possa ser usada para estimar esse parâmetro, ou seja,
+$$\hat{\theta} = T(\mathbf{X})$$
+
+### Estimador
+
+**Observações:**
+
+1. Todo estimador é uma estatística, mas nem toda estatística é um
+estimador.
+2. O valor assumido pelo estimador pontual é chamado de **estimativa
+pontual**,$$\hat{\theta} = T(\mathbf{X}) = T(X_1, \ldots, X_n) = t$$ ou
+seja, o estimador é uma **função** da amostra, e a estimativa é o
+**valor observado** de um estimador (um número) de uma amostra
+particular.
+
+### Estimação pontual
+
+A ideia geral por trás da estimação pontual é muito simples:
+
+Quando a amostragem é feita a partir de uma população descrita por uma
+função $f(x,\theta)$, o conhecimento de $\theta$ a partir da amostra,
+gera todo o conhecimento para a população.
+
+Dessa forma, é natural que se procure um **método** para se
+achar um **bom** estimador para $\theta$.
+
+Existem algumas **propriedades** que definem o que é um bom
+estimador, ou o ``**melhor**'' estimador entre uma série de
+candidatos.
+
+### Estimação pontual
+
+**Localização do problema:** Considere $X_1, \ldots, X_n$ uma
+amostra aleatóra de uma variável aleatória $X$ com fdp ou fp
+$f(x,\theta)$, $\theta \in \Theta$. Sejam:
+
+$$
+\hat{\theta}_1 = T_1(X_1, ..., X_n) \quad \quad \hat{\theta}_2 =
+T_2(X_1, ..., X_n)
+$$
+
+Qual dos dois estimadores pontuais é **melhor** para $\theta$?
+
+Como não conhecemos $\theta$, não podemos afirmar que $\hat{\theta}_1$
+é melhor do que $\hat{\theta}_2$ e vice-versa.
+
+O problema da estimação pontual é então escolher um estimador
+$\hat{\theta}$ que se aproxime de $\theta$ segundo algumas
+**propriedades**.
+
+### Estimação pontual
+
+**Exemplo 1:** Considere uma amostra aleatória ($X_1, \ldots,
+X_n$) de uma variável aleatória $X \sim \text{N}(\mu = 3, \sigma^2 = 1)$ e os
+estimadores pontuais para $\mu$
+$$\hat{\theta}_1 = \frac{1}{n} \sum_{i=1}^n X_i \qquad \text{e} \qquad
+\hat{\theta}_2 = \frac{X_{(1)}+X_{(n)}}{2}$$
+Qual dos dois estimadores pode ser considerado como o **melhor**
+para estimar o verdadeiro valor de $\mu$?
+
+Considere os seguintes pseudo-códigos para um estudo de simulação do
+comportamento destes dois estimadores:
+
+### Estimação pontual
+
+#### Pseudo-código 1
+\small
+- Simule uma amostra de tamanho $n = 10$ da distribuição considerada
+- Para essa amostra, calcule a média ($\hat{\theta}_1$) e o ponto
+médio ($\hat{\theta}_2$)
+- Repita os passos (1) e (2) acima $m = 1000$ vezes
+- Faça um gráfico da densidade das $m = 1000$ estimativas de
+$\hat{\theta}_1$ e $\hat{\theta}_2$ e verifique seu comportamento
+
+#### Pseudo-código 2
+\small
+- Simule amostras de tamanhos ($n$) 2, 3, 5, 10, 20, 50, 100, 500,
+1000 da distribuição considerada
+- Para cada amostra de tamanho $n$, calcule a média
+($\hat{\theta}_1$) e o ponto médio ($\hat{\theta}_2$)
+- Repita os passos (1) e (2) acima $m = 100$ vezes
+- Faça um gráfico das $m = 100$ estimativas de
+$\hat{\theta}_1$ e $\hat{\theta}_2$ para cada tamanho de amostra $n$
+e verifique seu comportamento
+
+### Estimação pontual: Pseudo-código 1 - $X \sim \text{N}(3,1)$
+
+```{r, results='hide', out.width='80%', fig.width=7, fig.height=5}
+N <- 1000
+n <- 10
+
+set.seed(1)
+th1 <- replicate(N, mean(rnorm(n, mean=3, sd=1)))
+th2 <- replicate(N, mean(range(rnorm(n, mean=3, sd=1))))
+
+L <- list(th1=data.frame(est=th1), th2=data.frame(est=th2))
+L <- ldply(L)
+str(L)
+
+densityplot(~est|.id, data = L,
+            panel = function(x, ...){
+    panel.densityplot(x, ...)
+    panel.abline(v = mean(x))
+},
+xlab = "Estimativa", ylab = "Densidade",
+strip = strip.custom(factor.levels =
+                         c(expression(hat(theta[1])), expression(hat(theta[2])))))+
+    layer(panel.abline(v=3))
+```
+
+### Estimação pontual: Pseudo-código 2 - $X \sim \text{N}(3,1)$
+
+```{r, results='hide', out.width='80%', fig.width=7, fig.height=5}
+N <- 100
+nval <- c(2,3,5,10,20,50,100,500,1000)
+
+set.seed(1)
+th1 <- sapply(nval,
+              function(n){
+    replicate(N, mean(rnorm(n, mean=3, sd=1)))
+})
+str(th1)
+th1 <- stack(as.data.frame(th1))
+levels(th1$ind) <- as.character(nval)
+th1$ind <- as.numeric(as.character(th1$ind))
+
+## xyplot(values~ind, th1, scales=list(x=list(log=10)))
+
+set.seed(1)
+## th2 <- replicate(N, mean(range(rnorm(N, mean=3, sd=1))))
+th2 <- sapply(nval,
+              function(n){
+    replicate(N, mean(range(rnorm(n, mean=3, sd=1))))
+})
+str(th2)
+th2 <- stack(as.data.frame(th2))
+levels(th2$ind) <- as.character(nval)
+th2$ind <- as.numeric(as.character(th2$ind))
+## xyplot(values~ind, th2, scales=list(x=list(log=10)))
+
+L <- list(th1=th1, th2=th2)
+L <- ldply(L)
+L$.id <- factor(L$.id)
+
+## xyplot(values~.id|factor(ind), L, jitter.x=TRUE, as.table = TRUE)+
+##     layer(panel.abline(h=3))
+
+xyplot(values~ind|factor(.id), L,
+       xlab = "Tamanho da amostra (escala log)", ylab = "Estimativas",
+       strip = strip.custom(factor.levels =
+                                c(expression(hat(theta[1])),
+                                  expression(hat(theta[2])))),
+       scales=list(x=list(log=10)))+
+    layer(panel.abline(h=3))
+```
+
+### Estimação pontual
+
+**Exemplo 2:** Considere uma amostra aleatória ($X_1, \ldots,
+X_n$) de uma variável aleatória $Y \sim \text{U}(\text{min} = 2,
+\text{max} = 4)$ (distribuição uniforme no intervalo [2,4]) e os
+estimadores pontuais para $\mu$
+$$\hat{\theta}_1 = \frac{1}{n} \sum_{i=1}^n X_i \qquad \text{e} \qquad
+\hat{\theta}_2 = \frac{X_{(1)}+X_{(n)}}{2}$$
+Qual dos dois estimadores pode ser considerado como o **melhor**
+para estimar a média de $Y$?
+
+### Estimação pontual: Pseudo-código 1 - $Y \sim \text{U}(2,4)$
+
+```{r, results='hide', out.width='80%', fig.width=7, fig.height=5}
+N <- 1000
+n <- 10
+
+set.seed(1)
+th1 <- replicate(N, mean(runif(n, min=2, max=4)))
+th2 <- replicate(N, mean(range(runif(n, min=2, max=4))))
+
+L <- list(th1=data.frame(est=th1), th2=data.frame(est=th2))
+L <- ldply(L)
+str(L)
+
+densityplot(~est|.id, data=L,
+            panel=function(x, ...){
+    panel.densityplot(x, ...)
+    panel.abline(v=mean(x))
+},
+xlab = "Estimativa", ylab = "Densidade",
+strip = strip.custom(factor.levels =
+                         c(expression(hat(theta[1])), expression(hat(theta[2])))))+
+    layer(panel.abline(v=3))
+```
+
+### Estimação pontual: Pseudo-código 2 - $Y \sim \text{U}(2,4)$
+
+```{r, results='hide', out.width='80%', fig.width=7, fig.height=5}
+N <- 100
+nval <- c(2,3,5,10,20,50,100,500,1000)
+
+set.seed(1)
+th1 <- sapply(nval,
+              function(n){
+                  replicate(N, mean(runif(n, min=2, max=4)))
+              })
+str(th1)
+th1 <- stack(as.data.frame(th1))
+levels(th1$ind) <- as.character(nval)
+th1$ind <- as.numeric(as.character(th1$ind))
+## xyplot(values~ind, th1, scales=list(x=list(log=10)))
+
+set.seed(1)
+## th2 <- replicate(N, mean(range(runif(N, min=2, max=4))))
+th2 <- sapply(nval,
+              function(n){
+                  replicate(N, mean(range(runif(n, min=2, max=4))))
+              })
+str(th2)
+th2 <- stack(as.data.frame(th2))
+levels(th2$ind) <- as.character(nval)
+th2$ind <- as.numeric(as.character(th2$ind))
+## xyplot(values~ind, th2, scales=list(x=list(log=10)))
+
+L <- list(th1=th1, th2=th2)
+L <- ldply(L)
+L$.id <- factor(L$.id)
+
+## xyplot(values~.id|factor(ind), L, jitter.x=TRUE, as.table=TRUE)+
+##     layer(panel.abline(h=3))
+
+xyplot(values~ind|.id, L,
+       xlab = "Tamanho da amostra (escala log)", ylab = "Estimativas",
+       strip = strip.custom(factor.levels =
+                                c(expression(hat(theta[1])), expression(hat(theta[2])))),
+       scales=list(x=list(log=10)))+
+           layer(panel.abline(h=3))
+```
+
+## Propriedades dos estimadores
+
+### Propriedades dos estimadores
+
+De modo geral, um ``**bom**'' estimador deve ser:
+
+1. Não viciado
+2. Consistente
+3. Eficiente
+
+### Propriedades dos estimadores: 1. Vício
+
+#### Erro quadrático médio (EQM)
+O Erro Quadrático Médio (EQM) de um estimador $\hat{\theta}$ de
+$\theta$ é dado por
+\begin{align*}
+\text{EQM}[\hat{\theta}] &= \text{E}[(\hat{\theta} - \theta)^2] \\
+  &= \text{Var}[\hat{\theta}] + \text{B}[\hat{\theta}]^2
+\end{align*}
+onde
+$$\text{B}[\hat{\theta}] = \text{E}[\hat\theta] - \theta$$
+é denominado de **vício** do estimador $\hat\theta$. Portanto,
+dizemos que um estimador é **não viciado** para $\theta$ quando
+$$\text{B}[\hat{\theta}] = 0 \quad \Rightarrow \quad \text{E}[\hat{\theta}] =
+\theta$$
+
+### Propriedades dos estimadores: 1. Vício
+
+#### Estimador não viciado
+Seja $(X_1, \ldots, X_n)$, uma amostra aleatória de uma variável
+aleatória com fdp ou fp $f(x,\theta)$, $\theta \in \Theta$, dizemos
+que o estimador $\hat{\theta} = T(\mathbf{X})$ é não viciado para
+$\theta$ se
+$$\text{E}[\hat{\theta}] = \text{E}[T(\mathbf{X})] = \theta \qquad \forall \, \theta
+\in \Theta$$
+
+####
+Um estimador $\hat\theta$ é dito **assintoticamente não viciado**
+se
+$$\lim_{n \to \infty} \text{E}[\hat{\theta}] = \theta$$
+Ou seja, para grandes amostras, $\hat\theta$ passa a ser imparcial.
+
+### Propriedades dos estimadores: 2. Consistência
+
+#### Estimador consistente
+Seja $(X_1, \ldots, X_n)$, uma amostra aleatória de uma variável
+aleatória com fdp ou fp $f(x,\theta)$, $\theta \in \Theta$, o
+estimador $\hat{\theta} = T(\mathbf{X})$ é consistente para $\theta$ se
+satisfaz simultaneamente
+$$\lim_{n \to \infty} \text{E}[\hat{\theta}] = \theta$$
+e
+$$\lim_{n \to \infty} \text{Var}[\hat{\theta}] = 0$$
+
+### Propriedades dos estimadores
+
+**Exemplo**: média amostral $\bar{x} = \frac{1}{n} \sum_{i=1}^{n}
+x_i$ como estimador da média populacional $\mu$:
+$$
+\text{E}(\bar{x}) = \text{E} \left[ \frac{1}{n} \sum_{i=1}^{n} x_i
+\right] = \mu
+$$
+
+$$
+\text{Var}(\bar{x}) = \text{Var} \left[ \frac{1}{n} \sum_{i=1}^{n} x_i
+\right] = \frac{\sigma^2}{n}
+$$
+Portanto $\bar{x}$ é um estimador **não viciado** e **consistente** para
+$\mu$.
+
+### Propriedades dos estimadores
+
+**Exemplo**: variância amostral $\hat{\sigma}^2 = \frac{1}{n}
+\sum_{i=1}^{n} (x_i - \bar{x})^2$ como estimador da variância populacional
+$\sigma^2$:
+$$
+\text{E}(\hat{\sigma}^2) = \text{E} \left[ \frac{1}{n} \sum_{i=1}^{n}
+(x_i - \bar{x})^2 \right]
+= \left( \frac{n-1}{n} \right) \sigma^2
+$$
+Portanto $\hat{\sigma}^2$ é um estimador **viciado** para
+$\sigma^2$. (Embora seja um estimador **assintoticamente** não
+viciado).
+
+Para eliminar esse vício, podemos definir então um novo
+estimador: $S^2 = \frac{1}{n-1} \sum_{i=1}^{n} (x_i - \bar{x})^2$, e
+$$
+\text{E}(S^2) = \text{E} \left[ \frac{1}{n-1} \sum_{i=1}^{n} (x_i -
+\bar{x})^2 \right] = \sigma^2
+$$
+que é então um estimador **não viciado** para $\sigma^2$.
+
+### Propriedades dos estimadores: 3. Eficiência
+
+#### Eficiência relativa
+Sejam $\hat{\theta}_1 = T_1(\mathbf{X})$ e $\hat{\theta}_2 =
+T_2(\mathbf{X})$ dois estimadores pontuais **não viciados** para
+$\theta$. A eficiência relativa de $\hat{\theta}_1$ em relação a
+$\hat{\theta}_2$ é
+$$\text{ER}[\hat{\theta}_1, \hat{\theta}_2] =
+\frac{\text{Var}[\hat{\theta}_1]}{\text{Var}[\hat{\theta}_2]}$$
+
+####
+Se:
+
+- $\text{ER}[\hat{\theta}_1, \hat{\theta}_2] > 1$ $\Rightarrow$
+$\hat\theta_2$ é mais eficiente
+- $\text{ER}[\hat{\theta}_1, \hat{\theta}_2] < 1$ $\Rightarrow$
+$\hat\theta_1$ é mais eficiente
+
+### Exemplo 7.11
+
+Uma amostra $(X_1, \ldots, X_n)$ é retirada de uma população com $X \sim
+\text{N}(\mu, \sigma^2)$, e dois estimadores são propostos para $\mu$:
+$$
+\hat{\mu}_1 = \bar{X} \quad \text{e} \quad \hat{\mu}_2 =
+\text{mediana}(X_1, \ldots, X_n)
+$$
+Qual dos dois é melhor para $\mu$?
+
+### Exemplo 7.11
+
+Podemos notar que
+\begin{align*}
+\text{E}(\hat{\mu}_1) &= \text{E}(\bar{X}) = \mu \\
+\text{Var}(\hat{\mu}_1) &= \text{Var}(\bar{X}) = \sigma^2/n
+\end{align*}
+\begin{align*}
+\text{E}(\hat{\mu}_2) &= \text{E}(\text{mediana}(X_1, \ldots, X_n)) = \mu \\
+\text{Var}(\hat{\mu}_2) &= \text{Var}(\text{mediana}(X_1, \ldots, X_n))
+= (\pi/2)(\sigma^2/n)
+\end{align*}
+Portanto, ambos são estimadores não viciados e consistentes. Mas:
+$$
+\text{ER}[\hat{\mu}_1, \hat{\mu}_2] =
+\frac{\text{Var}[\hat{\mu}_1]}{\text{Var}[\hat{\mu}_2]} =
+\frac{\sigma^2/n}{(\pi/2)(\sigma^2/n)} = \frac{2}{\pi} = 0,63
+$$
+Como $\text{ER}[\hat{\mu}_1, \hat{\mu}_2] < 1$ então $\hat{\mu}_1 =
+\bar{X}$ é mais **eficiente**.
+
+### Propriedades dos estimadores
+
+O **erro padrão** de um estimador dá uma ideia da
+**precisão** da estimativa.
+
+O erro padrão (EP) de um estimador é o seu desvio-padrão (raíz
+quadrada da variância), ou seja,
+$$
+\text{EP}(\hat\theta) = \sqrt{\text{Var}(\hat\theta)}
+$$
+
+**Exemplo:** Sabemos que a distribuição de $\bar{X}$ tem média $\mu$ e
+variância $\sigma^2/n$. Então o erro padrão de $\bar{X}$ é
+$$
+\text{EP}(\bar{X}) = \sqrt{\text{Var}(\bar{X})} =
+\sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}
+$$
+
+# Distribuições amostrais
+
+## Introdução
+
+### Distribuições amostrais
+
+De maneira geral, uma amostra de tamaho $n$ será descrita pelos
+valores $x_1, x_2, \ldots, x_n$ das variáveis aleatórias $X_1, X_2,
+..., X_n$ $\Rightarrow$ **Amostra Aleatória**
+
+No caso de uma Amostragem Aleatória Simples (AAS) **com
+reposição**, $X_1, X_2, \ldots, X_n$ serão
+variáveis aleatórias **independentes e identicamentes
+distribuídas** (iid) com função de probabilidade (fp) ou função
+densidade de probabilidade (fdp) conjunta dada por
+$$
+f(x_1, x_2, \ldots, x_n, \boldsymbol{\theta}) =
+f(x_1,\boldsymbol{\theta}) \cdot f(x_2,\boldsymbol{\theta}) \cdots
+f(x_n,\boldsymbol{\theta}) = \prod_{i=1}^{n} f(x_i,\boldsymbol{\theta})
+$$
+Onde o mesmo valor do parâmetro $\boldsymbol{\theta}$ é utilizado em
+cada um dos termos no produto.
+
+### Distribuições amostrais
+
+Quando uma amostra $X_1, X_2, \ldots, X_n$ é obtida, geralmente
+estamos interessados em um resumo destes valores, que pode ser
+expresso matematicamente pela estatística $T(x_1, x_2, \ldots, x_n)$.
+
+Dessa forma, $Y = T(x_1, x_2, \ldots, x_n)$ **é também uma variável
+aleatória**. Se $Y$ é uma VA, então ela possui uma **distribuição de
+probabilidade**.
+
+Uma vez que a distribuição de $Y$ é derivada da amostra $X_1, X_2,
+\ldots, X_n$, vamos denominá-la de **distribuição amostral** de $Y$.
+
+### Distribuições amostrais
+
+#### Distribuições amostrais
+A distribuição de probabilidade de uma estatística $Y = T(x_1, x_2,
+\ldots, x_n)$ é denominada de **distribuição amostral** de
+$Y$. Assim, uma estatística também é uma variável aleatória, pois
+seus valores mudam conforme a amostra aleatória.
+
+####
+**Exemplo**: duas estatísticas comumente utilizadas para o
+resumo de uma amostra aleatória são a **média amostral** $\bar{x}$, e
+a **proporção amostral** $\hat{p}$. Cada uma delas também possui uma
+distribuição amostral.
+
+## Distribuição amostral da média
+
+### Distribuição amostral da média
+
+Para estudarmos a distribuição amostral da estatística $\bar{X}$,
+considere uma população identificada pela VA $X$, com parâmetros
+$$
+\text{E}(X) = \mu = \text{média} \qquad \qquad \text{Var}(X) = \sigma^2 =
+\text{variância}
+$$
+supostamente conhecidos. Em seguida, realizamos os seguintes passos:
+
+1. Retiramos $m$ amostras aleatórias (AAS com reposição) de tamanho
+$n$ dessa população
+2. Para cada uma das $m$ amostras, calculamos a média amostral
+$\bar{x}$
+3. Verificamos a distribuição das $m$ médias amostrais e estudamos
+suas propriedades
+
+### Exemplo 7.13
+
+Seja $X \sim \text{N}(10,16)$, como se comporta $\bar{X}$ para $n = 10,
+30, 50, 100$?
+
+```{r, results='hide', out.width='70%', fig.width=7, fig.height=5}
+m <- 1000
+nval <- c(10, 30, 50, 100)
+set.seed(1)
+th1 <- sapply(nval,
+              function(n){
+    replicate(m, mean(rnorm(n, mean = 10, sd = 4)))
+})
+str(th1)
+th1 <- stack(as.data.frame(th1))
+levels(th1$ind) <- as.character(nval)
+th1$ind <- as.numeric(as.character(th1$ind))
+densityplot(~values, data = th1, groups = ind, plot.points = FALSE,
+            auto.key = list(columns = 4), n = 1000,
+            xlab = "Médias", ylab = "Densidade")
+```
+
+### Distribuição amostral da média
+
+Através do estudo da distribuição da média amostral chegamos em um dos
+resultados mais importantes da inferência estatística.
+
+#### Distribuição amostral da média
+- $\text{E}(\bar{X}) = \mu_{\bar{X}} = \mu$
+- $\text{Var}(\bar{X}) = \sigma^2_{\bar{X}} = \sigma^2/n$
+
+Portanto, se
+$$X \sim \text{N}(\mu, \sigma^2) \quad \text{então} \quad
+\bar{X} \sim \text{N}(\mu_{\bar{X}}, \sigma^2_{\bar{x}})$$
+mas, como
+$$\mu_{\bar{X}} = \mu \quad \text{e} \quad \sigma^2_{\bar{X}} =
+\sigma^2/n$$
+então, a **distribuição amostral** da média amostral $\bar{X}$ é
+$$\bar{X} \sim \text{N}\left(\mu, \frac{\sigma^2}{n} \right)$$
+
+### Distribuição amostral da média
+
+Pode-se mostrar que, para amostras suficientemente grandes, **a média
+amostral $\bar{X}$ converge para o verdadeiro valor da média
+populacional $\mu$** (é um **estimador não viesado** de $\mu$).
+
+Além disso, a variância das médias amostrais $\sigma^2_{\bar{X}}$
+tende a diminuir conforme $n \rightarrow \infty$ (é um estimador
+**consistente**).
+
+Estes resultados sugerem que, quando o tamanho da amostra aumenta,
+\begin{center}
+\underline{independente do formato da distribuição da população
+original},
+\end{center}
+**a distribuição amostral de $\bar{X}$ aproxima-se
+cada vez mais de uma distribuição Normal**, um resultado fundamental
+na teoria de probabilidade conhecido como **Teorema Central do Limite**.
+
+### Distribuição amostral da média
+
+#### Teorema Central do Limite (TCL)
+Para amostras aleatórias simples $(X_1, X_2, \ldots, X_n)$,
+retiradas de uma população com média $\mu$ e variância $\sigma^2$, a
+distribuição amostral da média $\bar{X}$, terá forma dada por
+$$
+Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}
+$$
+no limite quando $n \to \infty$, onde $Z \sim \text{N}(0,1)$.
+
+- Se a população for normal, então $\bar{X}$ terá distribuição
+*exata* normal.
+- A rapidez da convergência para a normal depende da distribuição
+da população da qual as amostras foram geradas.
+
+### Distribuição amostral da média
+
+```{r, results='hide'}
+##======================================================================
+## Script Teorema do Limite Central - TLC
+##======================================================================
+
+set.seed(2014)
+## Grafico de convergência de 4 distribuições de acordo com o TLC
+# Normal(500, 1000)
+norm <- rnorm(500, mean = 500, sd = 100)
+# Uniforme[200,800]
+unif <- runif(500, min = 200, max = 800)
+# Exponencial(1)
+expo <- rexp(500, rate = 1)
+# Poisson(2)
+pois <- rpois(500, lambda = 2)
+# n amostral
+n <- c(5, 25, 100)
+# m = número de amostras aleatórias de tamanho n
+m <- 500
+# vetor temporario para receber os valores de média
+temp <- numeric(m)
+
+## Limites para cada distribuicao
+xlim.norm <- c(150, 800)
+xlim.unif <- c(200, 800)
+xlim.expo <- c(0, 6)
+xlim.pois <- c(0, 7)
+
+pdf("img/dist_amostrais.pdf", width = 8, height = 8)
+par(mfrow = c(4, 4))
+# Distribuição Normal
+hist(norm, freq = TRUE, main = "População - N = 500",
+     include.lowest = TRUE, right = FALSE, ylab = "Frequência",
+     col = "lightgray", xlab = "Normal", xlim = xlim.norm)
+for(i in 1:3){
+    for(j in 1:m){
+        temp[j] <- mean(sample(norm, size = n[i], replace = TRUE))
+    }
+    hist(temp, freq = TRUE, main = paste("n = ", n[i]),
+         include.lowest = TRUE, right = FALSE, ylab = "Frequência",
+         xlab = "Médias amostrais", xlim = xlim.norm)
+}
+# Distribuição Uniforme
+hist(unif, freq = TRUE, main = "População - N = 500",
+     include.lowest = TRUE, right = FALSE, xlim = xlim.unif,
+     col = "lightgray", xlab = "Uniforme", ylab = "Frequência")
+for(i in 1:3){
+    for(j in 1:m){
+        temp[j] <- mean(sample(unif, size = n[i], replace = TRUE))
+    }
+    hist(temp, freq = TRUE, main = paste("n = ", n[i]),
+         include.lowest = TRUE, right = FALSE, ylab = "Frequência",
+         xlab = "Médias amostrais", xlim = xlim.unif)
+}
+# Distribuição Exponencial
+hist(expo, freq = TRUE, main = "População - N = 500",
+     include.lowest = TRUE, right = FALSE, xlim = xlim.expo,
+     col = "lightgray", xlab = "Exponencial", ylab = "Frequência")
+for(i in 1:3){
+    for(j in 1:m){
+        temp[j] <- mean(sample(expo, size = n[i], replace = TRUE))
+    }
+    hist(temp, freq = TRUE, main = paste("n = ", n[i]),
+         include.lowest = TRUE, right = FALSE, ylab = "Frequência",
+         xlab = "Médias amostrais", xlim = xlim.expo)
+}
+# Distribuição Poisson
+hist(pois, freq = TRUE, main = "População - N = 500",
+     include.lowest = TRUE, right = FALSE, xlim = xlim.pois,
+     col = "lightgray", xlab = "Poisson", ylab = "Frequência")
+for(i in 1:3){
+    for(j in 1:m){
+        temp[j] <- mean(sample(pois, size = n[i], replace = TRUE))
+    }
+    hist(temp, freq = TRUE, main = paste("n = ", n[i]),
+         include.lowest = TRUE, right = FALSE, ylab = "Frequência",
+         xlab = "Médias amostrais", xlim = xlim.pois)
+}
+par(mfrow = c(1, 1))
+dev.off()
+```
+
+Ver figura [dist_amostrais.pdf](img/dist_amostrais.pdf)
+
+### Distribuição amostral da média
+
+Em palavras, o teorema garante que que para $n$ grande, a distribuição
+da média amostral, devidamente padronizada, **se comporta segundo um
+modelo normal** com média 0 e variância 1.
+
+Pelo teorema, temos que quanto maior o tamanho da amostra, **melhor é a
+aproximação**.
+
+Estudos envolvendo simulações mostram que, em muitos casos, **valores de
+$n$ ao redor de 30** fornecem aproximações bastante boas para as
+aplicações práticas.
+
+### Distribuição amostral da média
+
+Quando calculamos a probabilidade de um valor estar em um determinado
+intervalo de valores, podemos usar o modelo Normal, como vimos
+anteriormente.
+
+No entanto, quando temos uma **amostra**, e queremos calcular
+probabilidades associadas à **média amostral** (a probabilidade
+da média amostral estar em um determinado intervalo de valores),
+precisamos necessariamente usar os resultados do TCL.
+
+### Distribuição amostral da média
+
+**Exemplo:** Uma máquina de empacotamento que abastece pacotes de
+feijão apresenta distribuição normal com média de 500 g e
+desvio-padrão de 22 g. De acordo com as normas de defesa do
+consumidor, os pacotes de feijão não podem ter peso inferior a 2% do
+estabelecido na embalagem.
+
+a. Determine a probabilidade de **um pacote** selecionado
+aleatoriamente ter a peso inferior a 490 g.
+b. Determine a proabilidade de **20 pacotes** selecionados
+aleatoriamente terem peso médio inferior a 490 g.
+c. Como podemos interpretar os resultados dos itens anteriores?
+O que é mais indicado para se tomar uma decisão sobre o
+funcionamento da máquina: selecionar um pacote ou uma amostra de
+pacotes?
+
+## Distribuição amostral da proporção
+
+### Distribuição amostral da proporção
+
+Muitas vezes, o interesse é conhecer uma **proporção**, e não a
+média de uma população.
+
+Suponha que uma amostra de tamanho $n$ foi obtida de uma população, e
+que $x \leq n$ observações nessa amostra pertençam a uma classe de
+interesse (ex.: pessoas do sexo masculino).
+
+Dessa forma, a proporção amostral
+$$
+\hat{p} = \frac{x}{n} = \frac{\text{número de sucessos}}{\text{total de
+tentativas}}
+$$
+é o ``melhor estimador'' para a proporção populacional $p$.
+
+Note que $n$ e $p$ são os parâmetros de uma **distribuição
+binomial**.
+
+### Distribuição amostral da proporção
+
+**Exemplo**: em 5 lançamentos de uma moeda considere que o evento
+"cara" (C) seja o sucesso ("sucesso" = 1; "fracasso" = 0). Um possível
+resultado seria o conjunto \{C, C, R, R, C\}. A proporção
+amostral seria
+$$
+\hat{p} = \frac{x}{n} = \frac{\text{número de sucessos}}{\text{total de
+tentativas}} = \frac{3}{5} = 0,6
+$$
+
+**Exemplo**: em uma amostra de 2500 eleitores de uma cidade, 1784
+deles eram favoráveis à reeleição do atual prefeito. A proporção
+amostral é então
+$$
+\hat{p} = \frac{x}{n} = \frac{\text{número de sucessos}}{\text{total de
+tentativas}} = \frac{1784}{2500} = 0,7136
+$$
+
+### Distribuição amostral de uma proporção
+
+A distribuição amostral de uma **proporção** é a distribuição das
+proporções de todas as possíveis amostras de tamanho $n$ retiradas de
+uma população.
+
+**Exemplo**:
+
+- Uma moeda é lançada $n=10, 30, 50, 100$ vezes, e a proporção de caras
+é registrada
+- Esse processo é repetido $m = 1000$ vezes
+
+Com isso, concluimos que:
+
+- A média das proporções para $n \to \infty$ tende para a
+verdadeira proporção populacional $p = 0,5$
+- A **distribuição amostral** das proporções segue
+aproximadamente uma **distribuição normal**
+
+### Distribuição amostral de uma proporção
+
+```{r, results='hide', out.width='70%', fig.width=7, fig.height=5}
+m <- 1000
+nval <- c(10, 30, 50, 100)
+set.seed(1)
+th1 <- sapply(nval,
+              function(n){
+    replicate(m, sum(sample(c(0,1), size = n, replace = TRUE))/n)
+})
+str(th1)
+th1 <- stack(as.data.frame(th1))
+levels(th1$ind) <- as.character(nval)
+th1$ind <- as.numeric(as.character(th1$ind))
+densityplot(~values, data = th1, groups = ind, plot.points = FALSE,
+            auto.key = list(columns = 4), n = 1000,
+            xlab = "Proporções", ylab = "Densidade")
+```
+
+### Distribuição amostral de uma proporção
+
+Através do estudo da distribuição amostral da proporção, chegamos aos
+seguintes resultados
+
+- $\text{E}(\hat{p}) = \mu_{\hat{p}} = p$
+- $\text{Var}(\hat{p}) = \sigma^{2}_{\hat{p}} = \frac{p(1-p)}{n}$
+
+Ou seja, $\hat{p}$ é um estimador **não viciado** e
+**consistente** para $p$.
+
+Assim, a **distribuição amostral** de $\hat{p}$ será
+$$
+\hat{p} \sim \text{N} \left( p, \frac{p(1-p)}{n} \right)
+$$
+
+### Distribuição amostral de uma proporção
+
+Note que o **erro padrão** de $\hat{p}$ será
+$$
+\text{EP}(\hat{p}) = \sqrt{\text{Var}(\hat{p})} = \sqrt{\frac{p(1-p)}{n}}
+$$
+Assim, usando o TCL, podemos mostrar que a quantidade
+$$
+Z = \frac{\hat{p} - p}{\sqrt{\frac{p(1-p)}{n}}} \, \sim \, \text{N}(0,1)
+$$
+segue uma distribuição **normal padrão** com média 0 e variância
+1.
+
+Quando não conhecemos $p$, usamos $\hat{p} = x/n$ como estimativa para
+calcular o erro padrão.
+
+### Exemplo 7.17
+
+Suponha que a proporção de peças fora da especificação em um lote é de
+40%. Uma amostra de 30 peças foi selecionada. Qual é a probabilidade da
+proporção de peças defeituosas ser menor do que 0,5?
+
+\pause
+
+$X \sim \text{Bin}(30, 0.4)$. Assim:
+\begin{align*}
+P(\hat{p} < 0.5) &= P(X/30 < 0.5) = P(X < 15) \\
+ &= \sum_{x=0}^{14} \binom{30}{x} 0.4^x 0.6^{30-x}
+\end{align*}
+
+Usando o R:
+
+\setlength{\topsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\partopsep}{1pt}
+```{r, echo=TRUE}
+pbinom(14, size = 30, prob = 0.4)
+```
+
+### Exemplo 7.17
+
+Considerando a aproximação pela Normal, temos
+$$
+\hat{p} \sim \text{N} \left( 0.4, \frac{0.4(1-0.4)}{30} \right)
+$$
+Assim,
+\begin{align*}
+P(\hat{p} < 0.5) &\approx P \left( \frac{\hat{p} - p}{\sqrt{\frac{p(1-p)}{n}}}
+< \frac{0.5 - 0.4}{\sqrt{\frac{0.4(1-0.4)}{30}}} \right) \\
+ &= P(Z < 1,12) = 0.8686
+\end{align*}
+Usando o R:
+
+\setlength{\topsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\partopsep}{1pt}
+```{r, echo=TRUE}
+pnorm(1.12)
+```
+
+# Exercícios
+
+### Exercícios recomendados
+
+- Seção 7.1 - 1 a 3
+- Seção 7.2 - 1 a 5
+- Seção 7.3 - 1 a 7
+- Seção 7.5 - 1 a 5, 9 a 12

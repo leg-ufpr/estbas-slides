@@ -1,0 +1,843 @@
+---
+title: "Variáveis aleatórias discretas"
+short-title: "VAs discretas"
+author: |
+  | Wagner H. Bonat
+  | Elias T. Krainski
+  | Fernando P. Mayer
+short-author: "LEG/DEST/UFPR"
+# date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+# short-date: "2018/1"
+institute: "Laboratório de Estatística e Geoinformação"
+# short-institute: "LEG/DEST/UFPR"
+department: |
+  | Universidade Federal do Paraná
+  | Departamento de Estatística
+safe-columns: true
+fontfamily: inconsolata
+output:
+  legtheme::beamer_leg
+---
+
+```{r setup, cache=FALSE, include=FALSE}
+source("setup_knitr_slides.R")
+library(xtable)
+```
+
+# Introdução
+
+### Variáveis aleatórias
+
+Em probabilidade, uma função $X$ que associa a cada evento do espaço
+amostral um número real $X(\omega) \in \mathbb{R}$, é
+denominada uma **variável aleatória** (VA).
+
+Uma variável aleatória pode ser classificada como **discreta** ou
+**contínua**, dependendo do domínio dos valores de $X$.
+
+Exemplo: o número de alunos em uma sala é uma variável aleatória
+(discreta), denotada por $X$ (maiúsculo). Uma observação dessa
+variável é denotada pela respectiva letra minúscula, *e.g.*, $x = 50$
+alunos.
+
+Em geral, denotamos a probabilidade de uma V.A. $X$ assumir determinado
+valor $x$ como
+$$
+P[X] \quad \text{ou} \quad P[X = x]
+$$
+
+### Variáveis aleatórias
+
+Dada a realização de um experimento aleatório qualquer, com um certo
+espaço de probabilidade, desejamos estudar a **estrutura
+probabilística** de quantidades associadas à esse experimento.
+
+Note que antes da realização de um experimento, **não sabemos seu
+resultado**, entretanto seu espaço de probabilidade pode ser
+previamente estabelecido.
+
+Dessa forma, podemos atribuir probabilidades aos *eventos* desse
+espaço amostral, dando origem ao conceito de **variável aleatória**.
+
+### Distribuições de probabilidade
+
+Existem diversos *modelos probabilísticos* que
+procuram descrever vários tipos de variáveis aleatórias: são as
+**distribuições de probabilidade de variáveis aleatórias**
+(discretas ou contínuas).
+
+A distribuição de probabilidades de uma VA $X$ é, portanto, uma
+descrição das probabilidades associadas com os possíveis valores de
+$X$. Os valores que $X$ assume determinam o **suporte** (S) da VA.
+
+- **Variáveis discretas** $\rightarrow$ suporte em um conjunto
+de valores enumeráveis (finitos ou infinitos)
+- **Variáveis contínuas** $\rightarrow$ suporte em um conjunto
+não enumerável de valores
+
+### Distribuições de probabilidade
+
+Denomina-se de **distribuição de probabilidade** de alguma variável
+aleatória, a **regra** geral que define a
+
+- **função de probabilidade** (fp) (V.A.s discretas), ou a
+- **função densidade de probabilidade** (fdp) (V.A.s contínuas)
+
+para a variável de interesse.
+
+Existem muitas distribuições de probabilidade, mas algumas merecem
+destaque por sua importância prática.
+
+Estas distribuições também são chamadas de **modelos probabilísticos**.
+
+# Variáveis aleatórias discretas
+
+### Definição
+
+A **função de probabilidade** (fp) da VA discreta $X$, que assume
+os valores $x_1, x_2, \ldots, x_n, \ldots$, é a função que atribui
+probabilidades a cada um dos possíveis valores: $\{[x_i, p(x_i)], i =
+1, 2, ...\}$, ou seja,
+
+$$
+P[X = x_i] = p(x_i) = p_i, \quad i = 1, 2, \ldots
+$$
+
+com as seguintes propriedades:
+
+i. A probabilidade de cada valor deve estar entre 0 e 1
+$$
+0 \leq p(x_i) \leq 1, \quad \forall \, i = 1, 2, ...
+$$
+ii. A soma de todas as probabilidades é igual a 1
+$$
+\sum_{i} p(x_i) = 1
+$$
+
+### Exemplo 3.3
+
+#### Experimento
+Lançamento de duas moedas. $X$ = número de resultados cara (C)
+
+```{r, out.width='60%'}
+knitr::include_graphics("img/exp_moedas-crop.pdf")
+```
+
+### Exemplo 3.3
+
+Podemos montar uma tabela de distribuição de frequência para a
+variável aleatória $X$ = número de resultados cara (C)
+
+\begin{table}[h]
+  \centering
+    \begin{tabular}{ccc}
+      \hline
+      $X$ & Frequência ($f_i$) & Frequência relativa ($fr_i$) \\
+      \hline
+      0 & 1 & 1/4 \\
+      1 & 2 & 2/4\\
+      2 & 1 & 1/4\\
+      \hline
+      Total & 4 & 1 \\
+      \hline
+    \end{tabular}
+\end{table}
+
+Assim podemos associar a cada valor de $X$ sua **probabilidade**
+correspondente, como resultado das **frequências relativas**
+\begin{align*}
+P[X=0] &= 1/4 \\
+P[X=1] &= 2/4 = 1/2 \\
+P[X=2] &= 1/4
+\end{align*}
+
+### Exemplo 3.3
+
+Dessa forma, a **distribuição de probabilidade** da variável
+aleatória $X$ = número de resultados cara (C) é a tabela
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{ccc}
+      \hline
+      $X$ & $P[X = x_i] = p(x_i)$ \\
+      \hline
+      0 & 1/4 \\
+      1 & 1/2\\
+      2 & 1/4\\
+      \hline
+      Total & 1 \\
+      \hline
+    \end{tabular}
+\end{table}
+
+Repare que as propriedades da função de probabilidade estão
+satisfeitas:
+
+i. As probabilidades $p(x_i)$ estão entre 0 e 1
+ii. A soma de todas as probabilidades $p(x_i)$ é 1
+
+### Exemplo 3.1
+
+Com dados do último censo, a assistente social de um Centro de Saúde
+constatou que para as famílias da região, $20\%$ não tem filhos, $30\%$
+tem um filho, $35\%$ tem dois, e as restantes se dividem igualmente
+entre três, quatro ou cinco filhos.
+
+Descreva a função de probabilidade da VA $N$ definida como número de
+filhos.
+
+### Exemplo 3.2
+
+Na construção de um certo prédio, as fundações devem atingir $15$ metros
+de profundidade e, para cada $5$ metros de estacas colocadas, o operador
+anota se houve alteração no ritmo de perfuração previamente
+estabelecido. Essa alteração é resultado de mudanças para mais ou para
+menos, na resistência do subsolo.
+
+Nos dois casos, medidas corretivas serão necessárias, encarecendo o
+custo da obra. Com base em avaliações geológicas, admite-se que a
+probabilidade de ocorrência de alterações é de $0.1$ para cada $5$
+metros.
+
+O custo básico inicial é de $100$ UPC (unidade padrão de construção) e
+será acrescida de $50k$, com $k$ representando o número de alterações
+observadas. Como se comporta a va custo das obras de fundações?
+
+### Função de distribuição de probabilidade
+
+Em muitas situações, é útil calcularmos a probabilidade **acumulada**
+até um certo valor.
+
+Definimos a **função de distribuição** ou **função acumulada de
+probablidade** de uma VA $X$ pela expressão:
+
+$$
+F(x) = P(X \leq x)
+$$
+
+para qualquer número real $x$.
+
+### Exemplo 3.5
+
+Uma população de 1000 crianças foi analisada num estudo para
+determinar a efetividade de uma vacina contra um tipo de alergia.
+
+No estudo, as crianças recebiam uma dose da vacina e, após um mês,
+passavam por um novo teste. Caso ainda tivessem tido alguma reação
+alérgica, recebiam outra dose da vacina. Ao fim de 5 doses todas
+as crianças foram consideradas imunizadas.
+
+Os resultados completados estão na tabela a seguir.
+
+```{r, results='asis'}
+tab <- as.table(c(245, 288, 256, 145, 66))
+dtab <- cbind(Freq. = tab)
+rownames(dtab)[1:5] <- 1:5
+print(xtable(t(dtab), digits = rep(0, 6)),
+      comment = FALSE)
+```
+
+Para uma criança sorteado ao acaso qual a probabilidade dela
+ter recebido $2$ doses? E até $2$ doses?
+
+### Exemplo 3.5
+
+\begincols
+\column{.5\textwidth}
+
+Tabela de frequência:
+
+```{r, results='asis'}
+dtab <- cbind(n_i = addmargins(tab),
+              f_i = addmargins(prop.table(tab)),
+              "f_{ac}" = c(cumsum(prop.table(tab)), NA))
+rownames(dtab)[1:5] <- 1:5
+print(xtable(dtab, digits = c(0, 0, 3, 3)),
+      comment = FALSE,
+      hline.after = c(-1, 0, nrow(dtab)-1, nrow(dtab)),
+      sanitize.colnames.function = function(x){
+    paste0("$", x, "$")
+})
+```
+
+\column{.5\textwidth}
+
+Grafico de $F(X)$:
+
+```{r, out.width='99%', fig.width=5,fig.height=3.5}
+par(mar=c(3,3,1,1), mgp=c(2,0.7,0), las=1)
+plot(stepfun(x = 1:5, y = c(0,dtab[-6,3]), right = FALSE),
+     xlab = "X", ylab = "F(X)", main = "",
+     pch = 19, col.vert = "gray")
+```
+\endcols
+
+### Exemplo 3.5
+
+Assim,
+$$
+F(2) = P(X \leq 2) = P(X = 1) + P(X = 2) = 0,533
+$$
+Note que podemos escrever
+$$
+F(x) = P(X \leq x) = 0,533 \quad \text{para} \quad 2 \leq x < 3
+$$
+E os valores completos da função de distribuição são:
+\small
+\[F(x) = \left\{
+  \begin{array}{lr}
+    0 & \text{se } x < 1 \\
+    0,245 & \text{se } 1 \leq x < 2 \\
+    0,533 & \text{se } 2 \leq x < 3 \\
+    0,789 & \text{se } 3 \leq x < 4 \\
+    0,934 & \text{se } 4 \leq x < 5 \\
+    1 & \text{se } x \geq 5
+  \end{array}
+\right.
+\]
+
+### Exemplo 3.6
+
+Num estudo sobre a incidência de câncer foi registrado, para
+cada paciente com esse diagnóstico, o número de casos de câncer em
+parentes próximos (pais, irmãos, tios, filhos, primos e sobrinhos).
+A distribuição de frequência para 26 pacientes é a seguinte:
+
+```{r, results='asis'}
+x <- c(2,5,0,2,1,5,3,3,3,2,0,1,1,4,5,2,2,3,2,1,5,4,0,0,3,3)
+tab <- table(x)
+dtab <- cbind(n_i = tab)
+print(xtable(t(dtab), digits = rep(0, 7)),
+      comment = FALSE,
+      sanitize.rownames.function = function(x){
+    paste0("$", x, "$")
+})
+```
+
+Estudos anteriores assumem que a incidência de câncer em parentes próximos
+pode ser teoricamente modelada pela seguinte função discreta de
+probabilidade:
+
+```{r, results='asis'}
+p <- c(.1,.1,.3,.3,.1,.1)
+dtab <- cbind(p_i = p)
+print(xtable(t(dtab), digits = rep(1, 7)),
+      comment = FALSE,
+      sanitize.rownames.function = function(x){
+    paste0("$", x, "$")
+})
+```
+
+Os dados observados concordam com o modelo teórico?
+
+### Exemplo 3.6
+
+O número de observações de incidência que seria esperado seguindo o
+modelo teórico é calculado como $$e_i = n \times p_i$$.
+
+\begincols
+\column{.5\textwidth}
+```{r, results='asis'}
+esp <- p * 26
+dtab <- cbind(n_i = addmargins(tab),
+              e_i = c(esp, sum(esp)))
+print(xtable(dtab, digits = c(0, 0, 1)),
+      comment = FALSE,
+      hline.after = c(-1, 0, nrow(dtab)-1, nrow(dtab)),
+      sanitize.colnames.function = function(x){
+    paste0("$", x, "$")
+})
+```
+\column{.5\textwidth}
+```{r esperado, out.width='99%', fig.width=5, fig.height=3.5}
+par(mar=c(3,3,1,1), mgp=c(2,0.7,0), las=1)
+plot(0:5, dtab[-7,1], xlab = "Casos", ylab = "Frequência",
+     ylim = c(0, 8))
+points(0:5, dtab[-7,2], pch = 3)
+legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
+```
+\endcols
+
+# Modelos discretos
+
+## Principais modelos
+
+### Modelo Uniforme Discreto
+
+**Definição:** Seja $X$ uma VA assumindo valores $1, 2, \ldots, k$.
+Dizemos que $X$ segue o modelo **Uniforme Discreto** se atribui a mesma
+probabilidade $1/k$ a cada um desses $k$ valores.
+
+Entãos, sua função de probabilidade é dada por
+$$
+P[X = j] =  \frac{1}{k}, \quad j = 1, 2, \ldots, k.
+$$
+
+**Notação**: $X \sim \text{U}_D[1,k]$
+
+### Modelo Uniforme Discreto
+
+```{r, out.width='80%', fig.width=7, fig.height=5}
+par(mfrow=c(2,2), mar=c(3,3,2,1), mgp=c(2,0.7,0), las=1)
+plot(1:2, dunif(x = 1:2, min = 0, max = 2), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "k = 2",
+     ylim = c(0,1), axes=FALSE); box(); axis(1, 1:2); axis(2)
+plot(1:5, dunif(x = 1:5, min = 0, max = 5), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "k = 5",
+     ylim = c(0,1))
+plot(1:10, dunif(x = 1:10, min = 0, max = 10), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "k = 10",
+     ylim = c(0,1))
+plot(1:20, dunif(x = 1:20, min = 0, max = 20), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "k = 20",
+     ylim = c(0,1))
+par(mfrow=c(1,1))
+```
+
+### Exemplo 3.7
+
+Uma rifa tem 100 bilhetes numerados de 1 a 100. Tenho 5 bilhetes
+consecutivos numerados de 21 a 25 e meu colega tem outros 5
+bilhetes, com os números 1, 11, 29, 68 e 93. Quem tem maior
+possibilidade de ser sorteado?
+
+### Modelo Bernoulli
+
+**Definição:** Uma variável aleatória $X$ segue o modelo Bernoulli
+se assume apenas os valores 0 ("fracasso") ou 1 ("sucesso"). Sua
+função de probabilidade é dada por
+$$
+P[X = x] = p^x (1-p)^{1-x}, \quad \quad x = 0, 1
+$$
+onde o parâmetro $0 \leq p \leq 1$ é a probabilidade de sucesso.
+
+**Notação:** $X \sim \text{Ber}(p)$
+
+### Modelo Bernoulli
+
+```{r, out.width='99%', fig.width=7, fig.height=4}
+par(mfrow=c(2,2), mar=c(3,3,2,1), mgp=c(2,0.7,0), las=1)
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .2), type = "h",
+xlab = "X", ylab = "P[X = x]", main = "p = 0.2",
+ylim = c(0,1), axes = FALSE); box(); axis(1,0:1); axis(2)
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .5), type = "h",
+xlab = "X", ylab = "P[X = x]", main = "p = 0.5",
+ylim = c(0,1), axes = FALSE); box(); axis(1,0:1); axis(2)
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .7), type = "h",
+xlab = "X", ylab = "P[X = x]", main = "p = 0.7",
+ylim = c(0,1), axes = FALSE); box(); axis(1,0:1); axis(2)
+plot(0:1, dbinom(x = 0:1, size = 1, prob = .9), type = "h",
+xlab = "X", ylab = "P[X = x]", main = "p = 0.9",
+ylim = c(0,1), axes = FALSE); box(); axis(1,0:1); axis(2)
+```
+
+### Exemplo
+
+No lançamento de uma moeda, considere cara como o evento de sucesso.
+Qual a probabilidade de sair cara, sendo que $p = 1/2$?
+
+\[ X = \left\{
+  \begin{array}{ll}
+    1, & \quad \text{cara}\\
+    0, & \quad \text{coroa}
+\end{array} \right.\]
+
+Temos que
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{ccc}
+    \hline
+    $X$ & $P[X=x]$ & $p = 1/2$ \\
+    \hline
+    0 & $1-p$ & $1/2$ \\
+    1 & $p$ & $1/2$ \\
+    \hline
+  \end{tabular}
+\end{table}
+
+### Modelo Binomial
+
+**Definição:** Seja um experimento realizado dentro das seguintes
+condições:
+
+i. São realizados $n$ "ensaios" de Bernoulli independentes
+ii. Cada ensaio só pode ter dois resultados possíveis: "sucesso" ou
+"fracasso"
+iii. A probabilidade $p$ de sucesso em cada ensaio é constante
+
+Vamos associar a VA $X$ o número de sucessos em $n$ ensaios de
+Bernoulli. Portanto $X$ poderá assumir os valores $0, 1, \ldots, n$.
+
+### Modelo binomial
+
+Vamos determinar a distribuição de probabilidade de $X$, através da
+probabilidade de um número genérico $x$ de sucessos.
+
+Suponha que ocorram sucessos (1) apenas nas $x$ primeiras provas, e
+fracassos (0) nas $n-x$ provas restantes
+$$
+\underbrace{1,1,1,..., 1}_{x}, \underbrace{0,0,0, ..., 0}_{n-x}
+$$
+Como as provas são independentes, a probabilidade de ocorrência de $x$
+sucessos em $n$ tentativas é uma extensão do modelo de Bernoulli para
+$n$ ensaios, ou seja,
+$$
+\underbrace{p\cdot p\cdot p \cdots p}_{x} \cdot
+\underbrace{(1-p)\cdot (1-p)\cdot (1-p) \cdots (1-p)}_{n-x} =
+ p^x (1-p)^{n-x}
+$$
+
+### Modelo binomial
+
+Porém, o evento: "$x$ sucessos em $n$ provas" pode ocorrer de
+diferentes maneiras (ordens) distintas, todas com a mesma
+probabilidade.
+
+Como o número de ordens é o número de combinações de $n$ elementos
+tomados $x$ a $x$, então a probabilidade de ocorrerem $x$ sucessos em
+$n$ provas de Bernoulli será então a distribuição binomial, dada por
+$$
+P[X = x] = \binom{n}{x} p^x (1-p)^{n-x}, \quad \quad x = 0, 1, \ldots, n
+$$
+onde
+$$
+\binom{n}{x} = \frac{n!}{x!(n-x)!}
+$$
+é o **coeficiente binomial**, que dá o número total de
+combinações possíveis de $n$ elementos, com $x$ sucessos.
+
+**Notação:** $X \sim \text{bin}(n,p)$
+
+### Modelo binomial
+
+```{r, out.width='90%', fig.width=7.5, fig.height=5}
+par(mfrow=c(2,2), mar=c(3,3,2,1), mgp=c(2,0.7,0), las=1)
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .2), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.2",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .5), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.5",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .7), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.7",
+     ylim = c(0,.5))
+plot(0:10, dbinom(x = 0:10, size = 10, prob = .9), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "n = 10, p = 0.9",
+     ylim = c(0,.5))
+```
+
+### Modelo binomial
+
+É importante notar que as probabilidades são completamente
+caracterizadas pela informação dos **parâmetros**.
+
+Por exemplo, para calcular a probabilidade de 3 sucessos de uma $b(12,
+0.4)$ fazemos
+$$
+P[X = 3] = \binom{12}{3} 0.4^3 0.6^{9} =
+ \frac{12!}{3!9!} 0.4^3 0.6^{9} = 0.142
+$$
+Diversos programas computacionais fazem esse cálculo facilmente. Por
+exemplo, com o R
+```{r, comment=NA, echo=TRUE}
+round(dbinom(0:12, size = 12, prob = 0.4), 3)
+```
+
+### Exemplo 3.9
+
+O escore de um teste internacional de proficiência na língua
+inglesa varia de $0$ a $700$ pontos, com mais pontos indicando um
+melhor desempenho. Informações, coletadas durante vários anos,
+permite estabelecer o seguinte modelo para o desempenho no teste:
+\begin{table}[]
+\centering
+\scriptsize
+\begin{tabular}{|l|l|l|l|l|l|l|}
+\hline
+Pontos & $[0,200)$ & $[200,300)$ & $[300,400)$ & $[400,500)$ & $[500,600)$ & $[600,700)$ \\ \hline
+$p_i$   & $0.06$   & $0.15$       & $0.16$       & $0.25$     & $0.28$   & $0.10$        \\ \hline
+\end{tabular}
+\end{table}
+Várias universidades americanas, exigem um escore mínimo de $600$
+pontos para aceitar candidatos de países de língua não inglesa.
+De um grande grupo de estudantes brasileiros que prestaram o último
+exame, escolhemos ao acaso $20$ deles. Qual é a probabilidade de no
+máximo $3$ atenderem ao requisito mínimo?
+
+### Exemplo 3.10
+
+Um veterinário está estudando o índice de natalidade em porcos
+sujeitos à inseminação artificial. Para tal, coletou informações sobre a
+variável número de filhotes nascidos vivos em cada uma das $100$
+inseminações realizadas com o mesmo reprodutor. A tabela a seguir
+apresenta os resultados.
+
+```{r, results='asis'}
+obs <- c(1,6,7,23,26,21,12,3,1)
+tab <- cbind("Número" = 1:9,
+             "Freq. Obs." = obs)
+knitr::kable(t(tab))
+```
+
+O veterinário informa que $11$ ou mais filhotes nascidos vivos é uma
+ocorrência muito rara e pode ser desprezada em termos do modelo.
+Ele sugeriu que a variável N: número de filhotes nascidos vivos,
+poderia ser ajustada pelo modelo Binomial com parâmetros $n = 10$ e
+$p = 0.5$. O que você acha da sugestão do veterinário?
+
+### Exemplo 3.10
+
+Usando o R temos:
+
+```{r, echo=TRUE}
+obs <- c(0, 1, 6, 7, 23, 26, 21, 12, 3, 1, 0)
+prob <- dbinom(0:10, size = 10, prob = 0.5)
+esp <- prob * 100
+cbind("Obs" = obs, "p" = round(prob, 2), "Esp" = round(esp, 2))
+```
+
+### Exemplo 3.10
+
+```{r, echo=-1, out.width="80%", fig.width=7, fig.height=4}
+par(mar=c(4,4,1,1), mgp=c(2.5,1,0), las=1)
+plot(0:10, obs, xlab = "Filhotes", ylab = "Frequência")
+points(0:10, esp, pch = 3)
+legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
+```
+
+## Outros modelos
+
+### Modelo Geométrico
+
+**Definição:** Considere o número ($k$) de ensaios Bernoulli **que
+precedem o primeiro sucesso**. Nesse caso, dizemos que a VA $X$ tem
+distribuição Geométrica de parâmetro $p$, e sua função de probabilidade
+tem a forma
+$$
+P(X = k) = p(1-p)^{k}, \quad k = 0, 1, 2, \ldots .
+$$
+onde $0 \leq p \leq 1$ é a probabilidade de sucesso.
+
+**Notação:** $X \sim \text{G}(p)$.
+
+### Modelo Geométrico
+
+```{r, out.width='90%', fig.width=7.5, fig.height=5}
+par(mfrow=c(2,2), mar=c(4,4,2,1), mgp=c(2.5,0.7,0), las=1)
+plot(0:50, dgeom(x = 0:50, prob = .1), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.1")
+plot(0:50, dgeom(x = 0:50, prob = .3), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.3")
+plot(0:50, dgeom(x = 0:50, prob = .7), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.7")
+plot(0:50, dgeom(x = 0:50, prob = .9), type = "h",
+     xlab = "X", ylab = "P[X = x]", main = "p = 0.9")
+```
+
+### Exemplo 3.11
+
+Uma linha de produção está sendo analisada para efeito de controle da
+qualidade das peças produzidas. Tendo em vista o alto padrão requerido,
+a produção é interrompida para regulagem toda vez que uma peça
+defeituosa é observada. Se $0.01$ é a probabilidade da peça ser
+defeituosa, estude o comportamento da variável $Q$, quantidade de peças
+boas produzidas antes da primeira defeituosa.
+
+### Exemplo 3.11
+
+$P(Q = k) = 0.01 \times 0.99^{k}, \quad k = 0, 1, 2, \ldots$
+
+Usando o R temos
+
+```{r, echo=-3, fig.width=7.5, fig.height=3, out.width="90%"}
+x = c(0:100)
+dx = dgeom(x = x, prob = 0.01)
+par(mar=c(4,4,1,1), mgp=c(3,1,0), las=1)
+plot(x, dx, type = "h", xlab = "X", ylab = "P[X = x]")
+```
+
+### Modelo Poisson
+
+**Definição:** Seja um experimento realizado nas seguintes
+condições:
+
+i. As ocorrências são independentes
+ii. As ocorrências são aleatórias
+iii. A variável aleatória $X$ é o número de ocorrências de um
+evento **ao longo de algum intervalo** (de tempo ou espaço)
+
+Denominamos esse experimento de **processo de Poisson**.
+
+Vamos associar a VA $X$ o número de ocorrências em um intervalo.
+Portanto $X$ poderá assumir os valores $0, 1, \ldots$ (sem limite
+superior).
+
+### Modelo Poisson
+
+Uma VA $X$ segue o modelo de Poisson se surge a partir de um
+processo de Poisson, e sua **função de probabilidade** for dada
+por
+$$
+P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2, \ldots .
+$$
+onde o parâmetro $\lambda > 0$ é a taxa média de ocorrências em um intervalo de
+tempo ou espaço.
+
+Notação: $X \sim Po(\lambda)$.
+
+### Modelo Poisson
+
+```{r, out.width='90%', fig.width=7.5, fig.height=5}
+par(mfrow=c(2,2), mar=c(4,4,2,1), mgp=c(3,1,0), las=1)
+plot(0:30, dpois(x = 0:30, lambda = 1), type = "h",
+xlab = "X", ylab = "P[X = x]", main = expression(lambda == 1),
+ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 5), type = "h",
+xlab = "X", ylab = "P[X = x]", main = expression(lambda == 5),
+ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 10), type = "h",
+xlab = "X", ylab = "P[X = x]", main = expression(lambda == 10),
+ylim = c(0,.4))
+plot(0:30, dpois(x = 0:30, lambda = 15), type = "h",
+xlab = "X", ylab = "P[X = x]", main = expression(lambda == 15),
+ylim = c(0,.4))
+```
+
+### Exemplo 3.12
+
+A emissão de partículas radioativas têm sido modelada através de
+uma distribuição de Poisson, com o valor do parâmetro dependendo da fonte
+utilizada.
+
+Suponha que o número de partículas alfa, emitidas por minuto,
+seja uma variável aleatória seguindo o modelo Poisson com parâmetro 5,
+isto é, a taxa média de ocorrência é de 5 emissões a cada minuto.
+
+Calcule a probabilidade de haver mais de $2$ emissões em um minuto.
+
+### Exemplo 3.12
+
+Note que $P(A > 2) = 1 - P(A \leq 2)$, portanto
+\begin{align*}
+P(A > 2) &= \sum_{a = 3}^{\infty} P(A = a) = 1 - P(A \leq 2) \\
+&= 1 - \sum_{a =0}^2 \frac{e^{-5}5^a}{a!} = 0.875
+\end{align*}
+
+Em R temos
+
+```{r, echo=TRUE}
+1 - ppois(2, lambda = 5)
+```
+
+### Exemplo $3.13$
+
+Engenheiros da companhia telefônica estudam se o modelo de Poisson
+com taxa de ocorrência de $4.5$ chamadas por hora pode ser ajustado ao
+número $N$ de chamadas interestaduais que chegam por hora, a uma
+central telefônica, durante o período noturno. Os dados coletados
+referentes a $650$ períodos de uma hora, estão apresentados abaixo.
+Analise se esta suposição é razoável.
+
+```{r, results='asis'}
+obs <- c(9,38,71,115,125,106,79,50,57)
+tab <- cbind("Chamadas" = c(0:7, "8+"),
+             "Freq. Obs." = obs)
+knitr::kable(t(tab))
+```
+
+### Exemplo $3.13$
+
+Usando o R temos
+
+```{r, echo=TRUE}
+obs <- c(9, 38, 71, 115, 125, 106, 79, 50, 57)
+prob <- c(dpois(0:7, lambda = 4.5), 1 - ppois(7, lambda = 4.5))
+esp <- prob * 650
+cbind("Obs" = obs, "p" = round(prob, 2), "Esp" = round(esp, 2))
+```
+
+### Modelo hipergeométrico
+
+**Definição:** Considere um conjunto de $n$ objetos dos quais $m$ são do
+tipo $I$ e $n-m$ são do tipo $II$. Para um sorteio de $r$ objetos $r <
+n$, feito ao acaso e **sem reposição**, defina $X$ como o número de
+objetos de tipo $I$ selecionados.
+
+Diremos que a VA $X$ segue o modelo Hipergeométrico e sua função de
+probabilidade é dada por
+$$
+P[X = k] = \frac{\dbinom{m}{k} \dbinom{n-m}{r-k}}{\dbinom{n}{r}},
+$$
+onde $k = \max{\{0, r - (n-m)\}} \leq k \leq \min{\{r, m\}}$.
+
+**Notação:** $X \sim \text{HG}(m, n, r)$.
+
+### Exemplo
+
+<!-- Magalhães, pg 87 -->
+
+Considere que, num lote de 20 peças, existam 4 defeituosas.
+Selecionando-se 5 dessas peças, sem reposição, qual seria a
+probabilidade de 2 defeituosas terem sido escolhidas?
+
+### Exemplo
+
+Pelo enunciado, sabemos que $n = 20$, $m = 4$, $r = 5$. podemos calcular
+a probabilidade de $X = 2$ como
+
+\begin{align*}
+P[X = 2] &= \frac{\dbinom{m}{k} \dbinom{n-m}{r-k}}{\dbinom{n}{r}}
+  = \frac{\dbinom{4}{2} \dbinom{20-4}{5-2}}{\dbinom{20}{5}} = 0.217
+\end{align*}
+
+Usando o R temos
+
+```{r, echo=TRUE}
+## m = defeituosas, n = não defeituosas, k = tam. amostra
+dhyper(x = 2, m = 4, n = 16, k = 5)
+```
+
+### Modelo hipergeométrico - captura e recaptura
+
+Para determinar o tamanho de uma população, podemos usar o modelo
+hipergeométrico
+
+- Captura e marcação de $m$ animais
+- Após um tempo, amostram-se $r$ animais (sem reposição)
+- O número de animais marcados é contado
+
+Sendo $X$ a VA "número de animais marcados", então $X \sim \text{HG}(m,
+N, r)$, onde $N$ é o tamanho da população (desconhecido).
+
+Supondo que a amostra forneça $k_0$ animais marcados, podemos ter uma
+estimativa de $N$ com
+$$
+N_{est} = m \frac{r}{k_0}
+$$
+
+### Modelo hipergeométrico - captura e recaptura
+
+Suponha que você marcou 200 indivíduos de uma espécie de peixe em um
+lago. Algum tempo depois você capturou 56 indivíduos, dos quais 9
+estavam marcados. Qual o tamanho estimado da população?
+
+\begin{align*}
+N_{est} &= m \frac{r}{k_0} \\
+  &= 200 \cdot \frac{56}{9} \\
+  &= 1244,44 \approx 1244
+\end{align*}
+
+```{r, include=FALSE}
+200 * (56/9)
+```
+
+# Exercícios recomendados
+
+### Exercícios recomendados
+
+- Seção $3.1$ - $3,5$ e $6$.
+- Seção $3.2$ - $2,3,5$ e $6$.
+- Seção $3.3$ - $1,2,3,4,5$ e $6$.
+- Extras: Seção 3.4 - 1, 9, 10, 14, 16, 19, 21, e 26.
