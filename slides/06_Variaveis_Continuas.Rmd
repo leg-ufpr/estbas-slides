@@ -1,0 +1,636 @@
+---
+title: "Variáveis aleatórias contínuas"
+short-title: "VAs contínuas"
+author: |
+  | Wagner H. Bonat
+  | Fernando P. Mayer
+  | Elias T. Krainski
+short-author: "LEG/DEST/UFPR"
+# date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+# short-date: "2018/1"
+institute: "Laboratório de Estatística e Geoinformação"
+# short-institute: "LEG/DEST/UFPR"
+department: |
+  | Universidade Federal do Paraná
+  | Departamento de Estatística
+safe-columns: true
+fontfamily: inconsolata
+output:
+  legtheme::beamer_leg
+---
+
+```{r setup, cache=FALSE, include=FALSE}
+source("setup_knitr_slides.R")
+library(xtable)
+op <- par(no.readonly = TRUE)
+```
+
+# Variáveis aleatórias contínuas
+
+## Introdução
+
+### Variáveis aleatórias
+
+Em probabilidade, uma função $X$ que associa a cada evento do espaço
+amostral um número real $X(\omega) \in \mathbb{R}$, é
+denominada uma **variável aleatória** (VA).
+
+Uma variável aleatória pode ser classificada como **discreta** ou
+**contínua**, dependendo do domínio dos valores de $X$.
+
+Exemplo: o número de alunos em uma sala é uma variável aleatória
+(discreta), denotada por $X$ (maiúsculo). Uma observação dessa
+variável é denotada pela respectiva letra minúscula, *e.g.*, $x = 50$
+alunos.
+
+Em geral, denotamos a probabilidade de uma V.A. $X$ assumir determinado
+valor $x$ como
+$$
+P[X] \quad \text{ou} \quad P[X = x]
+$$
+
+### Distribuições de probabilidade
+
+Existem diversos *modelos probabilísticos* que
+procuram descrever vários tipos de variáveis aleatórias: são as
+**distribuições de probabilidade de variáveis aleatórias**
+(discretas ou contínuas).
+
+A distribuição de probabilidades de uma VA $X$ é, portanto, uma
+descrição das probabilidades associadas com os possíveis valores de
+$X$. Os valores que $X$ assume determinam o **suporte** (S) da VA.
+
+- **Variáveis discretas** $\rightarrow$ suporte em um conjunto
+de valores enumeráveis (finitos ou infinitos)
+- **Variáveis contínuas** $\rightarrow$ suporte em um conjunto
+não enumerável de valores
+
+### Distribuições de probabilidade
+
+Denomina-se de **distribuição de probabilidade** de alguma variável
+aleatória, a **regra** geral que define a
+
+- **função de probabilidade** (fp) (V.A.s discretas), ou a
+- **função densidade de probabilidade** (fdp) (V.A.s contínuas)
+
+para a variável de interesse.
+
+Existem muitas distribuições de probabilidade, mas algumas merecem
+destaque por sua importância prática.
+
+Estas distribuições também são chamadas de **modelos probabilísticos**.
+
+### Variáveis aleatórias contínuas
+
+Uma V.A. é classificada como contínua se assume valores em qualquer
+intervalo dos números reais, ou seja, um conjunto de valores não
+enumerável. Dessa forma, não é possível atribuir probabilidades para um
+ponto específico, apenas para intervalos da reta.
+
+Exemplos:
+
+- Peso de animais
+- Tempo de falha de um equipamento eletrônico
+- Altura da maré em uma hora específica
+- Salinidade da água do mar
+- Retorno financeiro de um investimento
+
+### Exemplo 6.1
+
+Estudos anteriores revelam a existência de uma grande lençol
+de água no subsolo de uma região. No entanto, sua profundidade ainda
+não foi determinada, sabendo-se apenas que o lençol pode estar
+situado em qualquer ponto entre $20$ e $100$ metros.
+
+- Determine uma função para representar a variável $X$ (profundidade
+do lençol de água).
+- Calcule a probabilidade de encontar água em uma profundidade pelo
+menos igual a 25, mas inferior a 29 metros.
+
+## Variáveis aleatórias contínuas
+
+### Função densidade de probabilidade
+
+Não podemos atribuir probabilidades à valores específicos, pois há uma
+quantidade **não enumerável** (infinita) de valores em um ponto.
+
+Atribuimos probabilidades à intervalos de valores, por meio de uma
+**função**. Portanto, as probabilidades são representadas por
+áreas.
+
+```{r, out.width="55%", fig.width=6, fig.height=5}
+x <- rnorm(1000, 50, 5)
+MASS::truehist(x, xlim = c(30,70),
+               xlab = "X", ylab = "Densidade"); box()
+lines(density(x))
+```
+
+### Função densidade de probabilidade
+
+A **função densidade de probabilidade** (fdp) atribui probabilidades à
+intervalos de valores do tipo $[a,b]$, e é definida por
+$$
+P[a < x < b] = \int_{a}^{b} f(x) dx
+$$
+com as seguintes propriedades:
+
+i. É uma função não negativa $$f(x) \geq 0$$
+ii. A área total sob a curva deve ser igual a 1
+  $$\int_{-\infty}^{+\infty} f(x) dx = 1$$
+
+### Função densidade de probabilidade
+
+**Observações:**
+
+- $P[X=x] = 0$, portanto: $$P[a \leq X \leq b] = P[a < X \leq b] = P[a
+  \leq X < b] = P[a < X < b]$$
+- Qualquer função $f(\cdot)$ que seja não negativa e cuja área total sob
+a curva seja igual à unidade caracterizará uma VA contínua.
+- $f(x)$ **não** representa a probabilidade de ocorrência de algum
+evento. A área sob a curva entre dois pontos é que fornecerá a
+probabilidade.
+
+### Exemplo
+
+Seja a função:
+
+$$
+f(x)=
+\begin{cases}
+\frac{3}{2} x^2, & \text{se } -1 \leq x \leq 1 \\
+0,              & \text{caso contrário}
+\end{cases}
+$$
+
+- Verifique se essa função é uma fdp.
+- Calcule:
+    - $P[X > 0]$
+    - $P[X > 0,5]$
+    - $P[-0,5 \leq X \leq 0,5]$
+    - $P[X < -2]$
+    - $P[X < 0,5]$
+    - $P[X < 0 \cup X > 0,5]$
+
+(Ver também exemplos 6.2 e 6.3).
+
+```{r, include=FALSE}
+x <- seq(-1, 1, length = 100)
+fx <- 1.5 * x^2
+plot(x, fx, type = "l")
+```
+
+<!-- ### Exemplo 6.2 -->
+
+<!-- - Arqueólogos estudaram uma certa região e estabeleceram um -->
+<!-- modelo teórico para a variável $C$, comprimento de fósseis da região -->
+<!-- (em cm). Suponha que C é uma variável aleatória contínua com a seguinte -->
+<!-- função densidade de probabilidade: -->
+
+<!-- $$ -->
+<!-- f(c) = -->
+<!--   \begin{cases} -->
+<!--   \frac{1}{40}(\frac{c}{10} + 1) & \quad \text{se } 0 \leq c \leq 20 \\ -->
+<!--    0  & \quad \text{caso contrário} -->
+<!--   \end{cases} -->
+<!-- $$ -->
+
+<!-- - Exemplo 6.3 tarefa de casa. -->
+
+### Medidas de posição para VAs contínuas
+
+- O valor esperado (ou média) da VA contínua $X$ com função
+densidade $f(x)$, é dado pela expressão:
+$$E(X) = \mu = \int_{-\infty}^{\infty} x\, f(x) dx.$$
+- A mediana é o valor $Md$ que tem a propriedade de
+$$P(X \geq Md) \geq 0.5 \quad \text{e} \quad P(X \leq Md) \geq 0.5.$$
+- A moda é o valor $Mo$ tal que,
+$$f(Mo) = \max_{x} f(x).$$
+
+### Variância para VAs contínuas
+
+- Para uma VA $X$ com densidade $f(x)$, a variância é dada
+por
+$$Var(X) = \sigma^2 = \int_{-\infty}^{\infty} (x - \mu)^2 \, f(x) dx.$$
+- Expressão alternativa
+$$Var(X) = \sigma^2 = E(X^2) - E(X)^2.$$
+onde
+$$E(X^2) = \int_{-\infty}^{\infty} x^2 \, f(x) dx.$$
+
+### Exemplo
+
+Seja a função:
+
+$$
+f(x)=
+\begin{cases}
+\frac{3}{2} x^2, & \text{se } -1 \leq x \leq 1 \\
+0,              & \text{caso contrário}
+\end{cases}
+$$
+
+Calcule $E(X)$, $Var(X)$, $DP(X)$.
+
+# Principais modelos contínuos
+
+## Modelo Uniforme contínuo
+
+### Modelo Uniforme contínuo
+
+**Definição:** uma VA $X$ tem distribuição Uniforme contínua no
+intervalo $[a,b]$, $a < b$, se sua função densidade de probabilidade é
+dada por
+$$
+f(x) =
+  \begin{cases}
+  \frac{1}{b-a} & \quad \text{se } a \leq x \leq b \\
+   0  & \quad \text{caso contrário}
+  \end{cases}
+$$
+
+**Notação:** $X \sim U[a,b]$
+
+**Esperança e variância:** $E(X) = \frac{a+b}{2}$ e $Var(X) =
+\frac{(b-a)^2}{12}$.
+
+### Modelo Uniforme contínuo
+
+```{r, out.width='99%', fig.width=7, fig.height=4}
+par(mfrow=c(2,2), mar=c(3,4,2,1), mgp=c(2,0.5,0), las=1)
+plot(0:1, dunif(x = 0:1, min = 0, max = 1), type = "l",
+     xlab = "x", ylab = "f(x)", main = "a = 0, b = 1",
+     ylim = c(0,1), axes = TRUE)
+segments(0, 0, 0, 1, lty = 2)
+segments(1, 0, 1, 1, lty = 2)
+plot(-1:1, dunif(x = -1:1, min = -1, max = 1), type = "l",
+     xlab = "x", ylab = "f(x)", main = "a = -1, b = 1",
+     ylim = c(0,1), axes = TRUE)
+segments(-1, 0, -1, .5, lty = 2)
+segments(1, 0, 1, .5, lty = 2)
+plot(10:20, dunif(x = 10:20, min = 10, max = 20), type = "l",
+     xlab = "x", ylab = "f(x)", main = "a = 10, b = 20",
+     ylim = c(0,.2), axes = TRUE)
+segments(10, 0, 10, .1, lty = 2)
+segments(20, 0, 20, .1, lty = 2)
+plot(-10:10, dunif(x = -10:10, min = -10, max = 10), type = "l",
+     xlab = "x", ylab = "f(x)", main = "a = -10, b = 10",
+     ylim = c(0,.1), axes = TRUE)
+segments(-10, 0, -10, .05, lty = 2)
+segments(10, 0, 10, .05, lty = 2)
+```
+
+### Exemplo 6.5
+
+Com o objetivo de verificar a resistência à pressão de água, os técnicos
+de qualidade de uma empresa inspecionam os tubos de PVC produzidos.
+
+Os tudos inspecionados têm 6 metros de comprimento e são submetidos a
+grandes pressões até o aparecimento do primeiro vazamento, cuja
+distância a uma das extremidades (fixada à priori) é anotada para fins
+de análise.
+
+Escolhe-se um tubo ao acaso para ser inspecionado. Queremos calcular a
+probabilidade de que o vazamento esteja, a no máximo 1 metro das
+extremidades.
+
+## Modelo Exponencial
+
+### Modelo Exponencial
+
+**Definição:** uma VA contínua $X$ assumindo valores não negativos,
+segue o modelo exponencial com parâmetro $\alpha > 0$ se sua densidade é
+dada por
+$$
+f(x) =
+  \begin{cases}
+  \alpha e^{-\alpha x} & \quad \text{se } x \geq 0 \\
+   0  & \quad \text{caso contrário}
+  \end{cases}
+$$
+
+**Notação:** $X \sim \text{Exp}(\alpha)$
+
+**Esperança e variância:** $E(X) = \mu = \frac{1}{\alpha}$ e $Var(X) =
+\frac{1}{\alpha^2}$.
+
+**Obs.:** $P(a < X < b) = \int_{a}^{b} \alpha e^{-\alpha x} \, dx =
+e^{-\alpha a} - e^{-\alpha b}.$
+
+### Modelo Exponencial
+
+```{r, out.width='99%', fig.width=7, fig.height=4}
+par(mfrow=c(2,2), mar=c(3,4,2,1), mgp=c(2,0.5,0), las=1)
+plot(0:30, dexp(x = 0:30, rate = 0.2), type = "l",
+     xlab = "x", ylab = "f(x)", main = expression(alpha == 0.2),
+     ylim = c(0,.2), axes = TRUE)
+plot(0:30, dexp(x = 0:30, rate = 0.5), type = "l",
+     xlab = "x", ylab = "f(x)", main = expression(alpha == 0.5),
+     ylim = c(0,.5), axes = TRUE)
+plot(0:30, dexp(x = 0:30, rate = 1), type = "l",
+     xlab = "x", ylab = "f(x)", main = expression(alpha == 1),
+     ylim = c(0,1), axes = TRUE)
+plot(0:30, dexp(x = 0:30, rate = 2), type = "l",
+     xlab = "x", ylab = "f(x)", main = expression(alpha == 2),
+     ylim = c(0,2), axes = TRUE)
+```
+
+### Exemplo 6.6
+
+- Uma indústria fabrica lâmpadas especiais que ficam em operação
+continuamente. A empresa oferece a seus clientes a garantia de reposição,
+caso a lâmpada dure menos de 50 horas. A vida útil dessas lâmpadas
+é modelada através da distribuição Exponencial com parâmetro $1/8000$.
+Determine a proporção de troca por defeito de fabricação.
+
+### Exemplo 6.7
+
+- O intervalo de tempo, em minutos, entre emissões consecutivas
+de uma fonte radioativa é uma variável aleatória com distribuição
+Exponencial de parâmetro $\alpha = 0,2$. Calcule a probabilidade
+de haver uma emissão em um intervalo inferior a 2 minutos.
+
+## Modelo Normal
+
+### Modelo Normal
+
+**Definição:** Dizemos que uma VA $X$ segue o modelo normal se sua fdp é
+a seguinte
+$$
+f(x) = \frac{1}{\sigma\sqrt{2\pi}} \exp\left[-\frac{1}{2} \left( \frac{x -
+\mu}{\sigma}\right)^2\right], \quad -\infty < x < \infty
+$$
+onde $\mu \in \mathbb{R}$ é a média da população, $\sigma \in
+\mathbb{R}^+$ é o desvio-padrão populacional.
+
+**Notação:** $X \sim \text{N}(\mu, \sigma^2)$
+
+**Esperança e variância:** $E(X) = \mu$ e $Var(X) = \sigma^2$
+
+### Modelo Normal
+
+```{r, out.width='99%', fig.width=7, fig.height=4}
+par(mfrow=c(2,2), mar=c(3,4,2,1), mgp=c(2,0.5,0), las=1)
+plot(seq(10, 90, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(10, 90, length=100), mean = 50, sd = 5),
+     main = expression(list(mu == 50, sigma^2 == 25)))
+plot(seq(10, 90, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(10, 90, length=100), mean = 50, sd = 10),
+     main = expression(list(mu == 50, sigma^2 == 100)))
+plot(seq(70, 130, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(70, 130, length=100), mean = 100, sd = 5),
+     main = expression(list(mu == 100, sigma^2 == 25)))
+plot(seq(170, 230, length=100), type = "l", xlab = "X", ylab = "f(x)",
+     y = dnorm(x = seq(170, 230, length=100), mean = 200, sd = 5),
+     main = expression(list(mu == 200, sigma^2 == 25)))
+par(mfrow=c(1,1))
+```
+
+### Modelo Normal
+
+Característcas da curva normal:
+
+- É **simétrica** em relação à $\mu$
+- O ponto máximo (moda) de $f(x)$ é o ponto $x=\mu$
+- Os pontos de inflexão da função são $\mu-\sigma$ e $\mu+\sigma$
+- A área total sob a curva é 1 ou 100\%
+- A curva é **assintótica** em relação ao eixo $x$
+
+### Modelo Normal
+
+Para qualquer VA normal $X$, valem as seguintes relações:
+\begin{align*}
+&P[X > \mu] = P[X < \mu] \\
+&P[\mu - \sigma < X < \mu + \sigma] \approxeq 0,6827 \\
+&P[\mu - 2\sigma < X < \mu + 2\sigma] \approxeq 0,9545 \\
+&P[\mu - 3\sigma < X < \mu + 3\sigma] \approxeq 0,9973
+\end{align*}
+Portanto, $6\sigma$ é frequentemente referida como a **largura** de uma
+distribuição normal.
+
+Métodos mais avançados de integração podem ser utilizados para mostrar
+que a área sob a função densidade de probabilidade normal de $-\infty <
+x < \infty$ é igual a 1.
+
+<!-- ### Modelo Normal -->
+
+<!-- - Uma v.a. contínua $X$ tem distribuição Normal com parâmetros -->
+<!-- $\mu$ e $\sigma^2$, se sua função de densidade é dada por: -->
+<!-- $$f(x) =  \frac{1}{\sigma \sqrt{2\pi}} \exp^{-\frac{(x-\mu)^2}{2\sigma^2}}, -->
+<!-- \quad \text{para} \quad -\infty , x < \infty.$$ -->
+<!-- - Notação $X \sim N(\mu, \sigma^2)$. -->
+<!-- - $E(X) = \mu$ e $Var(X) = \sigma^2$. -->
+<!-- - $P(a \leq X \leq b) = \int_{a}^{b}\frac{1}{\sigma \sqrt{2\pi}} \exp^{-\frac{(x-\mu)^2}{2\sigma^2}}dx.$ -->
+<!-- - Exemplo cálculo de probabilidade usando transformação Z. -->
+
+### Modelo Normal
+
+Para obter uma probabilidade do modelo normal, devemos calcular a área
+entre os pontos $a$ e $b$, ou seja,
+$$
+P[a < X < b] = \int_a^b \frac{1}{\sqrt{2\pi}\sigma} \exp\left[-\frac{1}{2}
+\left( \frac{x - \mu}{\sigma}\right)^2\right] dx
+$$
+No entanto, essa função não possui forma fechada, e o cálculo de
+probabilidades pode ser feito apenas por aproximações numéricas.
+
+Para contornar esse problema, os valores de probabilidade são
+obtidos para uma distribuição normal padrão ($Z$) com $\mu = 0$ e
+$\sigma^2 = 1$,
+$$
+Z = \frac{X - \mu}{\sigma} \sim \text{N}(0,1)
+$$
+A vantagem é que podemos fazer uma única tabela com as integrais
+aproximadas de $Z$, ao invés de uma tabela para cada par
+$(\mu,\sigma^2)$.
+
+### Modelo Normal
+
+Se $Z \sim \text{N}(0,1)$, então sua fdp é
+$$
+f(z) = \frac{1}{\sqrt{2\pi}} \exp\left[-\frac{1}{2} (z)^2 \right]
+$$
+Para se obter a probabilidade de $Z$ estar entre $a$ e $b$,
+$$
+P[a < Z < b] = \int_a^b \frac{1}{\sqrt{2\pi}} \exp\left[-\frac{1}{2}
+(z)^2 \right] dz
+$$
+As integrais (áreas) para valores de $Z$ entre 0,00 e 3,99 estão na
+tabela. Portanto, para qualquer valor de $X$ entre $a$ e $b$, podemos
+calcular a probabilidade correspondente através da transformação,
+$$
+P[a < X < b] = P\left[\frac{a - \mu}{\sigma} < Z < \frac{b
+- \mu}{\sigma}\right]
+$$
+
+### Modelo Normal
+
+```{r, out.width="80%"}
+x <- seq(70, 130, length = 100)
+mu <- 100
+sigma <- 5
+fx <- dnorm(x = x, mean = mu, sd = sigma)
+xaxis <- seq(70, 130, 10)
+zaxis <- (xaxis - mu)/sigma
+par(cex.axis = 1.2, cex.lab = 1.2, mar = c(10.1,4.1,4.1,2.1))
+plot(x, fx, type = "l", xlab = "X", ylab = "f(X)",
+     main = expression(list(mu == 100, sigma^2 == 25)))
+axis(1, line = 5, at = xaxis, labels = zaxis)
+mtext("Z", side = 1, line = 8, cex = 1.2)
+```
+
+### Modelo Normal
+
+**Exemplo de uso da tabela**
+
+- Calcule as probabilidades (áreas):
+  - $P(0 < Z < 2)$
+  - $P(Z > 2)$
+  - $P(Z < -2)$
+  - $P(2,0 < Z < 2,5)$
+  - $P(-2,61 < Z < 2,43)$
+  - $P(Z > -1,63)$
+  - Qual é o valor de $c$ tal que $P(0 < Z < c) = 0,4$?
+  - Qual é o valor de $d$ tal que $P(Z > d) = 0,8$?
+
+### Exemplo 6.9
+
+Doentes sofrendo de certa moléstia são submetidos a um tratamento
+intensivo cujo tempo de cura foi modelado por uma densidade Normal
+de média $15$ e desvio padrão $2$ (em dias).
+
+- Calcule a proporção de pacientes que demorarão mais de $17$ dias para
+se recuperar.
+- Calcule a probabilidade um paciente selecionado ao acaso demorar
+menos de $20$ dias para se recuperar.
+- Qual o tempo máximo necessário para a recuperação de 25% dos
+  pacientes?
+- Se 100 pacientes forem escolhidos ao acaso, qual seria o número
+  esperado de doentes curados em menos de 11 dias?
+
+### Normal como aproximação da binomial
+
+- A distribuição Normal é uma das mais importantes na Estatística:
+  - Muitos fenômenos aleatórios se comportam próximos à essa
+    distribuição
+  - Pode ser usada como aproximação para outras distribuições
+
+Se $X \sim \text{Bin}(n,p)$ então $E(X) = np$ e $Var(X) = np(1-p)$.
+
+Podemos aproximar a binomial pela normal, usando
+$$
+Y \sim \text{N}(\mu = np, \sigma^2 = np(1-p)),
+$$
+em geral, quando $np \geq 5$ e $np(1-p) \geq 5$.
+
+### Exemplo 6.11
+
+Estudo do Sindicato dos Bancários indica que cerca de $30\%$
+dos funcionários de banco têm problemas de estresse, provenientes
+das condições de trabalho. Numa amostra de $200$ bancários, qual
+seria a probabilidade de pelo menos $50$ com essa doença?
+
+\pause
+
+Temos então $X \sim \text{Bin}(200, 0.3)$, e a probabilidade seria
+$$
+P(X \geq 50) = \sum_{k=50}^{200} \binom{200}{k} 0.3^k 0.7^{200-k}
+$$
+que é difícil de calcular sem computador.
+
+### Exemplo 6.11
+
+Mas $E(X) = np = 60$ e $Var(X) = np(1-p) = 42$. Assim, temos $Y \sim
+\text{N}(60, 42)$, de modo que
+\begin{align*}
+P(X \geq 50) \approx P(Y \geq 50-1/2) &= P\left(\frac{Y-60}{\sqrt{42}} \geq
+\frac{49.5-60}{\sqrt{42}}\right) \\
+ &= P(Z \geq -1.62) = 0.9474
+\end{align*}
+
+- o fator $-1/2$ é o fator de correção de continuidade
+
+Usando o R:
+
+\setlength{\topsep}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\partopsep}{1pt}
+```{r, echo=TRUE}
+## Cálculo exato pela binomial
+pbinom(49, size = 200, prob = 0.3, lower.tail = FALSE)
+## Aproximação pela Normal
+pnorm(50-1/2, mean = 60, sd = sqrt(42), lower.tail = FALSE)
+```
+
+### Exemplo 6.11
+
+Aproximação de $X \sim \text{Bin}(200, 0.3)$ com $Y \sim \text{N}(60,
+42)$.
+
+```{r, out.width='80%'}
+x <- 0:200
+px <- dbinom(x, size = 200, prob = 0.3)
+plot(x, px, type = "h", xlab = "x", ylab = "Densidade")
+fx <- dnorm(x, mean = 60, sd = sqrt(42))
+lines(x, fx, col = 2)
+```
+
+### Combinação linear de Normais independentes
+
+Se $X_1, X_2, \ldots, X_n$ fomam uma sequência de variáveis aleatórias
+independentes, onde $X_i \sim \text{N}(\mu_i, \sigma^2_i)$, e $a_1, a_2,
+\ldots, a_n$ são constantes quaisquer, então:
+$$
+W = \sum_{i=1}^n a_i X_i \quad \text{terá distribuição Normal com} \quad
+W \sim \text{N}(\mu_W, \sigma^2_W)
+$$
+onde:
+$$
+\mu_W = E(\sum_{i=1}^n a_i X_i) = \sum_{i=1}^n E(a_i X_i) = \sum_{i=1}^n
+a_i E(X_i) = \sum_{i=1}^n a_i \mu_i
+$$
+$$
+\sigma^2_W = Var(\sum_{i=1}^n a_i X_i) = \sum_{i=1}^n Var(a_i X_i) =
+\sum_{i=1}^n a_i^2 Var(X_i) = \sum_{i=1}^n a_i^2 \sigma^2_i
+$$
+
+### Exemplo 6.13
+
+Uma corretora negocia títulos na Bolsa de Valores e utiliza
+um modelo probabilístico para avaliar seus lucros. Suas aplicações
+financeiras de compra e venda atingem três áreas: agricultura,
+indústria e comércio. Admita que o seguinte modelo representa o
+comportamento do lucro diário da corretora (em milhares):
+$$
+L = 2 L_A + 5 L_I + 3 L_C
+$$
+onde $L_A$, $L_I$ e $L_C$ representam, os lucros diários nos setores
+de agricultura, indústria e comércio.
+
+As distribuições de probabilidades dessas variáveis aleatórias são $L_A
+\sim N(3,4)$, $L_I \sim N(6,9)$ e $L_C \sim N(4,16)$. Supondo
+independência entre os três setores, qual será a probabilidade de um
+lucro diário acima de 50 mil.
+
+### Exemplo 6.12
+
+Um serviço de fiscalização é criado para averiguar se garrafas de um
+certo refrigerante contém, de fato, o volume especificado pelo
+fabricante. Para tanto, $10$ garrafas do produto são compradas no
+varejo, em várias regiões da cidade. Cada uma dessas garrafas é
+esvaziada e o volume de seu conteúdo, que denotaremos por V é aferido.
+
+Uma vez obtidos os $10$ valores, a média aritmética M é calculada e, se
+$M < 290$ mililitros (ml), a companhia é multada. Estudos na linha de
+produção do fabricante mostraram que variações sempre ocorrem, mesmo se
+as especificações forem seguidas.
+
+Por essa razão, considera-se o volume do conteúdo das garrafas como
+seguindo o modelo Normal, com média $\mu = 300$ ml e desvio-padrão
+$\sigma = 25$ ml. Gostaríamos de calcular qual é a probabilidade de que
+o fabricante seja multado injustamente.
+
+# Exercícios
+
+### Exercícios recomendados
+
+- Seção $6.1$ - $1,2,3,4$ e $5$.
+- Seção $6.2$ - $1$ a $9$.

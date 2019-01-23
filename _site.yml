@@ -1,0 +1,26 @@
+name: "estbas-slides"
+output_dir: "docs"
+exclude: ["README.md", "\\.sh", "cache"]
+output:
+  html_document:
+    theme: flatly
+    highlight: default
+    code_folding: hide
+    number_sections: false
+    toc: true
+    toc_depth: 4
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+    includes:
+      in_header: analytics.html
+      after_body: footer.html
+navbar:
+  title: "Estatística Básica"
+  left:
+    - text: "Slides"
+      href: index.html
+  right:
+    - text: GitHub
+      icon: fa-github fa-lg
+      href: https://github.com/leg-ufpr/estbas-slides

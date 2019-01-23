@@ -1,0 +1,624 @@
+---
+title: "Probabilidades"
+short-title: "Probabilidades"
+author: |
+  | Wagner H. Bonat
+  | Elias T. Krainski
+  | Fernando P. Mayer
+short-author: "LEG/DEST/UFPR"
+# date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+# short-date: "2018/1"
+institute: "Laboratório de Estatística e Geoinformação"
+# short-institute: "LEG/DEST/UFPR"
+department: |
+  | Universidade Federal do Paraná
+  | Departamento de Estatística
+safe-columns: true
+fontfamily: inconsolata
+output:
+  legtheme::beamer_leg
+---
+
+```{r setup, cache=FALSE, include=FALSE}
+source("setup_knitr_slides.R")
+library(xtable)
+```
+
+# Introdução
+
+## Teoria das Probabilidades
+
+### Teoria das Probabilidades
+
+- A **Teoria das Probabilidades** é o ramo da Matemática que cria,
+desenvolve e pesquisa **modelos** que podem ser utilizados para estudar
+**experimentos ou fenômenos aleatórios**
+- A **Inferência Estatística** é totalmente fundamentada na **Teoria das
+Probabilidades**
+- O **modelo** utilizado para estudar um fenômeno aleatório pode variar
+em complexidade, mas todos eles possuem ingredientes básicos comuns.
+
+### Tipos de experimentos
+
+#### Experimentos determinísticos
+Dizemos que um experimento é determinístico quando repetido inúmeras
+vezes, **em condições semelhantes**, conduz a resultados
+*essencialmente* idênticos. Ex.:
+
+- Aceleração da gravidade
+- Leis da Física e da Química
+
+#### Experimentos aleatórios
+Os experimentos que **repetidos sob as mesmas condições** geram
+resultados diferentes, são chamados de experimentos aleatórios. Ex.:
+
+- Lançamento de uma moeda
+- Lançamento de um dado
+- Tempo de vida de um equipamento eletrônico
+
+### Objetivo
+
+- O objetivo é construir um modelo matemático para representar
+**experimentos aleatórios**. Isso o corre em duas etapas:
+  - Descrever o **conjunto** de resultados possíveis
+  - Atribuir *pesos* a cada resultado, refletindo suas chances de
+ocorrência
+
+## Experimentos e eventos
+
+### Definições
+
+Um experimento, que ao ser realizado sob as mesmas condições não
+produz os mesmos resultados, é denominado um \textbf{experimento
+aleatório}. Exemplo: lançamento de uma moeda, medir altura, ...
+
+O conjunto de todos os possíveis resultados de um experimento
+aleatório é denominado **espaço amostral** ($\Omega$). Pode conter
+um número finito ou infinito de pontos. Exemplo: \{cara, coroa\},
+$\mathbb{R}$, ...
+
+Os elementos do espaço amostral (**pontos amostrais**) são
+denotados por $\omega$. Exemplo: $\omega_1 = \text{cara}$, $\omega_2 =
+\text{coroa}$.
+
+Todo resultado ou \underline{subconjunto} de resultados de um
+experimento aleatório, é um **evento**. Exemplo: A = "sair
+cara", B = "sair face par".
+
+### Exemplos
+
+####
+
+- **Experimento:** retirar uma carta de um baralho de 52 cartas.
+- **Espaço amostral:** $\Omega=\{\clubsuit A,\clubsuit 2,...,\heartsuit
+A,...,\spadesuit A, ...,\diamondsuit J, \diamondsuit Q, \diamondsuit
+K\}$.
+- **Pontos amostrais:** $\omega_1=\clubsuit A$, $\omega_2=\clubsuit 2$,
+..., $\omega_{52}=\diamondsuit K$.
+- **Eventos:** A = "sair um ás", B = "sair uma letra", C = "sair carta
+  de $\clubsuit$".
+
+####
+
+- **Experimento:** pesar um fruto ao acaso
+- **Espaço amostral:** $\Omega=\mathbb{R}^{+}$.
+- **Pontos amostrais:** espaço amostral é infinito.
+- **Eventos:** A = "peso menor que 50g", B = $\{x: x\geq100\text{g}\}$.
+
+### Operações com eventos
+
+Usamos a **Teoria dos conjuntos** para definir operações com
+eventos
+
+- **União** é o evento que consiste da união de **todos** os pontos
+amostrais dos eventos que a compõem. Denotamos a união do evento A
+com B por $A\cup B$.
+$A \cup B = \{\omega \in A \text{ ou } \omega \in B\}$
+- **Interseção** é o evento composto pelos pontos amostrais
+**comuns** aos eventos que a compõem. Denotamos a interseção de
+A com B por $A\cap B$.
+$A \cap B = \{\omega \in A \text{ e } \omega \in B\}$
+- **Complemento** é o conjunto de pontos do espaço amostral que não
+estão no evento. Denotamos o complemento do evento A por $A^c$.
+$A^c = \{\omega \not\in A \}$
+
+### Tipos de eventos
+
+- **Disjuntos** (mutuamente exclusivos) são eventos que possuem
+interseção nula, ou seja, $A\cap B = \{\emptyset\}$.
+- **Complementares** são eventos que a união é o espaço amostral, ou
+seja, $A\cup B = \Omega$.
+
+### Exemplo
+
+Considere o lançamento de um dado e os eventos: $A = \{1,2,3,4\}$, $B =
+\{\omega:\omega\leq 3\}$, $C = \text{face par}$, $D = \text{face
+primo}$.
+
+- Uniões
+  - $A\cup B =$
+  - $A\cup C =$
+  - $A\cup D =$
+
+- Interseções
+  - $A\cap B =$
+  - $A\cap C =$
+  - $A\cap D =$
+
+- Complementos
+  - $A^c =$
+  - $B^c =$
+  - $D^c =$
+
+### Exemplo
+
+Considere o lançamento de um dado e os eventos: $A = \{1,2,3,4\}$, $B =
+\{\omega:\omega\leq 3\}$, $C = \text{face par}$, $D = \text{face
+primo}$.
+
+- Uniões
+  - $A\cup B = \{1,2,3,4\}$
+  - $A\cup C = \{1,2,3,4,6\}$
+  - $A\cup D = \{1,2,3,4,5\}$
+
+- Interseções
+  - $A\cap B = \{1,2,3\}$
+  - $A\cap C = \{2,4\}$
+  - $A\cap D = \{2,3\}$
+
+- Complementos
+  - $A^c = \{5,6\}$
+  - $B^c = \{\omega: \omega> 3\}$
+  - $D^c = \{1,4,6\}$
+
+# Probabilidade
+
+## Definições
+
+### Definição de probabilidade
+
+Probabilidade é uma função $P(\cdot)$ que atribui valores
+numéricos aos eventos do espaço amostral, de tal forma que
+
+  i. $0   \leq P(A) \leq 1, \quad \forall A \in \Omega$;
+  ii. $P(\Omega) = 1$;
+  iii. $P(\bigcup_{j=1}^n A_j) = \sum_{j=1}^n P(A_j)$, com os $A_j$'s
+  disjuntos.
+
+A pergunta que surge é então: como atribuir probabilidades aos elementos
+do espaço amostral?
+
+### Definição de probabilidade
+
+Existem duas maneiras principais de atribuir probabilidades aos
+elementos do espaço amostral:
+
+1. (**Clássica**) baseia-se nas características teóricas da realização
+   do fenômeno. Ex.:
+   - Considerando o lançamento de um dado, temos
+     $\Omega=\{1,2,3,4,5,6\}$
+   - Admintindo que o dado é honesto, podemos assumir que $P(1) = P(2) =
+     \cdots = P(6) = 1/6$
+2. (**Frequentista**) baseia-se nas frequências (relativas) de
+   ocorrência do fenômeno. Ex.:
+   - Determinar a probabilidade de ocorrência de cada face de um dado
+   - Sem fazer nenhuma suposição inicial, podemos usar as **frequências
+     relativas** de sucessivas ocorrências
+
+### Definição frequentista
+
+Podemos então pensar em repetir o experimento aleatório $n$ vezes, e
+contar quantas vezes o evento $A$ ocorre, $n(A)$.
+
+Dessa forma a frequência relativa de $A$ nas $n$ repetições será
+
+$$
+f_{n,A} = \frac{n(A)}{n}
+$$
+
+Para $n \rightarrow \infty$ repetições sucessivas e independentes, a
+frequência relativa de $A$ tende para uma constante $p$
+
+$$
+\lim_{n \rightarrow \infty} \frac{n(A)}{n} = P(A) = p
+$$
+
+**Exemplo:** Se um dado fosse lançado $n$ vezes, e contássemos
+quantas vezes saiu a face 4, qual seria a probabilidade desse evento?
+
+### Definição frequentista
+
+```{r, echo=FALSE, out.width='80%'}
+knitr::include_graphics("img/prob_freq.pdf")
+```
+
+### Definição frequentista
+
+Assim,
+
+$$
+\lim_{n \rightarrow \infty} \frac{n(A)}{n} = P(A) \approx 0,1667
+$$
+
+As probabilidades calculadas a partir de frequências relativas, são
+**estimativas** da verdadeira probabilidade
+
+À medida que o número de repetições vai aumentando, as **frequências
+relativas** se estabilizam em um número que chamamos de
+**probabilidade**.
+
+#### Lei dos Grandes Números
+A Lei dos Grandes Números nos diz que as estimativas dadas pelas
+frequências relativas tendem a ficar melhores com mais observações.
+
+### Exemplo
+
+Considerando os dados da variável `Idade` da aula anterior
+
+- O espaço amostral é $\Omega = \{17, 18, \ldots, 25\}$
+- Se um aluno é escolhido ao acaso, definimos a probabilidade dele ter
+  certa idade pela frequência relativa
+
+\begincols
+\column{.5\textwidth}
+```{r, results='asis'}
+dados <- read.table("dados/questionario.txt", header = TRUE)
+## Idade
+tab <- table(factor(dados$Idade, levels = 17:25))
+dtab <- cbind(n_i = addmargins(tab),
+              f_i = addmargins(prop.table(tab)),
+              "f_{ac}" = c(cumsum(prop.table(tab)), NA))
+print(xtable(dtab, digits = c(0, 0, 2, 2)),
+      comment = FALSE,
+      hline.after = c(-1, 0, nrow(dtab)-1, nrow(dtab)),
+      sanitize.colnames.function = function(x){
+    paste0("$", x, "$")
+})
+```
+\column{.5\textwidth}
+$$
+P(17) = 0,18; \ldots; P(25) = 0,04
+$$
+\endcols
+
+### Exemplo
+
+Considerando os dados das variáveis `Sexo` e `Turma`
+
+```{r, results='asis'}
+## Turma x Sexo
+tab <- table(dados$Turma, dados$Sexo)
+tab <- addmargins(tab)
+print(xtable(tab, digits = c(0, 0, 0, 0)),
+      comment = FALSE,
+      hline.after = c(-1, 0, nrow(tab)-1, nrow(tab)))
+```
+
+Podemos extrair as seguintes probabilidades
+
+\begin{align*}
+P(F) = \frac{37}{50} = 0,74; P(M) = \frac{13}{50} = 0,26 \\
+P(A) = \frac{26}{50} = 0,52; P(B) = \frac{24}{50} = 0,48
+\end{align*}
+
+Qual seria a probabilidade de escolhermos ao acaso um estudante do sexo
+feminino ou alguém da Turma B?
+
+### Exemplo
+
+Queremos então $P(F \cup B)$
+
+\begin{align*}
+P(F \cup B) &= P(F) + P(B) \\
+&= 0,74 + 0,48 \\
+&= 1,22
+\end{align*}
+
+o que não é possível pois a soma é superior a 1.
+
+Não é difícil ver que estamos somando alguns indivíduos 2 vezes, pois os
+estudantes do sexo feminino e da turma B, ou seja, o evento $F \cap B$
+está incluído no evento $F$ e no evento $B$.
+
+### Exemplo
+
+Logo, precisamos subtrair $P(F \cap B)$ para obter a probabilidade
+correta.
+
+Nesse caso, pela tabela, vemos que a interseção $F \cap B$ resulta na
+probabilidade
+
+\begin{align*}
+P(F \cap B) = \frac{16}{50} = 0,32
+\end{align*}
+
+E o resultado correto para $P(F \cup B)$ é
+
+\begin{align*}
+P(F \cup B) &= P(F) + P(B) - P(F \cap B) \\
+&= 0,74 + 0,48 - 0,32 \\
+&= 0,9
+\end{align*}
+
+### Regra da adição de probabilidades
+
+A probabilidade da união entre dois eventos quaisquer, $A$ e $B$, é
+dada pela **regra da adição de probabilidades**
+
+$$
+P(A \cup B) = P(A) + P(B) - P(A \cap B)
+$$
+
+```{r, out.width='70%'}
+knitr::include_graphics("img/regra_adicao1-crop.pdf")
+```
+
+### Regra da adição de probabilidades
+
+Note que a regra da adição pode ser simplificada, **se e somente
+se** os eventos $A$ e $B$ forem **disjuntos** (ou mutuamente exclusivos)
+
+$$
+P(A \cup B) = P(A) + P(B)
+$$
+
+pois, neste caso, $A \cap B = \emptyset \quad \Rightarrow \quad
+P(A \cap B) = P(\emptyset) = 0$
+
+```{r, out.width='70%'}
+knitr::include_graphics("img/regra_adicao2-crop.pdf")
+```
+
+### Regra do complementar
+
+Como consequência da regra da adição, temos que, para qualquer
+evento $A$,
+
+$$
+P(A) = 1 - P(A^c)
+$$
+
+Verifique através de $P(A \cup A^c) = P(A) + P(A^c) - P(A \cap A^c)$
+
+# Probabilidade condicional
+
+### Probabilidade condicional
+
+Em muitas situações práticas, o fenômeno aleatório com o qual
+trabalhamos pode ser separado em etapas.
+
+A informação do que ocorreu em uma determinada etapa pode influenciar
+nas probabilidades de ocorrências das etapas sucessivas.
+
+Nestes casos, dizemos que **ganhamos informação**, e podemos
+*recalcular* as probabilidades de interesse.
+
+Estas probabilidades *recalculadas* recebem o nome de
+**probabilidade condicional**.
+
+### Definição
+
+- Dados dois eventos A e B, a probabilidade condicional
+de A ocorrer, dado que ocorreu B é representado por $P(A | B)$ e dada
+por
+$$
+P(A | B) = \frac{P(A \cap B)}{P(B)}, \quad \text{para} \quad P(B) > 0.
+$$
+
+- Caso $P(B) = 0$, definimos $P(A | B) = P(A).$
+
+### Probabilidade condicional
+
+Considere o seguinte exemplo:
+
+- Um dado foi lançado, qual é a probabilidade de ter ocorrido face 4?
+- Suponha que o dado foi jogado, e, sem saber o resultado, você
+recebe a informação de que ocorreu face par. Qual é a probabilidade
+de ter saido face 4 com essa "nova" informação?
+
+$\Omega = \{1,2,3,4,5,6\}$, $n(\Omega) = 6$
+
+$A$ = face 4 = $\{4\}$, $n(A) = 1 \quad \Rightarrow \quad P(A) =
+\frac{n(A)}{n(\Omega)} = \frac{1}{6}$
+
+$B$ = face par = $\{2,4,6\}$, $n(B) = 3 \quad \Rightarrow \quad
+P(B) = \frac{n(B)}{n(\Omega)} = \frac{3}{6}$
+
+$C$ = face 4, dado que ocorreu face par = $\{4\}$, $n(C) = \frac{1}{3}$
+
+### Probabilidade condicional
+
+Usando a definição formal:
+
+$P(A \cap B) = \frac{n(A \cap B)}{n(\Omega)} = \frac{1}{6}$
+
+$P(B) = \frac{n(B)}{n(\Omega)} = \frac{3}{6}$
+
+\begin{align*}
+P(A|B) &= \frac{P(A \cap B)}{P(B)} \\
+&= \frac{1/6}{3/6} \\
+&= \frac{1}{3}
+\end{align*}
+
+### Regra do produto
+
+A regra do produto é uma expressão derivada do conceito de
+probabilidade condicional. Uma vez que
+
+$$
+P(A|B) = \frac{P(A\cap B)}{P(B)}
+$$
+
+temos que
+
+$$
+P(A\cap B) = P(B) \cdot P(A|B)
+$$
+
+Essa expressão permite calcular probabilidades em espaços amostrais
+que são realizados em sequência, onde a ocorrência da *segunda*
+etapa **depende** (ou não) da ocorrência da *primeira* etapa.
+
+### Regra do produto
+
+Qual a probabilidade de se obter dois ases em seguida, quando se
+extraem duas cartas de um baralho comum de 52 cartas, se:
+
+a. A primeira carta extraída **não** é reposta antes da extração da
+segunda carta.
+b. A primeira carta é reposta no baralho antes da extração da
+segunda carta.
+
+### Independência de eventos
+
+Vimos que para probabilidades condicionais, $P(A|B)$, saber que $B$
+ocorreu nos dá uma informação "extra" sobre a ocorrência de $A$.
+
+Porém, existem algumas situações nas quais saber que o evento $B$
+ocorreu, não tem qualquer interferência na ocorrência ou não de $A$.
+
+Nestes casos, podemos dizer que os aventos $A$ e $B$ são
+**independentes**.
+
+### Independência de eventos
+
+Os eventos A e B são **eventos independentes** se a ocorrência de
+B não altera a probabilidade de ocorrência de A, ou seja, eventos A e
+B são independentes se
+
+$$
+P(A|B) = P(A) \quad \text{e também que} \quad P(B|A) = P(B)
+$$
+
+Com isso, e a regra do produto, temos que
+
+\begin{align*}
+P(A \cap B) &= P(B) \cdot P(A|B) = P(B) \cdot P(A) \\
+P(A \cap B) &= P(A) \cdot P(B|A) = P(A) \cdot P(B)
+\end{align*}
+
+### Exemplo
+
+Considere o lançamento de um dado e os seguintes eventos
+
+$A = \text{``resultado é um número par''}$
+$B = \text{``resultado é um número menor ou igual a 4''}$
+
+Os eventos $A$ e $B$ são independentes?
+
+```{r, out.width='40%'}
+knitr::include_graphics("img/independencia-crop.pdf")
+```
+
+### Exemplo
+
+**Pela definição intuitiva**:
+
+$P(A) = 1/2$, \quad $P(A|B) = P(A\cap B)/P(B) = \frac{2/6}{4/6} =
+1/2$
+
+$P(B) = 2/3$, \quad $P(B|A) = P(B\cap A)/P(A) = \frac{2/6}{3/6} =
+2/3$.
+
+Portanto: $P(A|B) = P(A)$ e $P(B|A) = P(B)$
+
+**Pela definição formal:**
+
+$P(A \cap B) = P(A)P(B) = \frac{1}{2} \cdot \frac{2}{3} = 1/3$
+
+$P(A \cap B) = \frac{2}{6} = 1/3$, assim $P(A \cap B) = P(A)P(B)$
+
+Portanto, os eventos $A$ e $B$ são independentes. Saber que $A$
+ocorreu não muda a probabilidade de $B$ ocorrer e vice-versa.
+
+### Exemplo 2.4 (livro)
+
+Uma empresa produz peças em duas máquinas I e II, que podem apresentar
+desajustes com probabilidade $0,05$ e $0,10$, respectivamente.
+
+No início do dia de operação um teste é realizado e, caso a máquina
+esteja fora de ajuste, ela ficará sem operar nesse dia passando por
+revisão técnica.
+
+Para cumprir o nível mínimo de produção pelo menos uma das máquinas deve
+operar. Você diria que a empresa corre o risco de não cumprir com suas
+metas de produção?
+
+### Partição do espaço amostral
+
+Dizemos que os eventos $C_1, C_2, ..., C_k$ formam uma
+**partição** do espaço amostral, se eles não tem interseção
+entre si, e se sua união é igual ao espaço amostral. Isto é,
+
+$$
+C_i \cap C_j = \emptyset \quad \text{para} \quad i \not= j \quad
+\text{e} \quad \bigcup_{i=1}^k C_i = \Omega.
+$$
+
+```{r}
+knitr::include_graphics("img/particao.pdf")
+```
+
+### Exemplo 2.5 (livro)
+
+Suponha que um fabricante de sorvetes recebe $20\%$ de todo o leite
+que utiliza de uma fazenda $F_1$, $30\%$ de uma outra fazendo $F_2$ e
+$50\%$ de $F_3$.
+
+Um órgão de fiscalização inspecionou as fazendas de surpresa e observou
+que $20\%$ do leite produzido por $F_1$ estava adulterado por adição de
+água, enquanto que para $F_2$ e $F_3$, essa proporção era de $5\%$ e
+$2\%$, respectivamente.
+
+Na indústria de sorvetes os galões de leite são armazenados em um
+refrigerador sem identificação das fazendas. Para um galão escolhido ao
+acaso, qual a probabilidade do leite estar adulterado?
+
+### Exemplo 2.5 (livro)
+
+Seja $A$ o evento "o leite está adulterado", podemos defini-lo conforme
+a figura abaixo.
+
+```{r}
+knitr::include_graphics("img/bayes.pdf")
+```
+
+Calcule $P(A)$.
+
+### Teorema de Bayes
+
+Podemos estar interessados também na probabilidade de uma amostra
+adulterada ter sido obtida a partir da fazenda $F_1$, ou seja,
+$P(F_1|A)$.
+
+#### Teorema de Bayes
+Suponha que os eventos $C_1, C_2, \ldots, C_k$ formem uma
+partição de $\Omega$ e que suas probabilidades sejam conhecidas.
+Suponha, ainda, que para um evento $A$, se conheçam as probabilidades
+$P(A | C_i)$ para todo $i = 1, 2, \ldots, k.$ Então, para qualquer $j$,
+
+$$
+P(C_j | A ) = \frac{P(C_j)P(A | C_j)}{\sum_{i=1}^k P(C_i)P(A | C_i)},
+\quad j = 1,2, \ldots,k.
+$$
+
+### Exemplo 2.6 (livro)
+
+Usando o exemplo anterior, podemos agora calcular a probabilidade de que
+o leite adulterado tenha sido obtido a partir da fazenda $F_1$.
+
+\begin{align*}
+P(F_1|A) &= \frac{P(F_1)P(A|F_1)}
+{P(F_1)P(A|F_1) + P(F_2)P(A|F_2) + P(F_2)P(A|F_2)} \\
+  &= \frac{0,2 \times 0,2}
+{0,2 \times 0,2 + 0,3 \times 0,05 + 0,5 \times 0,02} \\
+  &= 0,615
+\end{align*}
+
+De maneira similar, podemos obter $P(F_2|A)$ e $P(F_3|A)$.
+
+### Exercícios recomendados
+
+- Seção $2.1$ Ex. $1, 2, 3, 4$ e $5$.
+- Seção $2.2$ Ex. $1, 2, 3, 4, 5, 6$ e $7$.
+- Seção $2.3$ Ex. $1, 3, 8, 9, 11, 13, 15$ e $19$.

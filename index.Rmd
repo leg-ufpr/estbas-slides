@@ -1,0 +1,42 @@
+---
+title: "Estatística Básica - Slides"
+output:
+  html_document:
+    toc: false
+---
+
+```{r setup, include=FALSE, cache=FALSE}
+source("setup_knitr.R")
+```
+
+[![Build Status](https://travis-ci.org/leg-ufpr/estbas-slides.svg?branch=master)](https://travis-ci.org/leg-ufpr/estbas-slides)
+
+ <!-- <div class="alert alert-danger" role="alert"> -->
+ <!-- </div> -->
+
+# Disciplinas
+
+Esta página abrange o conteúdo das seguintes disciplinas e cursos:
+
+- **CE001 - Bioestatística**
+  - Ciências Biológicas (MB)
+- **CE003 - Estatística II**
+  - Engenharia Industrial Madeireira (MD)
+  - Engenharia Madeireira (N)
+- **CE009 - Introdução à Estatística**
+  - Engenharia Ambiental (AMB)
+  - Agronomia (A)
+- **CE020 - Bioestatística**
+  - Enfermagem (E)
+
+# Slides
+
+1. [Análise Exploratória]()
+
+<!-- links -->
+
+[Elias Teixeira Krainski]: http://www.leg.ufpr.br/~elias/
+[Fernando de Pol Mayer]: http://leg.ufpr.br/~fernandomayer
+[Wagner Hugo Bonat]: http://leg.ufpr.br/~wbonat
+[LEG]: http://www.leg.ufpr.br
+[Resolução 64/18 - CEPE]: http://www.est.ufpr.br/calendario/cepe6418.pdf
