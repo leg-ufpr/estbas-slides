@@ -17,6 +17,7 @@ apt_packages:
   - cm-super
 
 before_script:
+  - fc-cache -fv
   - texhash
   - updmap-sys
   - chmod +x ./_build.sh
