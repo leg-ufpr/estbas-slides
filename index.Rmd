@@ -24,7 +24,7 @@ de Estatística Básica oferecidas na UFPR:
 - **CE009 - Introdução à Estatística**
 - **CE020 - Bioestatística**
 
-Os slides foram eleborados e são de responsabilidade dos professores:
+Os slides foram elaborados e são de responsabilidade dos professores:
 
 - [Elias Teixeira Krainski][], [LEG][]/DEST/UFPR
 - [Fernando de Pol Mayer][], [LEG][]/DEST/UFPR
