@@ -15,9 +15,6 @@ department: |
   | Departamento de Estatística
 safe-columns: true
 fontfamily: inconsolata
-header-includes:
-  - \usepackage[T1]{fontenc}
-  - \usepackage{lmodern}
 output:
   legtheme::beamer_leg
 ---
