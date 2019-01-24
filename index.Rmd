@@ -14,32 +14,49 @@ source("setup_knitr.R")
  <!-- <div class="alert alert-danger" role="alert"> -->
  <!-- </div> -->
 
-# Disciplinas
-
-Esta página abrange o conteúdo das seguintes disciplinas e cursos:
-
-- **CE001 - Bioestatística**
-  - Ciências Biológicas (MB)
-- **CE003 - Estatística II**
-  - Engenharia Industrial Madeireira (MD)
-  - Engenharia Madeireira (N)
-- **CE009 - Introdução à Estatística**
-  - Engenharia Ambiental (AMB)
-  - Agronomia (A)
-- **CE020 - Bioestatística**
-  - Enfermagem (E)
-
 # Slides
 
-1. [Análise Exploratória](slides/01_Analise_Exploratoria.pdf)
+Esta página hospeda os slides com o conteúdo das seguintes disciplinas
+de Estatística Básica oferecidas na UFPR:
+
+- **CE001 - Bioestatística**
+- **CE003 - Estatística II**
+- **CE009 - Introdução à Estatística**
+- **CE020 - Bioestatística**
+
+Os slides foram eleborados e são de responsabilidade dos professores:
+
+- [Elias Teixeira Krainski][], [LEG][]/DEST/UFPR
+- [Fernando de Pol Mayer][], [LEG][]/DEST/UFPR
+- [Wagner Hugo Bonat][], [LEG][]/DEST/UFPR
+
+Os slides são baseados no livro:
+
+- [Magalhães, MN](http://www.ime.usp.br/~marcos);
+      [Lima, ACP](http://www.ime.usp.br/~acarlos).
+      [Noções de Probabilidade e
+      Estatística](http://www.ime.usp.br/~noproest). São Paulo: EDUSP,
+      2015 (7ª edição).
+
+## Arquivos
+
+1. [Introdução à Análise Exploratória de dados](slides/01_Analise_Exploratoria.pdf)
 2. [Probabilidades](slides/02_Probabilidades.pdf)
 3. [Variáveis Aleatórias Discretas](slides/03_Variaveis_Discretas.pdf)
-
+4. [Medidas Resumo](slides/04_Medidas_Resumo.pdf)
+5. [Variáveis Bidimensionais](slides/05_Variaveis_Bidimensionais.pdf)
+6. [Variáveis Aleatórias Contínuas](slides/06_Variaveis_Continuas.pdf)
+7. Inferência Estatística
+    a. [Propriedades de estimadores e distribuições
+    amostrais](slides/07a_Estimacao.pdf)
+    b. [Estimação por intervalo](slides/07b_Estimacao.pdf)
+8. Inferência Estatística - [Testes de
+   Hipóteses](slides/08_Teste_Hipotese.pdf)
+9. [Regressão Linear Simples](slides/09_Regressao.pdf)
 
 <!-- links -->
 
 [Elias Teixeira Krainski]: http://www.leg.ufpr.br/~elias/
 [Fernando de Pol Mayer]: http://leg.ufpr.br/~fernandomayer
-[Wagner Hugo Bonat]: http://leg.ufpr.br/~wbonat
+[Wagner Hugo Bonat]: http://leg.ufpr.br/~wagner
 [LEG]: http://www.leg.ufpr.br
-[Resolução 64/18 - CEPE]: http://www.est.ufpr.br/calendario/cepe6418.pdf
