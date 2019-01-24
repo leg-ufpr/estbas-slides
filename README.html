@@ -11,7 +11,7 @@
 
 
 
-<title>Estatística Básica - Slides</title>
+<title>README.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,12 +19,13 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66454501-12"></script>
 <script>
@@ -284,6 +285,107 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -327,15 +429,15 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Estatística Básica - Slides</h1>
 
 </div>
 
 
+<div id="estbas-slides" class="section level1">
+<h1>estbas-slides</h1>
 <p><a href="https://travis-ci.org/leg-ufpr/estbas-slides"><img src="https://travis-ci.org/leg-ufpr/estbas-slides.svg?branch=master" alt="Build Status" /></a></p>
-<p><!-- <div class="alert alert-danger" role="alert"> --> <!-- </div> --></p>
-<div id="slides" class="section level1">
-<h1>Slides</h1>
+<div id="slides-de-estatistica-basica" class="section level2">
+<h2>Slides de Estatística Básica</h2>
 <p>Esta página hospeda os slides com o conteúdo das seguintes disciplinas de Estatística Básica oferecidas na UFPR:</p>
 <ul>
 <li><strong>CE001 - Bioestatística</strong></li>
@@ -345,16 +447,16 @@ $(document).ready(function () {
 </ul>
 <p>Os slides foram elaborados e são de responsabilidade dos professores:</p>
 <ul>
-<li><a href="http://www.leg.ufpr.br/~elias/">Elias Teixeira Krainski</a>, <a href="http://www.leg.ufpr.br">LEG</a>/DEST/UFPR</li>
-<li><a href="http://leg.ufpr.br/~fernandomayer">Fernando de Pol Mayer</a>, <a href="http://www.leg.ufpr.br">LEG</a>/DEST/UFPR</li>
-<li><a href="http://leg.ufpr.br/~wagner">Wagner Hugo Bonat</a>, <a href="http://www.leg.ufpr.br">LEG</a>/DEST/UFPR</li>
+<li>[Elias Teixeira Krainski][], [LEG][]/DEST/UFPR</li>
+<li>[Fernando de Pol Mayer][], [LEG][]/DEST/UFPR</li>
+<li>[Wagner Hugo Bonat][], [LEG][]/DEST/UFPR</li>
 </ul>
 <p>Os slides são baseados no livro:</p>
 <ul>
 <li><a href="http://www.ime.usp.br/~marcos">Magalhães, MN</a>; <a href="http://www.ime.usp.br/~acarlos">Lima, ACP</a>. <a href="http://www.ime.usp.br/~noproest">Noções de Probabilidade e Estatística</a>. São Paulo: EDUSP, 2015 (7ª edição).</li>
 </ul>
-<div id="arquivos" class="section level2">
-<h2>Arquivos</h2>
+<div id="arquivos" class="section level3">
+<h3>Arquivos</h3>
 <ol style="list-style-type: decimal">
 <li><a href="slides/01_Analise_Exploratoria.pdf">Introdução à Análise Exploratória de dados</a></li>
 <li><a href="slides/02_Probabilidades.pdf">Probabilidades</a></li>
@@ -370,7 +472,40 @@ $(document).ready(function () {
 <li>Inferência Estatística - <a href="slides/08_Teste_Hipotese.pdf">Testes de Hipóteses</a></li>
 <li><a href="slides/09_Regressao.pdf">Regressão Linear Simples</a></li>
 </ol>
-<!-- links -->
+</div>
+</div>
+<div id="para-gerar-os-pdfs" class="section level2">
+<h2>Para gerar os PDFs</h2>
+<p>Os slides são criados usando <a href="http://rmarkdown.rstudio.com">R Markdown</a> com saída no formato Beamer. O tema utilizado é o tema do LEG (<a href="https://github.com/leg-ufpr/legtheme">legtheme</a>), que deve ser instalado antes com</p>
+<pre class="r"><code>devtools::install_github(&quot;leg-ufpr/legtheme&quot;)</code></pre>
+<p>Outros pacotes necessários, que são utilizados dentro dos slides são: <code>xtable</code>, <code>latticeExtra</code>, <code>plyr</code>, <code>printr</code>, e <code>TeachingDemos</code>.</p>
+<p>Para compilar um arquivo individualmente basta fazer</p>
+<pre class="r"><code>library(rmarkdown)
+render(&quot;arquivo.Rmd&quot;)</code></pre>
+<p>Para compilar todos os arquivos de uma só vez, use o script <a href="slides/_build.R">_build.R</a> em um terminal</p>
+<pre class="r"><code>Rscript _build.R</code></pre>
+</div>
+<div id="para-gerar-o-site" class="section level2">
+<h2>Para gerar o site</h2>
+<p>O site é todo construído usando apenas o <a href="http://rmarkdown.rstudio.com">R Markdown</a>, por isso, o código fonte está nos arquivos <code>Rmd</code>. Para gerar o site você precisará das versões mais recentes dos pacotes <code>rmarkdown</code> e <code>knitr</code>.</p>
+<ol style="list-style-type: decimal">
+<li>Copie (clone ou fork) esse repositório</li>
+<li>Abra o R na raíz, carregue os pacotes e renderize o site com <code>render_site()</code></li>
+</ol>
+<pre class="r"><code>library(rmarkdown)
+render_site()</code></pre>
+<p><strong>Observações</strong>:</p>
+<ul>
+<li>A publicação no site é automatizada através do <a href="https://travis-ci.org">Travis</a>. Os arquivos para essa automatização são <a href="./.travis.yml">.travis.yml</a> (configura o build como se fosse um pacote do R), <a href="./_build.sh">_build.sh</a> (roda o <strong>rmarkdown</strong>) na raíz do site, e <a href="./_deploy.sh">_deploy.sh</a> (clona e gera o site diretamente no branch <em>gh-pages</em>).</li>
+</ul>
+<div id="licenca" class="section level3">
+<h3>Licença</h3>
+<p>O conteúdo deste repositório, das páginas, e do material da disciplina está está disponível por meio da <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt_BR">Licença Creative Commons 4.0</a> (Atribuição/NãoComercial/PartilhaIgual).</p>
+<div class="figure">
+<img src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" alt="Licença Creative Commons 4.0" />
+<p class="caption">Licença Creative Commons 4.0</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -385,6 +520,8 @@ $(document).ready(function () {
 </center>
 
 
+</div>
+</div>
 
 </div>
 
