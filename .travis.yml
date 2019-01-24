@@ -1,25 +1,8 @@
 language: r
 cache: packages
 pandoc_version: 2.5
-r_github_packages:
-  - leg-ufpr/legtheme
-r_packages:
-  - xtable
-  - printr
-  - latticeExtra
-  - plyr
-  - TeachingDemos
-apt_packages:
-  - texlive-fonts-recommended
-  - texlive-fonts-extra
-  - texlive-latex-extra
-  - fonts-inconsolata
-  - cm-super
 
 before_script:
-  - fc-cache -fv
-  - texhash
-  - updmap-sys
   - chmod +x ./_build.sh
   - chmod +x ./_deploy.sh
 
