@@ -35,9 +35,9 @@ Os slides são baseados no livro:
 5. [Variáveis Bidimensionais](slides/05_Variaveis_Bidimensionais.pdf)
 6. [Variáveis Aleatórias Contínuas](slides/06_Variaveis_Continuas.pdf)
 7. Inferência Estatística
-    a. [Propriedades de estimadores e distribuições
-    amostrais](slides/07a_Estimacao.pdf)
-    b. [Estimação por intervalo](slides/07b_Estimacao.pdf)
+     a. [Propriedades de estimadores e distribuições
+     amostrais](slides/07a_Estimacao.pdf)
+     b. [Estimação por intervalo](slides/07b_Estimacao.pdf)
 8. Inferência Estatística - [Testes de
    Hipóteses](slides/08_Teste_Hipotese.pdf)
 9. [Regressão Linear Simples](slides/09_Regressao.pdf)
@@ -106,3 +106,10 @@ está está disponível por meio da [Licença Creative Commons 4.0][]
 
 [Licença Creative Commons 4.0]: https://creativecommons.org/licenses/by-nc-sa/4.0/deed.pt_BR
 [R Markdown]: http://rmarkdown.rstudio.com
+
+<!-- links -->
+
+[Elias Teixeira Krainski]: http://www.leg.ufpr.br/~elias/
+[Fernando de Pol Mayer]: http://leg.ufpr.br/~fernandomayer
+[Wagner Hugo Bonat]: http://leg.ufpr.br/~wagner
+[LEG]: http://www.leg.ufpr.br
