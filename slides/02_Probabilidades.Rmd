@@ -8,6 +8,9 @@ author: |
 short-author: "LEG/DEST/UFPR"
 # date: "`r format(Sys.Date(), '%d/%m/%Y')`"
 # short-date: "2018/1"
+header-includes:
+- \usepackage[T1]{fontenc}
+- \usepackage{lmodern}
 institute: "Laboratório de Estatística e Geoinformação"
 # short-institute: "LEG/DEST/UFPR"
 department: |
@@ -26,43 +29,43 @@ library(xtable)
 
 # Introdução
 
-## Teoria das Probabilidades
+## Teoria das Probabilidades.
+
+### Tipos de fenômenos
+
+#### Fenômenos determinísticos
+Dizemos que um experimento é determinístico quando repetido inúmeras
+vezes, **em condições semelhantes**, conduz a resultados
+*essencialmente* idênticos. Ex.:
+
+- Aceleração da gravidade;
+- Leis da Física e da Química.
+
+#### Fenômenos aleatórios
+Os experimentos que **repetidos sob as mesmas condições** geram
+resultados diferentes, são chamados de experimentos aleatórios. Ex.:
+
+- Lançamento de uma moeda;
+- Lançamento de um dado;
+- Tempo de vida de um equipamento eletrônico.
 
 ### Teoria das Probabilidades
 
 - A **Teoria das Probabilidades** é o ramo da Matemática que cria,
 desenvolve e pesquisa **modelos** que podem ser utilizados para estudar
-**experimentos ou fenômenos aleatórios**
-- A **Inferência Estatística** é totalmente fundamentada na **Teoria das
-Probabilidades**
+**experimentos ou fenômenos aleatórios**.
+- A **Inferência Estatística** é fundamentada na **Teoria das
+Probabilidades**.
 - O **modelo** utilizado para estudar um fenômeno aleatório pode variar
 em complexidade, mas todos eles possuem ingredientes básicos comuns.
-
-### Tipos de experimentos
-
-#### Experimentos determinísticos
-Dizemos que um experimento é determinístico quando repetido inúmeras
-vezes, **em condições semelhantes**, conduz a resultados
-*essencialmente* idênticos. Ex.:
-
-- Aceleração da gravidade
-- Leis da Física e da Química
-
-#### Experimentos aleatórios
-Os experimentos que **repetidos sob as mesmas condições** geram
-resultados diferentes, são chamados de experimentos aleatórios. Ex.:
-
-- Lançamento de uma moeda
-- Lançamento de um dado
-- Tempo de vida de um equipamento eletrônico
 
 ### Objetivo
 
 - O objetivo é construir um modelo matemático para representar
-**experimentos aleatórios**. Isso o corre em duas etapas:
-  - Descrever o **conjunto** de resultados possíveis
+**experimentos aleatórios**. Isso ocorre em duas etapas:
+  - Descrever o **conjunto** de resultados possíveis;
   - Atribuir *pesos* a cada resultado, refletindo suas chances de
-ocorrência
+ocorrência.
 
 ## Experimentos e eventos
 
@@ -70,12 +73,12 @@ ocorrência
 
 Um experimento, que ao ser realizado sob as mesmas condições não
 produz os mesmos resultados, é denominado um \textbf{experimento
-aleatório}. Exemplo: lançamento de uma moeda, medir altura, ...
+aleatório}. Exemplo: lançamento de uma moeda, lançamento de um dado, altura de uma pessoa, etc.
 
 O conjunto de todos os possíveis resultados de um experimento
 aleatório é denominado **espaço amostral** ($\Omega$). Pode conter
 um número finito ou infinito de pontos. Exemplo: \{cara, coroa\},
-$\mathbb{R}$, ...
+\{1,2,3,4,5,6\}, $\mathbb{R}^+$.
 
 Os elementos do espaço amostral (**pontos amostrais**) são
 denotados por $\omega$. Exemplo: $\omega_1 = \text{cara}$, $\omega_2 =
@@ -100,7 +103,7 @@ K\}$.
 
 ####
 
-- **Experimento:** pesar um fruto ao acaso
+- **Experimento:** pesar um fruto ao acaso.
 - **Espaço amostral:** $\Omega=\mathbb{R}^{+}$.
 - **Pontos amostrais:** espaço amostral é infinito.
 - **Eventos:** A = "peso menor que 50g", B = $\{x: x\geq100\text{g}\}$.

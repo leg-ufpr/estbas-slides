@@ -1,0 +1,43 @@
+\frametitle{Tabela de frequência - quantitativa discreta (muitos valores)}
+
+\begin{itemize}
+\tightlist
+\item
+  Considerando a variável \texttt{TV}.
+\item
+  Apesar de ser discreta, o número de valores únicos é muito grande e
+  não seria útil contar as frequências de cada valor.
+\item
+  Neste caso, utiliza-se o mesmo procedimento usado para quantitativas
+  contínuas
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Foram construídas 6 classes de amplitude 6\footnote<.->{\textbf{Obs.}:
+      no livro a tabela tem 5 classes, pois a última tem comprimento 12}.
+  \end{itemize}
+\end{itemize}
+
+\scriptsize
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrr}
+  \hline
+ & $n_i$ & $f_i$ & $f_{ac}$ \\
+  \hline
+$[0,6)$ & 14 & 0.28 & 0.28 \\
+  $[6,12)$ & 17 & 0.34 & 0.62 \\
+  $[12,18)$ & 11 & 0.22 & 0.84 \\
+  $[18,24)$ & 4 & 0.08 & 0.92 \\
+  $[24,30)$ & 3 & 0.06 & 0.98 \\
+  $[30,36)$ & 1 & 0.02 & 1.00 \\
+   \hline
+$Sum$ & 50 & 1.00 &  \\
+   \hline
+\end{tabular}
+\end{table}
+
+\normalsize
+
