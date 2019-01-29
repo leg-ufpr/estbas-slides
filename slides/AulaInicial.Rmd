@@ -1,0 +1,132 @@
+---
+title: "Estatística Básica: Aula Inicial"
+short-title: "Estatística Básica: Aula Inicial"
+author: |
+  | Wagner H. Bonat
+  | Elias T. Krainski
+  | Fernando P. Mayer
+short-author: "LEG/DEST/UFPR"
+# date: "`r format(Sys.Date(), '%d/%m/%Y')`"
+# short-date: "2018/1"
+header-includes:
+- \usepackage[T1]{fontenc}
+- \usepackage{lmodern}
+institute: "Laboratório de Estatística e Geoinformação"
+# short-institute: "LEG/DEST/UFPR"
+department: |
+  | Universidade Federal do Paraná
+  | Departamento de Estatística
+safe-columns: true
+fontfamily: inconsolata
+output:
+  legtheme::beamer_leg
+---
+
+```{r setup, cache=FALSE, include=FALSE}
+source("setup_knitr_slides.R")
+library(xtable)
+```
+
+### Informações Gerais
+
+- Professores responsáveis:
+    - Wagner Hugo Bonat (http://www.leg.ufpr.br/~wagner);
+    - Elias Teixeira Krainski (http://www.leg.ufpr.br/~elias);
+    - Fernando de Pol Mayer (http://www.leg.ufpr.br/~fernandomayer).
+
+- Para quem este curso é ofertado?
+    - CE001 - Bioestatística.
+    - CE020 - Bioestatística.
+    - CE009 - Introdução à Estatística.
+    - CE003 - Estatística II.
+
+- Detalhes de cada turma, ver http://cursos.leg.ufpr.br/estbas
+
+- Datas importantes
+    - 18/02 Inicio do semestre.
+    - 22/06 Final do semestre.
+    - 27/06 - 03/07 semana de finais.
+
+### Objetivos do curso
+
+O objetivo deste curso é capacitar os alunos em conceitos básicos de estatística que permitam a interpretação de resultados de análises e procedimentos estatísticos, bem como a execução de procedimentos e análises estatística básicas. O curso compreende três grandes tópicos:
+
+- Análise descritiva e exploratória de dados;
+- Noções de probabilidades e distribuições de probabilidades;
+- Introdução à procedimentos de inferência estatística.
+
+### Referência bibliográfica
+
+Livro-texto:
+
+- Marcos Nascimento Magalhães e Antonio Carlos Pedroso de Lima. **Noções
+  de Probabilidade e Estatística**. Editora: EDUSP.
+
+\begin{figure}
+\includegraphics[height=0.5\textheight]{img/livro.png}
+\end{figure}
+
+
+### Conteúdo do curso
+
+1. Análise exploratória de dados.
+2. Probabilidades.
+3. Variáveis aleatórias discretas.
+4. Medidas resumo.
+5. Variáveis bidimensionais.
+6. Variáveis aleatórias contínuas.
+7. Inferência estatística - Estimação.
+8. Inferência estatística - Testes de hipóteses.
+9. Tópicos especiais.
+
+### Formato do curso
+
+- Cada tópico será explorado em três aulas:
+    - Aula expositiva com uso de slides;
+    - Aula de exercícios;
+    - Avaliação do capítulo.
+
+- A avaliação de cada capítulo será feita online via moodle.
+    - Acesse moodle.c3sl.ufpr.br;
+    - Faça sua autoinscrição;
+    - Inscreva-se na sua turma: senha fornecida pelo Professor.
+    - A avaliação ficará disponível entre 08:00 e 24:00 hrs.
+    - Calendário das avaliações disponível no site.
+    - Formato da avaliação: Marque a verdadeira.
+
+- Avaliação escrita em sala a cada três capítulos.
+    - Formato da avaliação: Questões abertas.
+    
+### Sobre as avaliações dos capítulos
+
+- A avaliação de cada capítulo será feita via moodle com correção automática.
+- As avaliações são geradas automaticamente pelo sistema, sendo portanto individualizada.
+- Objetivo: Incentivar os alunos a estudarem todas as semanas e melhorar seu aprendizado.
+- Fornecer feedback automático para o aluno avaliar seu desempenho.
+- Forma de correção:
+    - Exemplo 1 - Questão com 5 alternativas, sendo 2 verdadeiras e 3 falsas.
+    - Cada verdadeira vale $1/2$.
+    - Cada falsa vale $-1/3$. 
+- Note que marcar uma alternativa falsa altera a sua nota.
+    - Exemplo 2 - Questão com 5 alternativas, sendo 4 verdadeiras e 1 falsa.
+    - Cada verdadeira valie $1/4$.
+    - Cada falsa vale $-1$, ou seja se marcar a falsa zera a questão.
+
+### Forma de avaliação
+
+- $60\%$ Avaliações discursivas por módulos (serão 3 durante o semestre);
+    - Só será realizada segunda chamada para alunos que protocolarem o pedido, devidamente 
+    justificado, junto ao Departamento de Estatística.
+    - As provas de segunda chamada só serão realizadas ao final do semestre.
+- $40\%$ Avaliações de cada capítulo (serão 9 durante o semestre);
+    - As duas menores notas das avaliações de cada capítulo serão descartadas para o cálculo da média.
+    - Avaliações de cada capítulo NÃO TEM SEGUNDA CHAMADA.
+- Nota final: Média das 3 provas discursivas $*0.6$ + média das 7 melhores provas de capítulos $*0.4$.
+
+###  Critérios para aprovação:
+
+- Presença $< 75\% \to$ Reprovado.
+- Presença $> 75\%$:
+    - Nota final $> 7.0 \to$ Aprovado.
+    - Nota final entre $4.0$ e $7.0 \to$ Exame final.
+    - Nota final $< 4.0 \to$ Reprovado.

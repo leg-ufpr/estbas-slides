@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@sectionintoc {1}{Ideias gerais}{2}{0}{1}
+\beamer@sectionintoc {2}{An\IeC {\'a}lise explorat\IeC {\'o}ria de dados}{13}{0}{2}
+\beamer@subsectionintoc {2}{1}{Organiza\IeC {\c c}\IeC {\~a}o dos dados.}{15}{0}{2}
+\beamer@subsectionintoc {2}{2}{Tabelas de frequ\IeC {\^e}ncia.}{18}{0}{2}
+\beamer@subsectionintoc {2}{3}{Representa\IeC {\c c}\IeC {\~a}o gr\IeC {\'a}fica.}{25}{0}{2}
+\beamer@sectionintoc {3}{Exerc\IeC {\'\i }cios recomendados}{34}{0}{3}

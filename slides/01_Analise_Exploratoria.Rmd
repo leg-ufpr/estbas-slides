@@ -8,6 +8,9 @@ author: |
 short-author: "LEG/DEST/UFPR"
 # date: "`r format(Sys.Date(), '%d/%m/%Y')`"
 # short-date: "2018/1"
+header-includes:
+- \usepackage[T1]{fontenc}
+- \usepackage{lmodern}
 institute: "Laboratório de Estatística e Geoinformação"
 # short-institute: "LEG/DEST/UFPR"
 department: |
@@ -24,53 +27,63 @@ source("setup_knitr_slides.R")
 library(xtable)
 ```
 
-# Informações gerais
-
-### Referência bibliográfica
-
-Livro-texto:
-
-- Marcos Nascimento Magalhães e Antonio Carlos Pedroso de Lima. **Noções
-  de Probabilidade e Estatística**. Editora: EDUSP.
-
-\begin{figure}
-\includegraphics[height=0.5\textheight]{img/livro.png}
-\end{figure}
-
-### Tópicos do curso
-
-1. Análise exploratória de dados.
-2. Probabilidades.
-3. Variáveis aleatórias discretas.
-4. Medidas resumo.
-5. Variáveis bidimensionais.
-6. Variáveis aleatórias contínuas.
-7. Inferência estatística - Estimação.
-8. Inferência estatística - Testes de hipóteses.
-9. Tópicos especiais.
-
-## O que é estatística?
+# Ideias gerais
 
 ### O que é estatística?
 
 - Estatística é um conjunto de técnicas para, sistematicamente:
-    - planejar a coleta de dados oriundos de estudos ou experimentos,
-      realizados em qualquer área do conhecimento.
-    - descrever, analisar e interpretar dados
-    - extrair informações para subsidiar decisões ou conclusões
+    - Planejar a coleta de dados oriundos de estudos ou experimentos,
+      realizados em qualquer área do conhecimento;
+    - Descrever, analisar e interpretar dados;
+    - Extrair informações para subsidiar decisões;
+    - Avaliar evidências empíricas sob hipóteses de interesse.
 
-### Tópicos de estatística básica
+- Exemplos de aplicações:
+    - Opinião da população brasileira sobre o novo governo.
+    - Avaliar a efetividade de uma nova droga para a cura do câncer.
+    - Entender os hábitos de compra dos clientes de uma loja virtual.
+    - Recomendação personalizada de produtos.
+    - Comparar a produtividade da soja sob diferentes formas de cultivo, adubação, etc.
+    
+### População e amostra
 
-- Conceitos essenciais em Estatística:
-    - Estatística descritiva.
-    - Probabilidade.
-    - Inferência estatística.
-- Conceitos fundamentais:
+- Conceitos fundamentais
     - **População**: Conjunto de todos os elementos sob investigação.
     - **Amostra**:  Subconjunto da população.
-    - **Variável** de interesse: característica a ser observada em cada indivíduo da amostra
+    - **Variável** de interesse: característica a ser observada em cada indivíduo da amostra.
 
-### População e amostra
+### Exemplos em detalhes
+
+- Opinião da população brasileira sobre o novo governo.
+    - **População**: Todos os habitantes do Brasil? outras opções?
+    - **Amostra**: Algum subconjunto da população. Qualquer um será? Como selecionar?
+    - **Variável de interesse**: Opinião sobre o novo governo. Como medir isso? Gosta? sim ou não.
+
+- Avaliar a efetividade de uma nova droga para a cura do câncer.
+    - **População**: Todos os seres humanos? Apenas os já doentes? Como levar em conta questões de raça, culturas, etc ...
+    - **Amostra**: E agora? 
+    - **Variável de interesse**: Curou ou não curou? Será que isso é possível?
+
+- Entender os hábitos de compra dos clientes de uma loja virtual.
+    - **População**: Todos os clientes da loja virtual.
+    - **Amostra**: Preciso de amostra? 
+    - **Variável de interesse**: E agora? Como caracterizar hábito de compra?
+
+
+### Divisões básicas da estatística
+
+- Divisões essenciais em Estatística e seus principais objetivos.
+    - Estatística descritiva ou exploratória:
+        - Consistência dos dados e interpretações iniciais.
+        - Visualização dos dados e relações entre variáveis.
+    - Probabilidade:
+        - Fornece ferramentas para lidar/quantificar incerteza.
+    - Inferência estatística:
+        - Estimação de quantidades desconhecidas.
+        - Formular e testar hipóteses.
+        - Extrapolar para a população resultados obtidos na amostra.
+    
+### Ideia final
 
 ```{r, out.width='70%'}
 knitr::include_graphics("img/populacao_amostra.png")
@@ -78,99 +91,87 @@ knitr::include_graphics("img/populacao_amostra.png")
 
 ### Etapas da análise estatística
 
-- Definição do método de coleta de dados
-    - estabelecer os objetivos (questões) de pesquisa
-    - definir critérios objetivos de como e quais dados coletar
-    - postular a análise estatística a ser utilizada
-
-\pause
-
-- Estatística Descritiva
-    - depende do tipo de dado coletado
-    - deve ser racionalizada
-    - relacionada com os objetivos da pesquisa
-
-\pause
-
-- Inferência estatística
-    - depende do objetivo da pesquisa
+- Definir a **população de interesse**.
+    - População **factível**.
+- Estabelecer os objetivos (questões) de pesquisa.
+    - Definir critérios objetivos sobre quais dados coletar.
+    - Postular a análise estatística a ser utilizada.
+- Definir o método para coletar as amostras.
+    - Fonte de dados secundários (IBGE, IPEA, etc);
+    - Questionários específicos;
+    - Banco de dados da empresa;
+    - Experimentos em laboratórios, etc.
+- Análise dos dados.
+    - Análise descritiva e exploratória (o que aconteceu na amostra?).
+    - Análise inferencial (o que acontece na população?).
 
 ### Planejamento da coleta de dados
 
 - Definição do experimento
-    - variáveis respostas
-    - variáveis de controle
-    - desenho do experimento e randomização
+    - Variáveis respostas/interesse.
+    - Variáveis de controle (o que afeta a resposta?).
+    - Desenho do experimento e randomização.
 
 \pause
 
  - Coleta de dados por amostragem
-    - definição da população e característica de interesse
-    - definição do plano amostral
-        - Aleatória simples (com ou sem reposição) ou sistemática
-        - Estratificada, por estratos da população (segundo uma característica)
-        - Conglomerados, por grupos de indivíduos da população (subpopulações)
-        - Amostragem complexa (combina anteriores)
+    - Definição da população e característica de interesse.
+    - Definição do plano amostral:
+        - Aleatória simples (com ou sem reposição) ou sistemática;
+        - Estratificada, por estratos da população (segundo uma característica);
+        - Conglomerados, por grupos de indivíduos da população (subpopulações);
+        - Amostragem complexa (combina anteriores).
 
 \pause
 
  - Coleta de dados observacionais. Exemplos:
-    - população de plantas
-    - presença de seres vivos num ambiente
-    - fenômenos climáticos
+    - Presença de seres vivos num ambiente;
+    - Fenômenos climáticos;
+    - Fluxo de usuários em um website.
 
-### Análise estatística
-
-  - Estatística Descritiva
-    - consistência e interpretações iniciais
-    - visualização dos dados e relações entre variáveis
-
-  - Inferência estatística
-    - estimação de quantidades desconhecidas
-    - formulação e teste de hipóteses
-    - extrapolar para a população, se os dados são de uma amostra.
-
-### Etapas da análise estatística
+### Resumo: Objetivos e etapas da análise estatística
 
 ```{r, out.width='90%'}
 knitr::include_graphics("img/organograma_estatistica.png")
 ```
+** A forma de coleta dos dados é um tópico em si. No entanto neste curso básico ela será
+discutida de forma superficial dentro do tópico de análise exploratória.**
 
 # Análise exploratória de dados
 
 ### Exemplo
 Pesquisa foi realizada com alunos. Variáveis:
 
-- **Id**: identificação do aluno;  **Turma**:  A ou B
-- **Sexo**: feminino (F) ou masculino (M)
-- **Idade**: em anos; **Alt**: altura em metros
-- **Peso**: em quilogramas; **Filhos**: nº de filhos na família
-- **Fuma**: hábito de fumar: sim (S) ou não (N)
-- **Toler**: tolerância ao cigarro: (I) indiferente; (P) incomoda pouco; (M) incomoda muito
-- **Exerc.**: horas de atividade física, por semana
-- **Cine**: nº. de vezes que vai ao cinema por semana
+- **Id**: identificação do aluno;  **Turma**:  A ou B;
+- **Sexo**: feminino (F) ou masculino (M);
+- **Idade**: em anos; **Alt**: altura em metros;
+- **Peso**: em quilogramas; **Filhos**: nº de filhos na família;
+- **Fuma**: hábito de fumar: sim (S) ou não (N);
+- **Toler**: tolerância ao cigarro: (I) indiferente; (P) incomoda pouco; (M) incomoda muito;
+- **Exerc.**: horas de atividade física, por semana;
+- **Cine**: nº. de vezes que vai ao cinema por semana;
 - **OpCine**: opinião a respeito das salas de cinema na cidade: (B)
-  regular a boa; (M) muito boa
-- **TV**: horas gastas assistindo TV, por semana
+  regular a boa; (M) muito boa;
+- **TV**: horas gastas assistindo TV, por semana;
 - **OpTV**:  opinião  a  respeito  da  qualidade  da  programação  na
   TV: (R)  ruim;  (M)  média;  (B)  boa; (N) não sabe.
 
-## Organização de Dados
+## Organização dos dados.
 
-### Organização de Dados
+### Organização dos dados
 
 - A partir de um conjunto de dados coletado, a questão é:
     - Como extrair informações a respeito de uma ou mais características de interesse?
 - Basicamente temos duas opções:
-    - Tabelas de frequência
-    - Gráficos
+    - Tabelas de frequência;
+    - Gráficos.
 - O importante é levar em consideração a **natureza dos dados**.
 
 ### Organização de Dados
 
 - Uma típica **tabela de dados brutos** contém:
-    - Variáveis (características, medições, etc) nas colunas
-    - Sujeito (indivíduo, objetos, etc) nas linhas
+    - Variáveis (características, medições, etc) nas colunas.
+    - Sujeito (indivíduo, objetos, etc) nas linhas.
 
 ```{r, comment=NA}
 # Carregando os dados
@@ -179,9 +180,9 @@ print(head(dados), row.names = FALSE)
 ```
 
 - Tipos de variáveis:
-    - Qualitativa nominal: Turma, Sexo, Fuma,
+    - Qualitativa nominal: Turma, Sexo, Fuma.
     - Qualitativa ordinal: Toler, OpCine, OpTV.
-    - Quantitativa discreta: Idade, Filh, Exer, Cine, TV.
+    - Quantitativa discreta: Idade, Filhos, Exerc, Cine, TV.
     - Quantitativa contínua: Alt, Peso.
 
 ### Tipos de variáveis
@@ -190,22 +191,22 @@ print(head(dados), row.names = FALSE)
 knitr::include_graphics("img/classificacao_variaveis.png")
 ```
 
-## Tabelas de frequência
+## Tabelas de frequência.
 
 ### Tabelas de frequência
 
 - A tabela de dados brutos pode ser muito longa, portanto será difícil
-  extrair alguma informação
+  extrair alguma informação.
 - As **tabelas de frequência** ajudam a resumir a informação da variável
-  de interesse
+  de interesse.
 - Vamos usar 3 tipos de frequência:
     - Frequência **absoluta**: contagem de cada valor observado.
-    Representado por $n_i$ o número de valores $i$, e $n$ o número total
-    - Frequência **relativa**: número de valores $i$ dividido pelo total
-    $n$, ou seja $f_i = \frac{n_i}{n}$
+    Representado por $n_i$ o número de indivíduos com a característica $i$.
+    - Frequência **relativa**: número de indivíduos com a característica $i$ dividido pelo total de indivíduos
+    $n$, ou seja $f_i = \frac{n_i}{n}$.
     - Frequência **acumulada**: frequência (absoluta ou relativa)
     acumulada até um certo valor, obtida pela soma das frequências de
-    todos os valores da variável, menores ou iguais ao valor considerado
+    todos os valores da variável, menores ou iguais ao valor considerado.
 
 ### Tabela de frequência - qualitativa nominal
 
@@ -224,7 +225,7 @@ print(xtable(dtab, digits = c(0, 0, 2)),
 })
 ```
 
-- Não faz sentido usar frequência acumulada
+- Neste caso não faz sentido usar frequência acumulada.
 
 ### Tabela de frequência - quantitativa discreta
 
@@ -265,16 +266,16 @@ print(xtable(dtab, digits = c(0, 0, 2, 2)),
 ### Tabela de frequência - quantitativa contínua
 
 - No caso de quantitativas contínuas não faz sentido contar cada valor
-  pois podem existir muitos
+  pois podem existir muitos (potencialmente infinito).
 - A solução é criar **classes** ou **faixas de valores**, e contar o
   número de ocorrências dentro destas classes.
 - Para definir as classes:
-  1. Defina a amplitude da classe, de maneira que se obtenham de 5 a 8
-     classes (de mesma amplitude)
-  2. Identifique os valores máximo e mínimo da variável e construa as
-     classes de maneira que inclua todos os valores
+    - Defina a amplitude da classe, de maneira que se obtenham de 5 a 8
+     classes (de mesma amplitude).
+    - Identifique os valores máximo e mínimo da variável e construa as
+     classes de maneira que inclua todos os valores.
 
-As classes de valores podem seguir um dos formatos:
+- As classes de valores podem seguir um dos formatos:
 
 \small
 
@@ -286,8 +287,8 @@ $(a,b]$   $a \dashv b$  Aberto em a, fechado em b  Não inclui a, inclui b
 ### Tabela de frequência - quantitativa contínua
 
 - Considerando a variável `Peso`
-    - Foram construídas 6 classes de amplitude 10
-    - As classes são do tipo $[a,b)$ ou $a \vdash b$
+    - Foram construídas 6 classes de amplitude 10.
+    - As classes são do tipo $[a,b)$ ou $a \vdash b$.
 
 ```{r, results='asis'}
 ## Peso
@@ -305,13 +306,12 @@ print(xtable(dtab, digits = c(0, 0, 2, 2)),
 
 ### Tabela de frequência - quantitativa discreta (muitos valores)
 
-- Considerando a variável `TV`
-- Apesar de ser discreta, a amplitude de valores é muito grande e não
-  seria viável contar as frequências de cada valor
-- Nesse caso, utiliza-se o mesmo procedimento para quantitativas contínuas
+- Considerando a variável `TV`.
+- Apesar de ser discreta, o número de valores únicos é muito grande e não seria útil contar 
+as frequências de cada valor.
+- Neste caso, utiliza-se o mesmo procedimento usado para quantitativas contínuas
     - Foram construídas 6 classes de amplitude 6^[**Obs.**: no livro a
-    tabela tem 5 classes, pois a última tem comprimento 12.]
-    - As classes são do tipo $[a,b)$ ou $a \vdash b$
+    tabela tem 5 classes, pois a última tem comprimento 12].
 
 ```{r, results='asis'}
 ## TV
@@ -327,43 +327,40 @@ print(xtable(dtab, digits = c(0, 0, 2, 2)),
       )
 ```
 
-## Representação gráfica
+## Representação gráfica.
 
 ### Representação gráfica
 
-- As informações contidas nas tabelas podem ser visualizadas através de
-  gráficos
-- Assim como nas tabelas, existe um tipo de gráfico adequado para cada
-  tipo de variável
-- Cuidado deve ser tomado com representações visuais pois um gráfico
-  desproporcional pode gerar interpretações distorcidas
-- Os principais são:
-    - Diagrama circular  (setores ou "pizza")
-    - Gráfico de barras
-    - Histograma
-    - Boxplot
+- Podemos visualizar as tabelas através de gráficos.
+- Existe um tipo de gráfico adequado para cada tipo de variável.
+- Cuidado deve ser tomado com representações visuais pois um gráfico desproporcional pode 
+gerar interpretações distorcidas.
+- As principais representações gráficas são:
+    - Diagrama circular (setores ou "pizza");
+    - Gráfico de barras;
+    - Histogramas;
+    - Boxplots.
 
 ### Diagrama circular
 
 - Adequado para variáveis qualitativas nominal e ordinal.
 
 ```{r}
-par(mfrow = c(1, 2))
+par(mfrow = c(1, 2),mar=c(2.6, 2.8, 1.2, 0.5), mgp = c(1.6, 0.6, 0))
 pie(table(dados$Sexo), main = "Sexo")
 pie(table(dados$Toler), main = "Toler")
 par(mfrow = c(1, 1))
 ```
 
 -  O uso deste tipo de gráfico deve ser evitado, pois pode ser de
-   difícil interpretação
+   difícil interpretação.
 
 ### Gráfico de barras
 
-- Adequado para variáveis qualitativas nominal/ordinal e quantitativa
-  discreta.
-- Podem ser usadas as frequências absolutas ou relativas
+- Adequado para variáveis qualitativas nominal/ordinal e quantitativa discreta (poucos valores distintos).
+- Podem ser usadas as frequências absolutas ou relativas.
 
-```{r, fig.width=6, fig.height=4}
+```{r, fig.width=6, fig.height=3}
 par(mfrow = c(1,4), mar=c(2.6, 2.8, 1.2, 0.5), mgp = c(1.6, 0.6, 0))
 barplot(table(dados$Idade), main = "Idade", ylab = "Frequência")
 barplot(prop.table(table(dados$Idade)), main = "Idade",
@@ -389,40 +386,7 @@ hist(dados$Alt, prob = TRUE, ylab = "Densidade", xlab = "Altura",
 - Altura de cada retângulo é a densidade definida pelo quociente
 da área pela amplitude da faixa, $h = \frac{f_i}{AMP}$.
 
-### Mediana e quartis
-
-- **Mediana**: valor da variável que divide o conjunto de dados
-ordenados em dois subgrupos de mesmo tamanho.
-- **Quartis**: valores da variável que divide o conjunto de dados
-ordenados em quatro subgrupos de mesmo tamanho.
-- **Posição** dos quartis:
-    - $Q_1 = 0.25 \cdot (N+1)$ e arredonde.
-    - $Q_2 =$ média dos valores nas posições $(N/2)$ e $(N/2)+1$ se N par
-    e $Q_2 = (N+1)/2$ se N ímpar.
-    - $Q_3 = 0.75 \cdot (N+1)$  e arredonde.
-- Exemplo: Conside o conjunto de dados: $8.43(1)$, $8.65(2)$, $9.96(3)$,
-  $10.91(4)$,  $10.46(5)$ e $10.83(6)$.
-    - $Q_1 = 0.25 \cdot 7 = 1.75 \approx 2$, ou seja $8.65$.
-    - $Q_2 =$ média dos valores nas posições $3$ e $4$, ou seja, $(9.96 +
-    10.91 )/2 = 10.43$.
-    - $Q_3 = 0.75 \cdot 7 = 5.25 \approx 5$, ou seja, $10.46$.
-
-### Boxplots
-
-- Adequado para quantitativa contínua.
-
-```{r}
-par(mfrow = c(2,2), mar=c(2.6, 2.8, 1.2, 0.5), mgp = c(1.6, 0.6, 0))
-boxplot(dados$Peso ~ dados$Sexo, ylab = "Peso", xlab = "Sexo")
-boxplot(dados$Alt ~ dados$Sexo, ylab = "Altura", xlab = "Sexo")
-boxplot(dados$Peso ~ dados$Fum, ylab = "Peso", xlab = "Fumante")
-boxplot(dados$Alt ~ dados$Fum, ylab = "Altura", xlab = "Fumante")
-```
-
-- Excelente para explorar relações entre variáveis quantitativas
-e qualitativas.
-
-### Tipos de simetria
+### Tipos de assimetria
 
 ```{r, out.width='80%'}
 ## Gera dados
@@ -451,9 +415,43 @@ par(mar = c(1.1, 1.1, 1.1, 1.1))
 hist(xdir, main = "", axes = FALSE)
 ```
 
+
+### Mediana e quartis
+
+- **Mediana**: valor da variável que divide o conjunto de dados
+ordenado em dois subgrupos de mesmo tamanho.
+- **Quartis**: valores da variável que divide o conjunto de dados
+ordenados em quatro subgrupos de mesmo tamanho.
+- **Posição** dos quartis:
+    - $Q_1 = 0.25 \cdot (N+1)$ e arredonde.
+    - $Q_2 =$ média dos valores nas posições $(N/2)$ e $(N/2)+1$ se N par
+    e $Q_2 = (N+1)/2$ se N ímpar.
+    - $Q_3 = 0.75 \cdot (N+1)$  e arredonde.
+- Exemplo: Conside o conjunto de dados: $8.43(1)$, $8.65(2)$, $9.96(3)$,
+  $10.91(4)$,  $10.46(5)$ e $10.83(6)$.
+    - $Q_1 = 0.25 \cdot 7 = 1.75 \approx 2$, ou seja $8.65$.
+    - $Q_2 =$ média dos valores nas posições $3$ e $4$, ou seja, $(9.96 +
+    10.91 )/2 = 10.43$.
+    - $Q_3 = 0.75 \cdot 7 = 5.25 \approx 5$, ou seja, $10.46$.
+
+### Boxplots
+
+- Adequado para quantitativa contínua.
+
+```{r}
+par(mfrow = c(2,2), mar=c(2.6, 2.8, 1.2, 0.5), mgp = c(1.6, 0.6, 0))
+boxplot(dados$Peso ~ dados$Sexo, ylab = "Peso", xlab = "Sexo")
+boxplot(dados$Alt ~ dados$Sexo, ylab = "Altura", xlab = "Sexo")
+boxplot(dados$Peso ~ dados$Fum, ylab = "Peso", xlab = "Fumante")
+boxplot(dados$Alt ~ dados$Fum, ylab = "Altura", xlab = "Fumante")
+```
+
+- Excelente para explorar relações entre variáveis quantitativas e qualitativas.
+
+
 ### Diagrama de dispersão
 
-- Adequado para verificar relação entre variáveis quantitativas.
+- Adequado para explorar a relação entre variáveis quantitativas.
 
 ```{r}
 par(mfrow = c(1,1), mar=c(2.6, 2.8, 1.2, 0.5), mgp = c(1.6, 0.6, 0))
@@ -462,7 +460,7 @@ plot(dados$Peso ~ dados$Alt, ylab = "Peso", xlab = "Altura")
 
 ### Gráfico de mosaico
 
-- Adequado para verificar relação entre variáveis qualitativas (nominais
+- Adequado para explorar a relação entre variáveis qualitativas (nominais
   ou ordinais).
 
 ```{r}
@@ -486,5 +484,5 @@ abline(a = 0, b = 1, lty = 2)
 
 - Seção 1.1: Ex. 1, 2 e 3.
 - Seção 1.2: Ex. 1 e 4.
-- Seção 1.4: Ex. 1, 3, 5 (troque diagrama circular pro gráfico de
+- Seção 1.4: Ex. 1, 3, 5 (troque diagrama circular por gráficos de
   barras), 8, 9, 12, 18 e 20.
