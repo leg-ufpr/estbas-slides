@@ -29,7 +29,7 @@ library(xtable)
 
 # Introdução
 
-## Teoria das Probabilidades.
+## Conceitos iniciais.
 
 ### Tipos de fenômenos
 
@@ -47,46 +47,38 @@ resultados diferentes, são chamados de experimentos aleatórios. Ex.:
 
 - Lançamento de uma moeda;
 - Lançamento de um dado;
-- Tempo de vida de um equipamento eletrônico.
+- Condições climáticas do próximo domingo;
+- Taxa de inflação do próximo mês.
 
 ### Teoria das Probabilidades
 
-- A **Teoria das Probabilidades** é o ramo da Matemática que cria,
-desenvolve e pesquisa **modelos** que podem ser utilizados para estudar
-**experimentos ou fenômenos aleatórios**.
-- A **Inferência Estatística** é fundamentada na **Teoria das
-Probabilidades**.
-- O **modelo** utilizado para estudar um fenômeno aleatório pode variar
-em complexidade, mas todos eles possuem ingredientes básicos comuns.
+- O que é a Teoria das Probabilidades?
+    - Ramo da matemática que desenvolve e avalia **modelos** para descrever **fenômenos aleatórios**.
+    - É a base teórica para o desenvolvimento das técnicas estatísticas.
+- Qual o objetivo da Teoria das Probabilidades?
+    - Construir um arcabouço matemático adequado para descrever **fenômenos aleatórios**. 
+- O que precisamos para começar?
+    - Descrever o **conjunto** de resultados possíveis do **fenômeno aleatório** de interesse;
+    - Atribuir **pesos** a cada possível resultado, refletindo suas chances de ocorrência.
 
-### Objetivo
-
-- O objetivo é construir um modelo matemático para representar
-**experimentos aleatórios**. Isso ocorre em duas etapas:
-  - Descrever o **conjunto** de resultados possíveis;
-  - Atribuir *pesos* a cada resultado, refletindo suas chances de
-ocorrência.
-
-## Experimentos e eventos
+## Elementos da Teoria dos Conjuntos.
 
 ### Definições
 
-Um experimento, que ao ser realizado sob as mesmas condições não
-produz os mesmos resultados, é denominado um \textbf{experimento
-aleatório}. Exemplo: lançamento de uma moeda, lançamento de um dado, altura de uma pessoa, etc.
+- **Espaço amostral**: Conjunto de todos os possíveis resultados de um experimento
+aleatório. 
+    - Pode conter um número finito ou infinito de pontos. 
+    - Exemplos: \{cara, coroa\}, \{1,2,3,4,5,6\}, $\mathbb{R}^+$.
+    - Notação $\Omega$.
 
-O conjunto de todos os possíveis resultados de um experimento
-aleatório é denominado **espaço amostral** ($\Omega$). Pode conter
-um número finito ou infinito de pontos. Exemplo: \{cara, coroa\},
-\{1,2,3,4,5,6\}, $\mathbb{R}^+$.
+- **Pontos amostrais**: São os elementos que compõem o $\Omega$. 
+    - Notação $\omega$. 
+    - Exemplo: $\omega_1 = \text{cara}$, $\omega_2 = \text{coroa}$.
 
-Os elementos do espaço amostral (**pontos amostrais**) são
-denotados por $\omega$. Exemplo: $\omega_1 = \text{cara}$, $\omega_2 =
-\text{coroa}$.
-
-Todo resultado ou \underline{subconjunto} de resultados de um
-experimento aleatório, é um **evento**. Exemplo: A = "sair
-cara", B = "sair face par".
+- **Eventos**: Todo resultado ou \underline{subconjunto} de resultados de um
+experimento aleatório. 
+    - Exemplos: A = "sair cara", B = "sair face par".
+    - Em geral são denotados por $A, B, C \ldots$.
 
 ### Exemplos
 
@@ -111,26 +103,35 @@ K\}$.
 ### Operações com eventos
 
 Usamos a **Teoria dos conjuntos** para definir operações com
-eventos
+eventos.
 
+- **Conjunto vazio** é o conjunto sem elementos, denotado por $\emptyset$.
 - **União** é o evento que consiste da união de **todos** os pontos
 amostrais dos eventos que a compõem. Denotamos a união do evento A
 com B por $A\cup B$.
-$A \cup B = \{\omega \in A \text{ ou } \omega \in B\}$
+$A \cup B = \{\omega \in A \text{ ou } \omega \in B\}$.
 - **Interseção** é o evento composto pelos pontos amostrais
 **comuns** aos eventos que a compõem. Denotamos a interseção de
-A com B por $A\cap B$.
-$A \cap B = \{\omega \in A \text{ e } \omega \in B\}$
-- **Complemento** é o conjunto de pontos do espaço amostral que não
-estão no evento. Denotamos o complemento do evento A por $A^c$.
-$A^c = \{\omega \not\in A \}$
+A com B por $A \cap B$.
+$A \cap B = \{\omega \in A \text{ e } \omega \in B\}$.
+
+```{r, out.width='90%'}
+knitr::include_graphics("img/regra_adicao1-crop")
+```
 
 ### Tipos de eventos
 
 - **Disjuntos** (mutuamente exclusivos) são eventos que possuem
 interseção nula, ou seja, $A\cap B = \{\emptyset\}$.
+```{r, out.width='25%'}
+knitr::include_graphics("img/Disjuntos")
+```
+
 - **Complementares** são eventos que a união é o espaço amostral, ou
-seja, $A\cup B = \Omega$.
+seja, $A\cup A^{c} = \Omega$.
+```{r, out.width='25%'}
+knitr::include_graphics("img/Comp")
+```
 
 ### Exemplo
 
@@ -176,9 +177,9 @@ primo}$.
 
 # Probabilidade
 
-## Definições
+## Axiomas da probabilidade.
 
-### Definição de probabilidade
+### Definição axiomática de probabilidade
 
 Probabilidade é uma função $P(\cdot)$ que atribui valores
 numéricos aos eventos do espaço amostral, de tal forma que
@@ -197,16 +198,13 @@ Existem duas maneiras principais de atribuir probabilidades aos
 elementos do espaço amostral:
 
 1. (**Clássica**) baseia-se nas características teóricas da realização
-   do fenômeno. Ex.:
-   - Considerando o lançamento de um dado, temos
-     $\Omega=\{1,2,3,4,5,6\}$
-   - Admintindo que o dado é honesto, podemos assumir que $P(1) = P(2) =
-     \cdots = P(6) = 1/6$
+   do fenômeno. 
+    - Considerando o lançamento de um dado, temos $\Omega=\{1,2,3,4,5,6\}$
+    - Admitindo que o dado é honesto, podemos assumir que $P(1) = P(2) = \cdots = P(6) = 1/6$
 2. (**Frequentista**) baseia-se nas frequências (relativas) de
-   ocorrência do fenômeno. Ex.:
-   - Determinar a probabilidade de ocorrência de cada face de um dado
-   - Sem fazer nenhuma suposição inicial, podemos usar as **frequências
-     relativas** de sucessivas ocorrências
+   ocorrência do fenômeno.
+    - Determinar a probabilidade de ocorrência de cada face de um dado.
+    - Sem fazer nenhuma suposição inicial, podemos usar as **frequências relativas** de sucessivas ocorrências.
 
 ### Definição frequentista
 
@@ -216,14 +214,14 @@ contar quantas vezes o evento $A$ ocorre, $n(A)$.
 Dessa forma a frequência relativa de $A$ nas $n$ repetições será
 
 $$
-f_{n,A} = \frac{n(A)}{n}
+f_{A,n} = \frac{n(A)}{n}.
 $$
 
 Para $n \rightarrow \infty$ repetições sucessivas e independentes, a
-frequência relativa de $A$ tende para uma constante $p$
+frequência relativa de $A$ tende para uma constante $P(A)$, ou seja,
 
 $$
-\lim_{n \rightarrow \infty} \frac{n(A)}{n} = P(A) = p
+\lim_{n \rightarrow \infty} \frac{n(A)}{n} = P(A).
 $$
 
 **Exemplo:** Se um dado fosse lançado $n$ vezes, e contássemos
@@ -240,11 +238,11 @@ knitr::include_graphics("img/prob_freq.pdf")
 Assim,
 
 $$
-\lim_{n \rightarrow \infty} \frac{n(A)}{n} = P(A) \approx 0,1667
+\lim_{n \rightarrow \infty} \frac{n(A)}{n} = P(A) \approx 0,1667.
 $$
 
-As probabilidades calculadas a partir de frequências relativas, são
-**estimativas** da verdadeira probabilidade
+As probabilidades calculadas baseadas em frequências relativas, são
+**estimativas** da verdadeira probabilidade.
 
 À medida que o número de repetições vai aumentando, as **frequências
 relativas** se estabilizam em um número que chamamos de
@@ -256,9 +254,10 @@ frequências relativas tendem a ficar melhores com mais observações.
 
 ### Exemplo
 
-Considerando os dados da variável `Idade` da aula anterior
+Considerando os dados da variável `Idade` da aula anterior e
+considerando que os nossos dados são **populacionais**, tem-se
 
-- O espaço amostral é $\Omega = \{17, 18, \ldots, 25\}$
+- O espaço amostral é $\Omega = \{17, 18, \ldots, 25\}$.
 - Se um aluno é escolhido ao acaso, definimos a probabilidade dele ter
   certa idade pela frequência relativa
 
@@ -301,7 +300,7 @@ Podemos extrair as seguintes probabilidades
 
 \begin{align*}
 P(F) = \frac{37}{50} = 0,74; P(M) = \frac{13}{50} = 0,26 \\
-P(A) = \frac{26}{50} = 0,52; P(B) = \frac{24}{50} = 0,48
+P(A) = \frac{26}{50} = 0,52; P(B) = \frac{24}{50} = 0,48.
 \end{align*}
 
 Qual seria a probabilidade de escolhermos ao acaso um estudante do sexo
@@ -328,11 +327,11 @@ está incluído no evento $F$ e no evento $B$.
 Logo, precisamos subtrair $P(F \cap B)$ para obter a probabilidade
 correta.
 
-Nesse caso, pela tabela, vemos que a interseção $F \cap B$ resulta na
+Neste caso, pela tabela, vemos que a interseção $F \cap B$ resulta na
 probabilidade
 
 \begin{align*}
-P(F \cap B) = \frac{16}{50} = 0,32
+P(F \cap B) = \frac{16}{50} = 0,32.
 \end{align*}
 
 E o resultado correto para $P(F \cup B)$ é
@@ -340,8 +339,10 @@ E o resultado correto para $P(F \cup B)$ é
 \begin{align*}
 P(F \cup B) &= P(F) + P(B) - P(F \cap B) \\
 &= 0,74 + 0,48 - 0,32 \\
-&= 0,9
+&= 0,9.
 \end{align*}
+
+## Regra da adição de probabilidades.
 
 ### Regra da adição de probabilidades
 
@@ -349,7 +350,7 @@ A probabilidade da união entre dois eventos quaisquer, $A$ e $B$, é
 dada pela **regra da adição de probabilidades**
 
 $$
-P(A \cup B) = P(A) + P(B) - P(A \cap B)
+P(A \cup B) = P(A) + P(B) - P(A \cap B).
 $$
 
 ```{r, out.width='70%'}
@@ -358,15 +359,15 @@ knitr::include_graphics("img/regra_adicao1-crop.pdf")
 
 ### Regra da adição de probabilidades
 
-Note que a regra da adição pode ser simplificada, **se e somente
-se** os eventos $A$ e $B$ forem **disjuntos** (ou mutuamente exclusivos)
+Note que a regra da adição pode ser simplificada, **se e somente se** 
+os eventos $A$ e $B$ forem **disjuntos** (ou mutuamente exclusivos)
 
 $$
-P(A \cup B) = P(A) + P(B)
+P(A \cup B) = P(A) + P(B),
 $$
 
 pois, neste caso, $A \cap B = \emptyset \quad \Rightarrow \quad
-P(A \cap B) = P(\emptyset) = 0$
+P(A \cap B) = P(\emptyset) = 0$.
 
 ```{r, out.width='70%'}
 knitr::include_graphics("img/regra_adicao2-crop.pdf")
@@ -378,12 +379,21 @@ Como consequência da regra da adição, temos que, para qualquer
 evento $A$,
 
 $$
-P(A) = 1 - P(A^c)
+P(A) = 1 - P(A^c).
 $$
 
-Verifique através de $P(A \cup A^c) = P(A) + P(A^c) - P(A \cap A^c)$
+Verifique através de $P(A \cup A^c) = P(A) + P(A^c) - P(A \cap A^c)$.
 
-# Probabilidade condicional
+\pause
+
+\begin{eqnarray*} 
+P(A \cup A^c) &=& 1. \quad \text{Pela regra da adição, tem-se} \\
+P(A) + P(A^c) - P(A \cap A^c) &=& 1. \quad \text{interseção é nula, então} \\
+P(A) + P(A^c) &=& 1. \quad \text{e portanto} \\
+P(A) &=& 1 - P(A^c).
+\end{eqnarray*}
+
+# Probabilidade condicional e independência.
 
 ### Probabilidade condicional
 
@@ -397,7 +407,7 @@ Nestes casos, dizemos que **ganhamos informação**, e podemos
 *recalcular* as probabilidades de interesse.
 
 Estas probabilidades *recalculadas* recebem o nome de
-**probabilidade condicional**.
+**probabilidades condicionais**.
 
 ### Definição
 
@@ -419,15 +429,15 @@ Considere o seguinte exemplo:
 recebe a informação de que ocorreu face par. Qual é a probabilidade
 de ter saido face 4 com essa "nova" informação?
 
-$\Omega = \{1,2,3,4,5,6\}$, $n(\Omega) = 6$
+$\Omega = \{1,2,3,4,5,6\}$, $n(\Omega) = 6.$
 
 $A$ = face 4 = $\{4\}$, $n(A) = 1 \quad \Rightarrow \quad P(A) =
-\frac{n(A)}{n(\Omega)} = \frac{1}{6}$
+\frac{n(A)}{n(\Omega)} = \frac{1}{6}.$
 
 $B$ = face par = $\{2,4,6\}$, $n(B) = 3 \quad \Rightarrow \quad
-P(B) = \frac{n(B)}{n(\Omega)} = \frac{3}{6}$
+P(B) = \frac{n(B)}{n(\Omega)} = \frac{3}{6}.$
 
-$C$ = face 4, dado que ocorreu face par = $\{4\}$, $n(C) = \frac{1}{3}$
+$C$ = face 4, dado que ocorreu face par = $\{4\}$, $n(C) = \frac{1}{3}.$
 
 ### Probabilidade condicional
 
@@ -440,8 +450,10 @@ $P(B) = \frac{n(B)}{n(\Omega)} = \frac{3}{6}$
 \begin{align*}
 P(A|B) &= \frac{P(A \cap B)}{P(B)} \\
 &= \frac{1/6}{3/6} \\
-&= \frac{1}{3}
+&= \frac{1}{3}.
 \end{align*}
+
+## Regra do produto.
 
 ### Regra do produto
 
@@ -455,7 +467,7 @@ $$
 temos que
 
 $$
-P(A\cap B) = P(B) \cdot P(A|B)
+P(A\cap B) = P(A|B) \cdot P(B)  .
 $$
 
 Essa expressão permite calcular probabilidades em espaços amostrais
@@ -472,7 +484,7 @@ segunda carta.
 b. A primeira carta é reposta no baralho antes da extração da
 segunda carta.
 
-### Independência de eventos
+### Eventos independentes
 
 Vimos que para probabilidades condicionais, $P(A|B)$, saber que $B$
 ocorreu nos dá uma informação "extra" sobre a ocorrência de $A$.
@@ -480,32 +492,32 @@ ocorreu nos dá uma informação "extra" sobre a ocorrência de $A$.
 Porém, existem algumas situações nas quais saber que o evento $B$
 ocorreu, não tem qualquer interferência na ocorrência ou não de $A$.
 
-Nestes casos, podemos dizer que os aventos $A$ e $B$ são
+Nestes casos, podemos dizer que os eventos $A$ e $B$ são
 **independentes**.
 
-### Independência de eventos
+### Eventos independentes
 
 Os eventos A e B são **eventos independentes** se a ocorrência de
 B não altera a probabilidade de ocorrência de A, ou seja, eventos A e
 B são independentes se
 
 $$
-P(A|B) = P(A) \quad \text{e também que} \quad P(B|A) = P(B)
+P(A|B) = P(A) \quad \text{e também que} \quad P(B|A) = P(B).
 $$
 
 Com isso, e a regra do produto, temos que
 
 \begin{align*}
-P(A \cap B) &= P(B) \cdot P(A|B) = P(B) \cdot P(A) \\
-P(A \cap B) &= P(A) \cdot P(B|A) = P(A) \cdot P(B)
+P(A \cap B) &= P(B) \cdot P(A|B) = P(B) \cdot P(A). \\
+P(A \cap B) &= P(A) \cdot P(B|A) = P(A) \cdot P(B).
 \end{align*}
 
 ### Exemplo
 
-Considere o lançamento de um dado e os seguintes eventos
+Considere o lançamento de um dado e os seguintes eventos:
 
-$A = \text{``resultado é um número par''}$
-$B = \text{``resultado é um número menor ou igual a 4''}$
+$A = \text{``resultado é um número par''}$.
+$B = \text{``resultado é um número menor ou igual a 4''}$.
 
 Os eventos $A$ e $B$ são independentes?
 
@@ -518,18 +530,18 @@ knitr::include_graphics("img/independencia-crop.pdf")
 **Pela definição intuitiva**:
 
 $P(A) = 1/2$, \quad $P(A|B) = P(A\cap B)/P(B) = \frac{2/6}{4/6} =
-1/2$
+1/2$.
 
 $P(B) = 2/3$, \quad $P(B|A) = P(B\cap A)/P(A) = \frac{2/6}{3/6} =
 2/3$.
 
-Portanto: $P(A|B) = P(A)$ e $P(B|A) = P(B)$
+Portanto: $P(A|B) = P(A)$ e $P(B|A) = P(B)$.
 
 **Pela definição formal:**
 
-$P(A \cap B) = P(A)P(B) = \frac{1}{2} \cdot \frac{2}{3} = 1/3$
+$P(A \cap B) = P(A)P(B) = \frac{1}{2} \cdot \frac{2}{3} = 1/3.$
 
-$P(A \cap B) = \frac{2}{6} = 1/3$, assim $P(A \cap B) = P(A)P(B)$
+$P(A \cap B) = \frac{2}{6} = 1/3$, assim $P(A \cap B) = P(A)P(B).$
 
 Portanto, os eventos $A$ e $B$ são independentes. Saber que $A$
 ocorreu não muda a probabilidade de $B$ ocorrer e vice-versa.
@@ -565,7 +577,7 @@ knitr::include_graphics("img/particao.pdf")
 ### Exemplo 2.5 (livro)
 
 Suponha que um fabricante de sorvetes recebe $20\%$ de todo o leite
-que utiliza de uma fazenda $F_1$, $30\%$ de uma outra fazendo $F_2$ e
+que utiliza de uma fazenda $F_1$, $30\%$ de uma outra fazenda $F_2$ e
 $50\%$ de $F_3$.
 
 Um órgão de fiscalização inspecionou as fazendas de surpresa e observou
@@ -587,6 +599,8 @@ knitr::include_graphics("img/bayes.pdf")
 ```
 
 Calcule $P(A)$.
+
+## Teorema de Bayes.
 
 ### Teorema de Bayes
 
@@ -615,7 +629,7 @@ P(F_1|A) &= \frac{P(F_1)P(A|F_1)}
 {P(F_1)P(A|F_1) + P(F_2)P(A|F_2) + P(F_2)P(A|F_2)} \\
   &= \frac{0,2 \times 0,2}
 {0,2 \times 0,2 + 0,3 \times 0,05 + 0,5 \times 0,02} \\
-  &= 0,615
+  &= 0,615.
 \end{align*}
 
 De maneira similar, podemos obter $P(F_2|A)$ e $P(F_3|A)$.
