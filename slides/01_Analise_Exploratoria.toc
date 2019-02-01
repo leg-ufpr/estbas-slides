@@ -1,4 +1,4 @@
-\beamer@endinputifotherversion {3.36pt}
+\beamer@endinputifotherversion {3.24pt}
 \beamer@sectionintoc {1}{Ideias gerais}{2}{0}{1}
 \beamer@sectionintoc {2}{An\IeC {\'a}lise explorat\IeC {\'o}ria de dados}{13}{0}{2}
 \beamer@subsectionintoc {2}{1}{Organiza\IeC {\c c}\IeC {\~a}o dos dados.}{15}{0}{2}
