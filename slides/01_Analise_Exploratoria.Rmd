@@ -98,8 +98,8 @@ knitr::include_graphics("img/populacao_amostra.png")
     - Postular a análise estatística a ser utilizada.
 - Definir o método para coletar as amostras.
     - Fonte de dados secundários (IBGE, IPEA, etc);
-    - Questionários específicos;
     - Banco de dados da empresa;
+    - Pesquisas amostrais;
     - Experimentos em laboratórios, etc.
 - Análise dos dados.
     - Análise descritiva e exploratória (o que aconteceu na amostra?).
@@ -227,6 +227,24 @@ print(xtable(dtab, digits = c(0, 0, 2)),
 
 - Neste caso não faz sentido usar frequência acumulada.
 
+### Tabela de frequência - qualitativa ordinal
+
+- Considerando a variável `OpTV`
+
+```{r, results='asis'}
+## OpTV
+tab <- table(factor(dados$OpTV, levels = c("R", "M", "B", "N")))
+dtab <- cbind(n_i = addmargins(tab),
+              f_i = addmargins(prop.table(tab)),
+              "f_{ac}" = c(cumsum(prop.table(tab)), NA))
+print(xtable(dtab, digits = c(0, 0, 2, 2)),
+      comment = FALSE,
+      hline.after = c(-1, 0, nrow(dtab)-1, nrow(dtab)),
+      sanitize.colnames.function = function(x){
+    paste0("$", x, "$")
+})
+```
+
 ### Tabela de frequência - quantitativa discreta
 
 - Considerando a variável `Idade`
@@ -245,23 +263,6 @@ print(xtable(dtab, digits = c(0, 0, 2, 2)),
 })
 ```
 
-### Tabela de frequência - qualitativa ordinal
-
-- Considerando a variável `OpTV`
-
-```{r, results='asis'}
-## OpTV
-tab <- table(factor(dados$OpTV, levels = c("R", "M", "B", "N")))
-dtab <- cbind(n_i = addmargins(tab),
-              f_i = addmargins(prop.table(tab)),
-              "f_{ac}" = c(cumsum(prop.table(tab)), NA))
-print(xtable(dtab, digits = c(0, 0, 2, 2)),
-      comment = FALSE,
-      hline.after = c(-1, 0, nrow(dtab)-1, nrow(dtab)),
-      sanitize.colnames.function = function(x){
-    paste0("$", x, "$")
-})
-```
 
 ### Tabela de frequência - quantitativa contínua
 
