@@ -8,6 +8,9 @@ author: |
 short-author: "LEG/DEST/UFPR"
 # date: "`r format(Sys.Date(), '%d/%m/%Y')`"
 # short-date: "2018/1"
+header-includes:
+- \usepackage[T1]{fontenc}
+- \usepackage{lmodern}
 institute: "Laboratório de Estatística e Geoinformação"
 # short-institute: "LEG/DEST/UFPR"
 department: |
@@ -26,98 +29,91 @@ library(xtable)
 
 # Introdução
 
-### Variáveis aleatórias
+### Resumo
 
-Em probabilidade, uma função $X$ que associa a cada evento do espaço
-amostral um número real $X(\omega) \in \mathbb{R}$, é
-denominada uma **variável aleatória** (VA).
+- Fenômeno aleatório: situação ou acontecimento cujos resultados não podem ser previstos com certeza.
+- Espaço amostral: conjunto de todos os resultados possíveis de um fenômeno aleatório, denotado por $\Omega$.
+- Eventos: subconjuntos de $\Omega$, denotado por $A, B, \ldots$.
+- Conjunto vazio: conjunto sem eventos, denotado por $\emptyset$.
+- União $A \cup B$: ocorrência de pelo menos um dos eventos A ou B.
+- Intersecção $A \cap B$: ocorrência simultânea de A e B.
+- Eventos disjuntos ou mutuamente exclusivos: $A \cap B = \emptyset$.
+- Eventos complementares: $A \cup A^{c} = \Omega$ e $A \cap A^{c} = \emptyset$.
 
-Uma variável aleatória pode ser classificada como **discreta** ou
-**contínua**, dependendo do domínio dos valores de $X$.
+### Definição e Notação
 
-Exemplo: o número de alunos em uma sala é uma variável aleatória
-(discreta), denotada por $X$ (maiúsculo). Uma observação dessa
-variável é denotada pela respectiva letra minúscula, *e.g.*, $x = 50$
-alunos.
+#### Definição
+- **Variável aleatória** - Descrição numérica do resultado de um fenômeno aleatório.
 
-Em geral, denotamos a probabilidade de uma V.A. $X$ assumir determinado
-valor $x$ como
-$$
-P[X] \quad \text{ou} \quad P[X = x]
-$$
+#### Notação 
+- $X$ denota a variável aleatória
+- $x$ denota os valores realizados da v.a.
+- Probabilidade de $X$ assumir o valor $x$ é denotada $P(X = x)$.
 
-### Variáveis aleatórias
+#### Exemplo
+- X: Número de alunos em uma sala de aula. 
+- Uma possível realização $x = 50$.
 
-Dada a realização de um experimento aleatório qualquer, com um certo
+### Tipos de dados, espaço amostral e v.a
+
+- Tipos de dados
+    1. Dados na reta real, $\Omega = \Re$.
+    2. Dados estritamente positivos, $\Omega = \Re_{+}$.
+    3. Dados positivos com zeros, $\Omega = \Re_{0} = [0,\infty)$.
+    4. Proporções, $\Omega = (0,1)$.
+    5. Direções, $\Omega = [0, 2 \pi)$.
+    6. Contagens, $\Omega = \mathbb{N}_{0} = \{0,1,2,\ldots \}$.
+    7. Binomial, $\Omega = = \{0,1,2,\ldots,m \}$.
+- Tipos de espaço amostral
+    1. **Espaço amostral Discreto**: Contêm apenas um número finito 
+    ou contável de elementos.
+    2. **Espaço amostral Contínuo**: Contêm um número infinito de elementos.
+- Tipos de variáveis aleatórias
+    1. Variável aleatória é **contínua** se seu espaço amostral é contínuo.
+    2. Variável aleatória é **dicreta** se seu espaço amostral é discreto.
+
+### Descrição probabilística de v.a
+
+- Dada a realização de um experimento aleatório qualquer, com um certo
 espaço de probabilidade, desejamos estudar a **estrutura
 probabilística** de quantidades associadas à esse experimento.
 
-Note que antes da realização de um experimento, **não sabemos seu
-resultado**, entretanto seu espaço de probabilidade pode ser
-previamente estabelecido.
+- Note que antes da realização de um experimento, **não sabemos seu
+resultado**, entretanto seu espaço de amostral pode ser estabelecido com precisão.
 
-Dessa forma, podemos atribuir probabilidades aos *eventos* desse
-espaço amostral, dando origem ao conceito de **variável aleatória**.
+- Podemos atribuir probabilidades aos *eventos* deste
+espaço amostral, dando origem a idéia de **distribuição de probabilidade**.
 
-### Distribuições de probabilidade
+- Em geral vamos distinguir a distribuição de probabilidade de v.a discretas e contínuas.
 
-Existem diversos *modelos probabilísticos* que
-procuram descrever vários tipos de variáveis aleatórias: são as
-**distribuições de probabilidade de variáveis aleatórias**
-(discretas ou contínuas).
-
-A distribuição de probabilidades de uma VA $X$ é, portanto, uma
-descrição das probabilidades associadas com os possíveis valores de
-$X$. Os valores que $X$ assume determinam o **suporte** (S) da VA.
-
-- **Variáveis discretas** $\rightarrow$ suporte em um conjunto
-de valores enumeráveis (finitos ou infinitos)
-- **Variáveis contínuas** $\rightarrow$ suporte em um conjunto
-não enumerável de valores
-
-### Distribuições de probabilidade
-
-Denomina-se de **distribuição de probabilidade** de alguma variável
-aleatória, a **regra** geral que define a
-
-- **função de probabilidade** (fp) (V.A.s discretas), ou a
-- **função densidade de probabilidade** (fdp) (V.A.s contínuas)
-
-para a variável de interesse.
-
-Existem muitas distribuições de probabilidade, mas algumas merecem
-destaque por sua importância prática.
-
-Estas distribuições também são chamadas de **modelos probabilísticos**.
-
-# Variáveis aleatórias discretas
+# Função de Probabilidade
 
 ### Definição
 
-A **função de probabilidade** (fp) da VA discreta $X$, que assume
+A **função de probabilidade** (fp) da v.a discreta $X$, que assume
 os valores $x_1, x_2, \ldots, x_n, \ldots$, é a função que atribui
 probabilidades a cada um dos possíveis valores: $\{[x_i, p(x_i)], i =
 1, 2, ...\}$, ou seja,
 
 $$
-P[X = x_i] = p(x_i) = p_i, \quad i = 1, 2, \ldots
+P[X = x_i] = p(x_i) = p_i, \quad i = 1, 2, \ldots.
 $$
 
 com as seguintes propriedades:
 
 i. A probabilidade de cada valor deve estar entre 0 e 1
 $$
-0 \leq p(x_i) \leq 1, \quad \forall \, i = 1, 2, ...
+0 \leq p(x_i) \leq 1, \quad i = 1, 2,\ldots .
 $$
 ii. A soma de todas as probabilidades é igual a 1
 $$
-\sum_{i} p(x_i) = 1
+\sum_{i} p(x_i) = 1.
 $$
 
 ### Exemplo 3.3
 
 #### Experimento
-Lançamento de duas moedas. $X$ = número de resultados cara (C)
+Lançamento de duas moedas. $X$ = número de resultados cara (C).
 
 ```{r, out.width='60%'}
 knitr::include_graphics("img/exp_moedas-crop.pdf")
@@ -126,7 +122,7 @@ knitr::include_graphics("img/exp_moedas-crop.pdf")
 ### Exemplo 3.3
 
 Podemos montar uma tabela de distribuição de frequência para a
-variável aleatória $X$ = número de resultados cara (C)
+variável aleatória $X$ = número de resultados cara (C).
 
 \begin{table}[h]
   \centering
@@ -144,7 +140,7 @@ variável aleatória $X$ = número de resultados cara (C)
 \end{table}
 
 Assim podemos associar a cada valor de $X$ sua **probabilidade**
-correspondente, como resultado das **frequências relativas**
+correspondente, como resultado das **frequências relativas**.
 \begin{align*}
 P[X=0] &= 1/4 \\
 P[X=1] &= 2/4 = 1/2 \\
@@ -154,7 +150,7 @@ P[X=2] &= 1/4
 ### Exemplo 3.3
 
 Dessa forma, a **distribuição de probabilidade** da variável
-aleatória $X$ = número de resultados cara (C) é a tabela
+aleatória $X$ = número de resultados cara (C) é a tabela:
 
 \begin{table}[h]
     \centering
@@ -174,8 +170,8 @@ aleatória $X$ = número de resultados cara (C) é a tabela
 Repare que as propriedades da função de probabilidade estão
 satisfeitas:
 
-i. As probabilidades $p(x_i)$ estão entre 0 e 1
-ii. A soma de todas as probabilidades $p(x_i)$ é 1
+i. As probabilidades $p(x_i)$ estão entre 0 e 1.
+ii. A soma de todas as probabilidades $p(x_i)$ é 1.
 
 ### Exemplo 3.1
 
@@ -184,7 +180,7 @@ constatou que para as famílias da região, $20\%$ não tem filhos, $30\%$
 tem um filho, $35\%$ tem dois, e as restantes se dividem igualmente
 entre três, quatro ou cinco filhos.
 
-Descreva a função de probabilidade da VA $N$ definida como número de
+Descreva a função de probabilidade da v.a $N$ definida como número de
 filhos.
 
 ### Exemplo 3.2
@@ -206,11 +202,11 @@ observadas. Como se comporta a va custo das obras de fundações?
 
 ### Função de distribuição de probabilidade
 
-Em muitas situações, é útil calcularmos a probabilidade **acumulada**
+- Em muitas situações, é útil calcularmos a probabilidade **acumulada**
 até um certo valor.
 
-Definimos a **função de distribuição** ou **função acumulada de
-probablidade** de uma VA $X$ pela expressão:
+- Definimos a **função de distribuição** ou **função acumulada de probablidade** de uma v.a 
+$X$ pela expressão:
 
 $$
 F(x) = P(X \leq x)
@@ -277,13 +273,13 @@ plot(stepfun(x = 1:5, y = c(0,dtab[-6,3]), right = FALSE),
 
 Assim,
 $$
-F(2) = P(X \leq 2) = P(X = 1) + P(X = 2) = 0,533
+F(2) = P(X \leq 2) = P(X = 1) + P(X = 2) = 0,533.
 $$
 Note que podemos escrever
 $$
-F(x) = P(X \leq x) = 0,533 \quad \text{para} \quad 2 \leq x < 3
+F(x) = P(X \leq x) = 0,533 \quad \text{para} \quad 2 \leq x < 3.
 $$
-E os valores completos da função de distribuição são:
+Função de distribuição
 \small
 \[F(x) = \left\{
   \begin{array}{lr}
@@ -334,7 +330,7 @@ Os dados observados concordam com o modelo teórico?
 ### Exemplo 3.6
 
 O número de observações de incidência que seria esperado seguindo o
-modelo teórico é calculado como $$e_i = n \times p_i$$.
+modelo teórico é calculado como $$e_i = n \times p_i.$$
 
 \begincols
 \column{.5\textwidth}
@@ -359,17 +355,15 @@ legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
 ```
 \endcols
 
-# Modelos discretos
-
-## Principais modelos
+# Distribuições de probabilidade discretas
 
 ### Modelo Uniforme Discreto
 
-**Definição:** Seja $X$ uma VA assumindo valores $1, 2, \ldots, k$.
+**Definição:** Seja $X$ uma v.a assumindo valores $1, 2, \ldots, k$.
 Dizemos que $X$ segue o modelo **Uniforme Discreto** se atribui a mesma
 probabilidade $1/k$ a cada um desses $k$ valores.
 
-Entãos, sua função de probabilidade é dada por
+Então, sua função de probabilidade é dada por
 $$
 P[X = j] =  \frac{1}{k}, \quad j = 1, 2, \ldots, k.
 $$
@@ -462,15 +456,15 @@ Temos que
 **Definição:** Seja um experimento realizado dentro das seguintes
 condições:
 
-i. São realizados $n$ "ensaios" de Bernoulli independentes
+i. São realizados $n$ "ensaios" de Bernoulli independentes.
 ii. Cada ensaio só pode ter dois resultados possíveis: "sucesso" ou
-"fracasso"
-iii. A probabilidade $p$ de sucesso em cada ensaio é constante
+"fracasso".
+iii. A probabilidade $p$ de sucesso em cada ensaio é constante.
 
-Vamos associar a VA $X$ o número de sucessos em $n$ ensaios de
+Vamos associar a v.a $X$ o número de sucessos em $n$ ensaios de
 Bernoulli. Portanto $X$ poderá assumir os valores $0, 1, \ldots, n$.
 
-### Modelo binomial
+### Modelo Binomial
 
 Vamos determinar a distribuição de probabilidade de $X$, através da
 probabilidade de um número genérico $x$ de sucessos.
@@ -478,7 +472,7 @@ probabilidade de um número genérico $x$ de sucessos.
 Suponha que ocorram sucessos (1) apenas nas $x$ primeiras provas, e
 fracassos (0) nas $n-x$ provas restantes
 $$
-\underbrace{1,1,1,..., 1}_{x}, \underbrace{0,0,0, ..., 0}_{n-x}
+\underbrace{1,1,1,..., 1}_{x}, \underbrace{0,0,0, ..., 0}_{n-x}.
 $$
 Como as provas são independentes, a probabilidade de ocorrência de $x$
 sucessos em $n$ tentativas é uma extensão do modelo de Bernoulli para
@@ -486,10 +480,10 @@ $n$ ensaios, ou seja,
 $$
 \underbrace{p\cdot p\cdot p \cdots p}_{x} \cdot
 \underbrace{(1-p)\cdot (1-p)\cdot (1-p) \cdots (1-p)}_{n-x} =
- p^x (1-p)^{n-x}
+ p^x (1-p)^{n-x}.
 $$
 
-### Modelo binomial
+### Modelo Binomial
 
 Porém, o evento: "$x$ sucessos em $n$ provas" pode ocorrer de
 diferentes maneiras (ordens) distintas, todas com a mesma
@@ -508,9 +502,9 @@ $$
 é o **coeficiente binomial**, que dá o número total de
 combinações possíveis de $n$ elementos, com $x$ sucessos.
 
-**Notação:** $X \sim \text{bin}(n,p)$
+**Notação:** $X \sim B(n,p)$
 
-### Modelo binomial
+### Modelo Binomial
 
 ```{r, out.width='90%', fig.width=7.5, fig.height=5}
 par(mfrow=c(2,2), mar=c(3,3,2,1), mgp=c(2,0.7,0), las=1)
@@ -528,12 +522,11 @@ plot(0:10, dbinom(x = 0:10, size = 10, prob = .9), type = "h",
      ylim = c(0,.5))
 ```
 
-### Modelo binomial
+### Modelo Binomial
 
-É importante notar que as probabilidades são completamente
-caracterizadas pela informação dos **parâmetros**.
+- As probabilidades são completamente caracterizadas pela informação dos **parâmetros**.
 
-Por exemplo, para calcular a probabilidade de 3 sucessos de uma $b(12,
+- Por exemplo, para calcular a probabilidade de 3 sucessos de uma $B(12,
 0.4)$ fazemos
 $$
 P[X = 3] = \binom{12}{3} 0.4^3 0.6^{9} =
@@ -607,8 +600,6 @@ points(0:10, esp, pch = 3)
 legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
 ```
 
-## Outros modelos
-
 ### Modelo Geométrico
 
 **Definição:** Considere o número ($k$) de ensaios Bernoulli **que
@@ -663,10 +654,10 @@ plot(x, dx, type = "h", xlab = "X", ylab = "P[X = x]")
 **Definição:** Seja um experimento realizado nas seguintes
 condições:
 
-i. As ocorrências são independentes
-ii. As ocorrências são aleatórias
+i. As ocorrências são independentes.
+ii. As ocorrências são aleatórias.
 iii. A variável aleatória $X$ é o número de ocorrências de um
-evento **ao longo de algum intervalo** (de tempo ou espaço)
+evento **ao longo de algum intervalo** (de tempo ou espaço).
 
 Denominamos esse experimento de **processo de Poisson**.
 
@@ -676,7 +667,7 @@ superior).
 
 ### Modelo Poisson
 
-Uma VA $X$ segue o modelo de Poisson se surge a partir de um
+Uma v.a $X$ segue o modelo de Poisson se surge a partir de um
 processo de Poisson, e sua **função de probabilidade** for dada
 por
 $$
@@ -685,7 +676,7 @@ $$
 onde o parâmetro $\lambda > 0$ é a taxa média de ocorrências em um intervalo de
 tempo ou espaço.
 
-Notação: $X \sim Po(\lambda)$.
+Notação: $X \sim P(\lambda)$.
 
 ### Modelo Poisson
 
