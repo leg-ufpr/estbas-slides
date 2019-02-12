@@ -46,7 +46,7 @@ library(xtable)
 - **Variável aleatória** - Descrição numérica do resultado de um fenômeno aleatório.
 
 #### Notação 
-- $X$ denota a variável aleatória
+- $X$ denota a variável aleatória.
 - $x$ denota os valores realizados da v.a.
 - Probabilidade de $X$ assumir o valor $x$ é denotada $P(X = x)$.
 
@@ -79,12 +79,12 @@ espaço de probabilidade, desejamos estudar a **estrutura
 probabilística** de quantidades associadas à esse experimento.
 
 - Note que antes da realização de um experimento, **não sabemos seu
-resultado**, entretanto seu espaço de amostral pode ser estabelecido com precisão.
+resultado**, entretanto seu espaço amostral pode ser estabelecido com precisão.
 
 - Podemos atribuir probabilidades aos *eventos* deste
 espaço amostral, dando origem a idéia de **distribuição de probabilidade**.
 
-- Em geral vamos distinguir a distribuição de probabilidade de v.a discretas e contínuas.
+- Em geral vamos distinguir a distribuição de probabilidade de v.a's discretas e contínuas.
 
 # Função de Probabilidade
 
@@ -178,10 +178,25 @@ ii. A soma de todas as probabilidades $p(x_i)$ é 1.
 Com dados do último censo, a assistente social de um Centro de Saúde
 constatou que para as famílias da região, $20\%$ não tem filhos, $30\%$
 tem um filho, $35\%$ tem dois, e as restantes se dividem igualmente
-entre três, quatro ou cinco filhos.
-
-Descreva a função de probabilidade da v.a $N$ definida como número de
+entre três, quatro ou cinco filhos. Descreva a função de probabilidade da v.a $N$ definida como número de
 filhos.
+\pause
+\begin{table}[]
+\begin{tabular}{lllllll} \hline
+X      & 0    & 1    & 2    & 3 & 4 & 5 \\ \hline
+P(X=x) & 0.20 & 0.30 & 0.35 & ? & ? & ? \\ \hline
+\end{tabular}
+\end{table}
+\pause
+Porém sabemos que
+$$ \sum_{i=1}^6 P(X = x_i) = 0.20 + 0.30 + 0.35 + x + x + x = 1.$$
+\begin{table}[]
+\begin{tabular}{lllllll} \hline
+X      & 0    & 1    & 2    & 3 & 4 & 5 \\ \hline
+P(X=x) & 0.20 & 0.30 & 0.35 & 0.05 & 0.05 & 0.05 \\ \hline
+\end{tabular}
+\end{table}
+
 
 ### Exemplo 3.2
 
@@ -198,7 +213,26 @@ metros.
 
 O custo básico inicial é de $100$ UPC (unidade padrão de construção) e
 será acrescida de $50k$, com $k$ representando o número de alterações
-observadas. Como se comporta a va custo das obras de fundações?
+observadas. Como se comporta a v.a custo das obras de fundações?
+
+### Exemplo 3.2
+
+```{r, out.width='115%'}
+knitr::include_graphics("figures/Arvore")
+```
+
+### Exemplo 3.2
+
+- Construindo a função de probabilidade.
+- V.a custo da obra.
+
+\begin{table}[]
+\begin{tabular}{lllllll} \hline
+C      & 100     & 150    & 200     & 250 & \\ \hline
+P(C=c) & 0.729 & 0.243  & 0.027 & 0.001  \\ \hline
+\end{tabular}
+\end{table}
+
 
 ### Função de distribuição de probabilidade
 
@@ -224,7 +258,7 @@ passavam por um novo teste. Caso ainda tivessem tido alguma reação
 alérgica, recebiam outra dose da vacina. Ao fim de 5 doses todas
 as crianças foram consideradas imunizadas.
 
-Os resultados completados estão na tabela a seguir.
+Os resultados estão na tabela a seguir.
 
 ```{r, results='asis'}
 tab <- as.table(c(245, 288, 256, 145, 66))
@@ -311,9 +345,8 @@ print(xtable(t(dtab), digits = rep(0, 7)),
 })
 ```
 
-Estudos anteriores assumem que a incidência de câncer em parentes próximos
-pode ser teoricamente modelada pela seguinte função discreta de
-probabilidade:
+Estudos anteriores assumem que a incidência de câncer em parentes próximos pode ser teoricamente modelada pela seguinte função 
+discreta de probabilidade:
 
 ```{r, results='asis'}
 p <- c(.1,.1,.3,.3,.1,.1)
@@ -329,7 +362,7 @@ Os dados observados concordam com o modelo teórico?
 
 ### Exemplo 3.6
 
-O número de observações de incidência que seria esperado seguindo o
+O número de observações de incidência esperado seguindo o
 modelo teórico é calculado como $$e_i = n \times p_i.$$
 
 \begincols
@@ -355,7 +388,7 @@ legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
 ```
 \endcols
 
-# Distribuições de probabilidade discretas
+# Distribuições discretas de probabilidade
 
 ### Modelo Uniforme Discreto
 
@@ -535,7 +568,7 @@ $$
 Diversos programas computacionais fazem esse cálculo facilmente. Por
 exemplo, com o R
 ```{r, comment=NA, echo=TRUE}
-round(dbinom(0:12, size = 12, prob = 0.4), 3)
+round(dbinom(3, size = 12, prob = 0.4), 3)
 ```
 
 ### Exemplo 3.9
@@ -603,7 +636,7 @@ legend("topright", legend = c("Observado", "Esperado"), pch = c(1, 3))
 ### Modelo Geométrico
 
 **Definição:** Considere o número ($k$) de ensaios Bernoulli **que
-precedem o primeiro sucesso**. Nesse caso, dizemos que a VA $X$ tem
+precedem o primeiro sucesso**. Nesse caso, dizemos que a v.a $X$ tem
 distribuição Geométrica de parâmetro $p$, e sua função de probabilidade
 tem a forma
 $$
@@ -661,7 +694,7 @@ evento **ao longo de algum intervalo** (de tempo ou espaço).
 
 Denominamos esse experimento de **processo de Poisson**.
 
-Vamos associar a VA $X$ o número de ocorrências em um intervalo.
+Vamos associar a v.a $X$ o número de ocorrências em um intervalo.
 Portanto $X$ poderá assumir os valores $0, 1, \ldots$ (sem limite
 superior).
 
@@ -673,8 +706,7 @@ por
 $$
 P(X = k) = \frac{e^{-\lambda}\lambda^k}{k!}, \quad k = 0, 1, 2, \ldots .
 $$
-onde o parâmetro $\lambda > 0$ é a taxa média de ocorrências em um intervalo de
-tempo ou espaço.
+onde o parâmetro $\lambda > 0$ é a taxa média de ocorrências em um intervalo de tempo ou espaço.
 
 Notação: $X \sim P(\lambda)$.
 
@@ -699,8 +731,7 @@ ylim = c(0,.4))
 ### Exemplo 3.12
 
 A emissão de partículas radioativas têm sido modelada através de
-uma distribuição de Poisson, com o valor do parâmetro dependendo da fonte
-utilizada.
+uma distribuição de Poisson, com o valor do parâmetro dependendo da fonte utilizada.
 
 Suponha que o número de partículas alfa, emitidas por minuto,
 seja uma variável aleatória seguindo o modelo Poisson com parâmetro 5,
@@ -756,7 +787,7 @@ tipo $I$ e $n-m$ são do tipo $II$. Para um sorteio de $r$ objetos $r <
 n$, feito ao acaso e **sem reposição**, defina $X$ como o número de
 objetos de tipo $I$ selecionados.
 
-Diremos que a VA $X$ segue o modelo Hipergeométrico e sua função de
+Diremos que a v.a $X$ segue o modelo Hipergeométrico e sua função de
 probabilidade é dada por
 $$
 P[X = k] = \frac{\dbinom{m}{k} \dbinom{n-m}{r-k}}{\dbinom{n}{r}},
@@ -775,8 +806,8 @@ probabilidade de 2 defeituosas terem sido escolhidas?
 
 ### Exemplo
 
-Pelo enunciado, sabemos que $n = 20$, $m = 4$, $r = 5$. podemos calcular
-a probabilidade de $X = 2$ como
+Pelo enunciado, sabemos que $n = 20$, $m = 4$, $r = 5$. 
+Podemos calcular a probabilidade de $X = 2$ como
 
 \begin{align*}
 P[X = 2] &= \frac{\dbinom{m}{k} \dbinom{n-m}{r-k}}{\dbinom{n}{r}}
@@ -790,16 +821,16 @@ Usando o R temos
 dhyper(x = 2, m = 4, n = 16, k = 5)
 ```
 
-### Modelo hipergeométrico - captura e recaptura
+### Modelo hipergeométrico: Captura e Recaptura
 
 Para determinar o tamanho de uma população, podemos usar o modelo
-hipergeométrico
+hipergeométrico o processo resumido é o seguinte:
 
-- Captura e marcação de $m$ animais
-- Após um tempo, amostram-se $r$ animais (sem reposição)
-- O número de animais marcados é contado
+- Captura e marcação de $m$ animais.
+- Após um tempo, amostram-se $r$ animais (sem reposição).
+- O número de animais marcados é contado.
 
-Sendo $X$ a VA "número de animais marcados", então $X \sim \text{HG}(m,
+Sendo $X$ a v.a "número de animais marcados", então $X \sim \text{HG}(m,
 N, r)$, onde $N$ é o tamanho da população (desconhecido).
 
 Supondo que a amostra forneça $k_0$ animais marcados, podemos ter uma
@@ -808,7 +839,7 @@ $$
 N_{est} = m \frac{r}{k_0}
 $$
 
-### Modelo hipergeométrico - captura e recaptura
+### Modelo hipergeométrico - Captura e Recaptura
 
 Suponha que você marcou 200 indivíduos de uma espécie de peixe em um
 lago. Algum tempo depois você capturou 56 indivíduos, dos quais 9
