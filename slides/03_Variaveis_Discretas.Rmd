@@ -178,10 +178,25 @@ ii. A soma de todas as probabilidades $p(x_i)$ é 1.
 Com dados do último censo, a assistente social de um Centro de Saúde
 constatou que para as famílias da região, $20\%$ não tem filhos, $30\%$
 tem um filho, $35\%$ tem dois, e as restantes se dividem igualmente
-entre três, quatro ou cinco filhos.
-
-Descreva a função de probabilidade da v.a $N$ definida como número de
+entre três, quatro ou cinco filhos. Descreva a função de probabilidade da v.a $N$ definida como número de
 filhos.
+\pause
+\begin{table}[]
+\begin{tabular}{lllllll} \hline
+X      & 0    & 1    & 2    & 3 & 4 & 5 \\ \hline
+P(X=x) & 0.20 & 0.30 & 0.35 & ? & ? & ? \\ \hline
+\end{tabular}
+\end{table}
+\pause
+Porém sabemos que
+$$ \sum_{i=1}^6 P(X = x_i) = 0.20 + 0.30 + 0.35 + x + x + x = 1.$$
+\begin{table}[]
+\begin{tabular}{lllllll} \hline
+X      & 0    & 1    & 2    & 3 & 4 & 5 \\ \hline
+P(X=x) & 0.20 & 0.30 & 0.35 & 0.05 & 0.05 & 0.05 \\ \hline
+\end{tabular}
+\end{table}
+
 
 ### Exemplo 3.2
 
@@ -199,6 +214,25 @@ metros.
 O custo básico inicial é de $100$ UPC (unidade padrão de construção) e
 será acrescida de $50k$, com $k$ representando o número de alterações
 observadas. Como se comporta a v.a custo das obras de fundações?
+
+### Exemplo 3.2
+
+```{r, out.width='115%'}
+knitr::include_graphics("figures/Arvore")
+```
+
+### Exemplo 3.2
+
+- Construindo a função de probabilidade.
+- V.a custo da obra.
+
+\begin{table}[]
+\begin{tabular}{lllllll} \hline
+C      & 100     & 150    & 200     & 250 & \\ \hline
+P(C=c) & 0.729 & 0.243  & 0.027 & 0.001  \\ \hline
+\end{tabular}
+\end{table}
+
 
 ### Função de distribuição de probabilidade
 
