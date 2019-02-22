@@ -18,6 +18,7 @@ department: |
   | Departamento de Estatística
 safe-columns: true
 fontfamily: inconsolata
+classoption: "aspectratio=169"
 output:
   legtheme::beamer_leg
 ---
@@ -110,7 +111,8 @@ Livro-texto:
 - Note que marcar uma alternativa falsa altera a sua nota.
     - Exemplo 2 - Questão com 5 alternativas, sendo 4 verdadeiras e 1 falsa.
     - Cada verdadeira valie $1/4$.
-    - Cada falsa vale $-1$, ou seja se marcar a falsa zera a questão.
+    - Cada falsa vale $-1/2$, ou seja se marcar a falsa terá metade da questão.
+    - A penalização é o máximo entre o número de falsas e 2.
 
 ### Forma de avaliação
 
