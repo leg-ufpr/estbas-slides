@@ -18,6 +18,7 @@ department: |
   | Departamento de Estatística
 safe-columns: true
 fontfamily: inconsolata
+classoption: "aspectratio=169"
 output:
   legtheme::beamer_leg
 ---
@@ -85,7 +86,7 @@ library(xtable)
     
 ### Ideia final
 
-```{r, out.width='70%'}
+```{r, out.width='50%'}
 knitr::include_graphics("img/populacao_amostra.png")
 ```
 
@@ -126,12 +127,11 @@ knitr::include_graphics("img/populacao_amostra.png")
 
  - Coleta de dados observacionais. Exemplos:
     - Presença de seres vivos num ambiente;
-    - Fenômenos climáticos;
-    - Fluxo de usuários em um website.
+    - Fenômenos climáticos; Fluxo de usuários em um website.
 
 ### Resumo: Objetivos e etapas da análise estatística
 
-```{r, out.width='90%'}
+```{r, out.width='80%'}
 knitr::include_graphics("img/organograma_estatistica.png")
 ```
 ** A forma de coleta dos dados é um tópico em si. No entanto neste curso básico ela será
@@ -346,7 +346,7 @@ gerar interpretações distorcidas.
 
 - Adequado para variáveis qualitativas nominal e ordinal.
 
-```{r}
+```{r,out.width='50%'}
 par(mfrow = c(1, 2),mar=c(2.6, 2.8, 1.2, 0.5), mgp = c(1.6, 0.6, 0))
 pie(table(dados$Sexo), main = "Sexo")
 pie(table(dados$Toler), main = "Toler")
@@ -389,7 +389,7 @@ da área pela amplitude da faixa, $h = \frac{f_i}{AMP}$.
 
 ### Tipos de assimetria
 
-```{r, out.width='80%'}
+```{r, out.width='60%'}
 ## Gera dados
 set.seed(12)
 x <- rnorm(1000)
@@ -429,24 +429,24 @@ ordenados em quatro subgrupos de mesmo tamanho.
     e $Q_2 = (N+1)/2$ se N ímpar.
     - $Q_3 = 0.75 \cdot (N+1)$  e arredonde.
 - Exemplo: Conside o conjunto de dados: $8.43(1)$, $8.65(2)$, $9.96(3)$,
-  $10.91(4)$,  $10.46(5)$ e $10.83(6)$.
+  $10.91(6)$,  $10.46(4)$ e $10.83(5)$.
     - $Q_1 = 0.25 \cdot 7 = 1.75 \approx 2$, ou seja $8.65$.
     - $Q_2 =$ média dos valores nas posições $3$ e $4$, ou seja, $(9.96 +
-    10.91 )/2 = 10.43$.
-    - $Q_3 = 0.75 \cdot 7 = 5.25 \approx 5$, ou seja, $10.46$.
+    10.46 )/2 = 10.21$.
+    - $Q_3 = 0.75 \cdot 7 = 5.25 \approx 5$, ou seja, $10.83$.
 
 ### Boxplot
 
 - Adequado para quantitativa contínua.
 - Pode ser usado também para quantitative discreta com muitos valores.
 
-```{r, out.width='70%'}
-knitr::include_graphics("figures/boxplot.png")
+```{r, out.width='50%'}
+knitr::include_graphics("img/boxplot.png")
 ```
 
 ### Boxplots
 
-- Execelente para explorar relações entre qualitativas e contínuas.
+- Excelente para explorar relações entre qualitativas e contínuas.
 
 ```{r}
 par(mfrow = c(2,2), mar=c(2.6, 2.8, 1.2, 0.5), mgp = c(1.6, 0.6, 0))
@@ -481,6 +481,9 @@ abline(h = 0)
 plot(-1*y ~ x, ylab = "Eixo y", xlab = "Eixo x", main = "Negativa")
 abline(a = -2, b = -2)
 ```
+
+### Diagrama de dispersão
+
 - Formas não lineares.
 
 ```{r, fig.height=2, fig.width=6}

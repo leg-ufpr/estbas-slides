@@ -1,33 +1,33 @@
-\beamer@endinputifotherversion {3.36pt}
+\beamer@endinputifotherversion {3.24pt}
 \headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
 \headcommand {\beamer@framepages {1}{1}}
 \headcommand {\sectionentry {1}{Ideias gerais}{2}{Ideias gerais}{0}}
 \headcommand {\beamer@sectionpages {1}{1}}
 \headcommand {\beamer@subsectionpages {1}{1}}
-\headcommand {\slideentry {1}{0}{1}{2/2}{}{0}}
+\headcommand {\slideentry {1}{0}{2}{2/2}{}{0}}
 \headcommand {\beamer@framepages {2}{2}}
-\headcommand {\slideentry {1}{0}{2}{3/3}{}{0}}
+\headcommand {\slideentry {1}{0}{3}{3/3}{}{0}}
 \headcommand {\beamer@framepages {3}{3}}
-\headcommand {\slideentry {1}{0}{3}{4/4}{}{0}}
+\headcommand {\slideentry {1}{0}{4}{4/4}{}{0}}
 \headcommand {\beamer@framepages {4}{4}}
-\headcommand {\slideentry {1}{0}{4}{5/5}{}{0}}
+\headcommand {\slideentry {1}{0}{5}{5/5}{}{0}}
 \headcommand {\beamer@framepages {5}{5}}
-\headcommand {\slideentry {1}{0}{5}{6/6}{}{0}}
+\headcommand {\slideentry {1}{0}{6}{6/6}{}{0}}
 \headcommand {\beamer@framepages {6}{6}}
-\headcommand {\slideentry {1}{0}{6}{7/7}{}{0}}
+\headcommand {\slideentry {1}{0}{7}{7/7}{}{0}}
 \headcommand {\beamer@framepages {7}{7}}
-\headcommand {\slideentry {1}{0}{7}{8/8}{}{0}}
+\headcommand {\slideentry {1}{0}{8}{8/8}{}{0}}
 \headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {1}{0}{8}{9/11}{}{0}}
+\headcommand {\slideentry {1}{0}{9}{9/11}{}{0}}
 \headcommand {\beamer@framepages {9}{11}}
-\headcommand {\slideentry {1}{0}{9}{12/12}{}{0}}
+\headcommand {\slideentry {1}{0}{10}{12/12}{}{0}}
 \headcommand {\beamer@framepages {12}{12}}
 \headcommand {\sectionentry {2}{An\IeC {\'a}lise explorat\IeC {\'o}ria de dados}{13}{An\IeC {\'a}lise explorat\IeC {\'o}ria de dados}{0}}
 \headcommand {\beamer@sectionpages {2}{12}}
 \headcommand {\beamer@subsectionpages {2}{12}}
-\headcommand {\slideentry {2}{0}{1}{13/13}{}{0}}
+\headcommand {\slideentry {2}{0}{11}{13/13}{}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\slideentry {2}{0}{2}{14/14}{}{0}}
+\headcommand {\slideentry {2}{0}{12}{14/14}{}{0}}
 \headcommand {\beamer@framepages {14}{14}}
 \headcommand {\beamer@subsectionentry {0}{2}{1}{15}{Organiza\IeC {\c c}\IeC {\~a}o dos dados.}}\headcommand {\beamer@subsectionpages {13}{14}}
 \headcommand {\slideentry {2}{1}{1}{15/15}{Organiza\IeC {\c c}\IeC {\~a}o dos dados.}{0}}
@@ -76,15 +76,17 @@
 \headcommand {\beamer@framepages {35}{35}}
 \headcommand {\slideentry {2}{3}{12}{36/36}{Representa\IeC {\c c}\IeC {\~a}o gr\IeC {\'a}fica.}{0}}
 \headcommand {\beamer@framepages {36}{36}}
-\headcommand {\sectionentry {3}{Exerc\IeC {\'\i }cios recomendados}{37}{Exerc\IeC {\'\i }cios recomendados}{0}}
-\headcommand {\beamer@sectionpages {13}{36}}
-\headcommand {\beamer@subsectionpages {25}{36}}
-\headcommand {\slideentry {3}{0}{1}{37/37}{}{0}}
+\headcommand {\slideentry {2}{3}{13}{37/37}{Representa\IeC {\c c}\IeC {\~a}o gr\IeC {\'a}fica.}{0}}
 \headcommand {\beamer@framepages {37}{37}}
-\headcommand {\slideentry {3}{0}{2}{38/38}{}{0}}
+\headcommand {\sectionentry {3}{Exerc\IeC {\'\i }cios recomendados}{38}{Exerc\IeC {\'\i }cios recomendados}{0}}
+\headcommand {\beamer@sectionpages {13}{37}}
+\headcommand {\beamer@subsectionpages {25}{37}}
+\headcommand {\slideentry {3}{0}{14}{38/38}{}{0}}
 \headcommand {\beamer@framepages {38}{38}}
-\headcommand {\beamer@partpages {1}{38}}
-\headcommand {\beamer@subsectionpages {37}{38}}
-\headcommand {\beamer@sectionpages {37}{38}}
-\headcommand {\beamer@documentpages {38}}
-\headcommand {\def \inserttotalframenumber {36}}
+\headcommand {\slideentry {3}{0}{15}{39/39}{}{0}}
+\headcommand {\beamer@framepages {39}{39}}
+\headcommand {\beamer@partpages {1}{39}}
+\headcommand {\beamer@subsectionpages {38}{39}}
+\headcommand {\beamer@sectionpages {38}{39}}
+\headcommand {\beamer@documentpages {39}}
+\headcommand {\def \inserttotalframenumber {37}}
