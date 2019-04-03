@@ -357,10 +357,12 @@ Calcule as medidas de posição para a VA $Y = 5X - 10$.
 ```{r, eval=FALSE}
 x <- c(2, 5, 8, 15, 20)
 p <- c(.1, .3, .2, .2, .2)
-sum(x * p)
+(xbar <- sum(x * p))
 ## Y = 5X - 10
-y <- 5*x - 10
+(y <- 5*x - 10)
 sum(y * p)
+## OU
+5 * xbar - 10
 ```
 
 # Medidas de dispersão
@@ -786,19 +788,35 @@ e decida sobre o método mais eficiente.
 ```{r, eval=FALSE}
 x1 <- c(0,4,5,6,10)
 p1 <- c(.2,.2,.2,.2,.2)
-(x1bar <- sum(x1*p1))
+(EX1 <- sum(x1*p1))
 
 x2 <- c(1,5,9)
 p2 <- c(1/3,1/3,1/3)
-(x2bar <- sum(x2*p2))
+(EX2 <- sum(x2*p2))
 
 x3 <- c(4,5,6)
 p3 <- c(.3,.4,.3)
-(x3bar <- sum(x3*p3))
+(EX3 <- sum(x3*p3))
 
-sum(p1 * (x1 - x1bar)^2)
-sum(p2 * (x2 - x2bar)^2)
-sum(p3 * (x3 - x3bar)^2)
+## Variâncias
+sum(p1 * (x1 - EX1)^2)
+sum(p2 * (x2 - EX2)^2)
+sum(p3 * (x3 - EX3)^2)
+
+## Forma alternativa
+## V(X) = E(X^2) - E(X)^2
+
+x12 <- x1^2
+(EX12 <- sum(x12 * p1))
+(VX1 <- EX12 - EX1^2)
+
+x22 <- x2^2
+(EX22 <- sum(x22 * p2))
+(VX2 <- EX22 - EX2^2)
+
+x32 <- x3^2
+(EX32 <- sum(x32 * p3))
+(VX3 <- EX32 - EX3^2)
 ```
 
 ### Esperança e variância de modelos teóricos
