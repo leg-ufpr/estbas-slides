@@ -64,9 +64,9 @@ op <- par(no.readonly = TRUE)
 
 ### Exemplo $5.1$
 
-- Uma amostra de $20$ alunos do primeiro ano de uma faculdade foi
-escolhida. Perguntou-se aos alunos se trabalhavam, variável que foi
-representada por $X$, e o número de vestibulares prestados, variável
+Uma amostra de $20$ alunos do primeiro ano de uma faculdade foi
+escolhida. Perguntou-se aos alunos se *trabalhavam*, variável que foi
+representada por $X$, e o *número de vestibulares prestados*, variável
 representada por $Y$. Os dados obtidos estão na tabela abaixo.
 
 ```{r}
@@ -91,19 +91,20 @@ tab
 
 ### Exemplo 5.1
 
-Distribuição conjunta (melhor para visualizar)
+Distribuição conjunta: **tabela de dupla entrada** (melhor para
+visualizar)
 
 ```{r}
 addmargins(table(X, Y))
 ```
 
-Distribuição marginal de $X$
+Distribuição **marginal** de $X$
 
 ```{r}
 addmargins(table(X))
 ```
 
-Distribuição marginal de $Y$
+Distribuição **marginal** de $Y$
 
 ```{r}
 addmargins(table(Y))
@@ -111,11 +112,11 @@ addmargins(table(Y))
 
 ### Exemplo $5.2$
 
-- Um estudo envolveu $345$ pacientes HIV positivos, acompanhados
-durante um ano, pelo setor de doenças infecciosas de um grande hospital
-público. Os dados apresentados contêm as ocorrências relacionadas
-às variáveis número de internações $(I)$ e número de crises com
-infecções oportunistas $(C)$.
+Um estudo envolveu $345$ pacientes HIV positivos, acompanhados durante
+um ano, pelo setor de doenças infecciosas de um grande hospital público.
+Os dados apresentados contêm as ocorrências relacionadas às variáveis
+*número de internações* $(I)$ e *número de crises com infecções
+oportunistas* $(C)$.
 
 \begin{table}[]
 \centering
@@ -137,21 +138,21 @@ I <- rep(0:2, times = c(115, 130, 100))
 C <- rep(0:4, times = c(110, 91, 86, 44, 14))
 ```
 
-- Marginal de $I$
+- Marginal de $I$ (soma das linhas)
 
 ```{r}
 addmargins(table(I))
 ```
 
-- Marginal de $C$
+- Marginal de $C$ (soma das colunas)
 
 ```{r}
 addmargins(table(C))
 ```
 
-### Função de probabilidade conjunta
+### VAs discretas: função de probabilidade conjunta
 
-Sejam $X$ e $Y$ duas VAs discretas originárias do mesmo fenômeno
+Sejam $X$ e $Y$ **duas VAs discretas** originárias do mesmo fenômeno
 aleatório, com valores atribuídos a partir do mesmo espaço amostral.
 
 A **função de probabilidade conjunta** é definida, para todos os possíveis
@@ -181,12 +182,31 @@ Este índice, atribuiu $10$ pontos para cada entrega dentro do cronograma
 previsto. Denote por $X$ o valor recebido pelo pedido e $Y$ o índice
 obtido. Obtenha a conjunta de $Y$ e $X$ e as marginais de $Y$ e $X$.
 
+```{r, include=FALSE}
+pa1 <- 0.1; pa1c <- 0.9
+pa2 <- 0.2; pa2c <- 0.8
+da <- expand.grid(c("A1", "A1c"), c("A2", "A2c"))
+da$pxy <- as.vector(outer(X = c(pa1, pa1c), Y = c(pa2, pa2c)))
+da$X <- c(160, 180, 180, 200)
+da$Y <- c(0, 10, 10, 20)
+da
+## Conjunta de (X, Y)
+aggregate(pxy ~ X + Y, data = da, FUN = sum)
+## Marginal de X
+aggregate(pxy ~ X, data =  da, FUN = sum)
+## Marginal de Y
+aggregate(pxy ~ Y, data =  da, FUN = sum)
+## Conjunta em forma de tabela de dupla entrada
+(cXY <- xtabs(pxy ~ X + Y, data = da))
+addmargins(cXY)
+```
+
 ### Exemplo $5.5$
 
-Uma região foi dividida em $10$ sub-regiões. Em cada uma delas,
-foram observadas duas variáveis: número de poços artesianos $(X)$
-e número de riachos ou rios presentes na sub-região $(Y)$.
-Os resultados são apresentados na tabela a seguir:
+Uma região foi dividida em $10$ sub-regiões. Em cada uma delas, foram
+observadas duas variáveis: *número de poços artesianos* $(X)$ e *número
+de riachos ou rios presentes* na sub-região $(Y)$. Os resultados são
+apresentados na tabela a seguir:
 
 ```{r}
 X <- c(0, 0, 0, 0, 1, 2, 1, 2, 2, 0)
@@ -259,6 +279,58 @@ $$
 com o somatório percorrendo todos os valores de $X$ ou $Y$, conforme for
 o caso.
 
+### Exemplo 5.6
+
+Em uma cidade, admite-se que o *número de anos para competar o ensino
+fundamental* ($F$), e o *número de anos para completar o ensino médio*
+($M$) têm função de probabilidade conjunta:
+
+```{r}
+da <- data.frame(
+    F = c(rep(9, 3), rep(10, 3), rep(11, 2)),
+    M = c(rep(3:5, 2), 4, 5),
+    P = c(3/10, 1/10, 1/10, 2/10, 1/20, 1/10, 1/10, 1/20)
+)
+```
+
+\begincols
+\column{.5\textwidth}
+```{r}
+da1 <- data.frame(
+    paste(da$F, da$M, sep = ","),
+    da$P
+)
+names(da1) <- c("`(F,M)`", "`p(f,m)`")
+da1
+```
+\column{.5\textwidth}
+```{r}
+(da2 <- xtabs(P ~ F + M, data = da))
+```
+\endcols
+
+O interesse está em estudar o comportamento da variável *número total de
+anos para completar o ensino fundamental e médio*, ou seja, $T = F + M$.
+Obtenha a distribuição de $T$.
+
+### Exemplo 5.6
+
+\begincols
+\column{.5\textwidth}
+Possíveis valores de $T = F+M$
+```{r}
+da1$T <- da$F + da$M
+da1
+```
+\column{.5\textwidth}
+Distribuição de $T=F+M$
+```{r}
+dT <- aggregate(da1[, 2] ~ T, data = da1, FUN = sum)
+names(dT) <- c("T", "P(T)")
+dT
+```
+\endcols
+
 ## Associação entre variáveis
 
 ### Associação entre variáveis
@@ -268,13 +340,13 @@ o caso.
 - Queremos conhecer o grau de **dependência**, para prever melhor o
   resultado de uma delas quando conhecemos a outra
 - Veremos algumas formas de medir/avaliar essa dependência:
-  a. Duas variáveis qualitativas
-     - Verificação de proporções através da distribuição conjunta
-     - Medida $Q^2$
-  b. Duas variáveis quantitativas
+  a. Duas variáveis quantitativas
      - Diagramas de dispersão
      - Probabilidades condicionais
      - Correlação e covariância
+  b. Duas variáveis qualitativas
+     - Verificação de proporções através da distribuição conjunta
+     - Medida $Q^2$
 
 ### Exemplo $5.7$
 
