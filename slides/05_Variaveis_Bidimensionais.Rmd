@@ -129,7 +129,6 @@ I/C & 0  & 1  & 2  & 3  & 4  \\ \hline
 \end{table}
 
 - Obtenha as marginais de $I$ e $C$.
-- Exemplo $5.3$ tarefa de casa.
 
 ### Exemplo $5.2$
 
@@ -215,7 +214,6 @@ rbind("Sub-região" = 1:10, X, Y)
 ```
 
 - Construa a distribuição conjunta e marginais de $X$ e $Y$.
-- Exemplo $5.6$ tarefa de casa.
 
 ### Exemplo $5.5$
 
@@ -377,7 +375,6 @@ Inglês e Matemática:
 table(I,M)
 ```
 \column{.5\textwidth}
-
 Português e Matemática:
 ```{r}
 table(P,M)
@@ -402,7 +399,10 @@ par(mfrow = c(1,1))
 
 - A **probabilidade condicional** de $X = x$, dado que $Y = y$ ocorreu,
 é dada pela expressão:
-$$ P(X = x | Y = y) = \frac{P(X=x,Y=y)}{P(Y=y)}, \quad \text{se} \quad P(Y=y) > 0.$$
+$$
+P(X = x | Y = y) = \frac{P(X=x,Y=y)}{P(Y=y)},
+\quad \text{se} \quad P(Y=y) > 0.
+$$
 - Duas VAs discretas são **independentes**, se a ocorrência de qualquer
 valor de uma delas não altera a probabilidade de valores da outra. Em termos
 matemáticos
@@ -412,10 +412,10 @@ $$ P(X =x, Y = y) = P(X=x)P(Y=y), \quad \forall (x,y).$$
 
 ### Exemplo $5.8$
 
-- O Centro Acadêmico de uma faculdade de administração fez um
-levantamento da remuneração dos estágios dos alunos, em salários
-mínimos, com relação ao ano que estão cursando. As probabilidades
-de cada caso são apresentadas na próxima tabela, incluindo as distribuições
+O Centro Acadêmico de uma faculdade de administração fez um levantamento
+da *remuneração dos estágios dos alunos*, em salários mínimos ($X$), com
+relação ao *ano que estão cursando* ($Y$). As probabilidades de cada
+caso são apresentadas na próxima tabela, incluindo as distribuições
 marginais.
 
 \begin{table}
@@ -429,13 +429,13 @@ $P(Ano = y)$    & $5/25$ & $9/25$ & $5/25$ & $6/25$ & $1$         \\ \hline
 \end{tabular}
 \end{table}
 
-- X e Y são independentes?
+- $X$ e $Y$ são independentes?
 
 ### Exemplo $5.9$
 
-- Em uma clínica médica foram coletados dados em $150$ pacientes,
-referentes ao último ano. Observou-se a ocorrência de infecções urinárias
-$(U)$ e o número de parceiros sexuais $(N)$.
+Em uma clínica médica foram coletados dados em 150 pacientes, referentes
+ao último ano. Observou-se a *ocorrência de infecções urinárias* ($U$) e
+o *número de parceiros sexuais* ($N$).
 
 \begin{table}
 \centering
@@ -447,7 +447,7 @@ Total & 57 & 39 & 54  & 150  \\ \hline
 \end{tabular}
 \end{table}
 
-- Estude a associação entre U e N.
+- Estude a associação entre $U$ e $N$.
 
 ### Exemplo $5.9$
 
@@ -482,9 +482,9 @@ porcentagens similares em cada valor de $N$ (independência).
 
 ### Exemplo 5.10
 
-- Os dados abaixo representam uma amostra de 80 famílias de um certo
-  bairro, onde $T$ é o número de pessoas que trabalham na família, e $A$
-  é o número de adolescentes entre 12 e 18 anos.
+Os dados abaixo representam uma amostra de 80 famílias de um certo
+bairro, onde $T$ é o *número de pessoas que trabalham na família*, e $A$
+é o *número de adolescentes entre 12 e 18 anos*.
 
 ```{r}
 A <- rep(0:4, times = c(15, 22, 18, 17, 8))
@@ -493,35 +493,73 @@ T <- c(rep(0:3, times = c(5, 2, 4, 4)),
        rep(0:3, times = c(2, 6, 8, 2)),
        rep(0:3, times = c(3, 4, 5, 5)),
        rep(0:3, times = c(1, 1, 2, 4)))
-addmargins(table(T, A))
+(ta <- addmargins(table(T, A)))
 ```
 
 - Verifique a associação entre as duas variáveis.
 
 ### Exemplo 5.10
 
-Usando a distribuição marginal de $T$ (ou seja, utilizando-se a soma por
-colunas)
-
+Assim como no exemplo anterior, podemos usar os totais de coluna e
+calcular as frequências relativas
 ```{r}
-round(addmargins(prop.table(table(T))), 2)
-```
-
-podemos calcular quais seriam as proporções esperadas para cada valor de
-$A$, caso fossem independentes:
-
-```{r}
-round(addmargins(prop.table(
+tab <- round(addmargins(prop.table(
     cbind(table(T, A), apply(table(T, A), 1, sum)), margin = 2),
     margin = 1), 2)
+names(dimnames(tab)) <- c("T", "A")
+dimnames(tab)$A[6] <- "Sum"
+class(tab) <- c("table", "matrix")
+tab
 ```
+
+- Caso houvesse independência, as frequências de cada valor de $A$
+deveriam ser próximas das frequências marginais de $T$ (última coluna).
+- Podemos também verificar se as **frequências absolutas** de cada coluna
+de $A$ se distribuem de maneira **proporcional**.
+- Dessa forma, calculamos as **frequências esperadas**, caso houvesse
+independência.
 
 ### Exemplo 5.10
 
-Uma forma de resumir é calcular as **frequências esperadas**,
-multiplicando os totais de coluna pelas proporções obtidas pela
-**distribuição marginal** de $T$
+\begincols
+\column{.5\textwidth}
+Distribuição marginal de $T$
+```{r}
+mT <- as.data.frame(addmargins(table(T)))
+mT$"Freq. rel." <- round(addmargins(prop.table(table(T))), 2)
+mT
+```
+\column{.5\textwidth}
+Distribuição de $T/A=0$
+```{r}
+mTA0 <- as.data.frame(addmargins(table(T[A == 0])))
+names(mTA0) <- c("`T/A=0`", "Freq. obs.")
+mTA0
+```
+\endcols
 
+\begincols
+\column{.5\textwidth}
+\begin{align*}
+\text{Freq. esp.} &= \text{Freq. rel.} \times \text{Total de col.} \\
+2.85 &= 0.19 \times 15 \\
+3.90 &= 0.26 \times 15 \\
+5.10 &= 0.34 \times 15 \\
+3.15 &= 0.21 \times 15
+\end{align*}
+\column{.5\textwidth}
+```{r}
+mTA0 <- as.data.frame(addmargins(table(T[A == 0])))
+names(mTA0) <- c("`T/A=0`", "Freq. obs.")
+mTA0$"Freq. esp." <- mTA0[5, "Freq. obs."] * mT$"Freq. rel."
+mTA0
+```
+\endcols
+
+### Exemplo 5.10
+
+Fazendo o mesmo processo para todas as colunas, obtemos a tabela com as
+**frequências esperadas**
 ```{r}
 tab <- matrix(prop.table(table(T)), nrow = 4, ncol = 5)
 somas <- apply(table(T, A), 2, sum)
@@ -529,7 +567,13 @@ tab <- sweep(tab, 2, somas, FUN = "*")
 colnames(tab) <- 0:4
 rownames(tab) <- 0:3
 tab <- addmargins(tab)
+class(tab) <- c("table", "matrix")
+names(dimnames(tab)) <- c("T", "A")
 round(tab, 2)
+```
+que podemos comparar com a tabela de **frequências observadas**
+```{r}
+ta
 ```
 
 ### Exemplo 5.10
@@ -563,11 +607,10 @@ $$ \rho_{XY} = \frac{\sum_{i=1}^n x_i y_i - n\bar{x}\bar{y}}{\sqrt{[\sum_{j=1}^n
 
 ### Exemplo 5.11
 
-- A quantidade de chuva é um fator importante na produtividade
-agrícola. Para medir esse efeito foram anotados, para $8$ diferentes
-regiões produtoras de soja, o índice pluviométrico em milímetros $(X)$
-e a produção do último ano em toneladas $(Y)$. Determine o coeficiente
-de correlação.
+A quantidade de chuva é um fator importante na produtividade agrícola.
+Para medir esse efeito foram anotados, para $8$ diferentes regiões
+produtoras de soja, o *índice pluviométrico* em milímetros $(X)$ e a
+*produção do último ano* em toneladas $(Y)$.
 
 ```{r }
 X <- c(120,140,122,150,115,190,130,118)
@@ -575,7 +618,7 @@ Y <- c(40,46,45,37,25,54,33,30)
 rbind(X, Y)
 ```
 
-- Exemplo $5.12$ tarefa de casa.
+- Determine o coeficiente de correlação.
 
 ### Exemplo 5.11
 
@@ -591,28 +634,114 @@ $$
 
 ### Propriedades de esperança de VAs
 
-Para podermos definir medidas de dependência entre VAs discretas,
+Para podermos definir medidas de dependência entre **VAs discretas**,
 precisamos das seguintes propriedades de esperança de VAs.
 
-Para duas VAs $X$ e $Y$, **independentes**, segue que
+#### Valor esperado da soma de VAs
 
+Para variáveis aleatórias $X$ e $Y$, vale sempre que
 $$
 E(X + Y) = E(X) + E(Y)
 $$
 
+### Voltando ao exemplo 5.6
+
+```{r}
+da <- data.frame(
+    F = c(rep(9, 3), rep(10, 3), rep(11, 2)),
+    M = c(rep(3:5, 2), 4, 5),
+    P = c(3/10, 1/10, 1/10, 2/10, 1/20, 1/10, 1/10, 1/20)
+)
+```
+\begincols
+\column{.5\textwidth}
+```{r}
+da2 <- xtabs(P ~ F + M, data = da)
+(da2 <- addmargins(da2))
+```
+\footnotesize
+$E(F) = 9 \times 0.5 + \cdots + 11 \times 0.15 = `r sum(9*.5, 10*.35,
+ 11*.15)`$
+$E(M) = 3 \times 0.5 + \cdots + 5 \times 0.25 = `r sum(3*.5, 4*.25,
+ 5*.25)`$
+\column{.5\textwidth}
+Distribuição de $T=F+M$
+```{r}
+da1 <- data.frame(
+    paste(da$F, da$M, sep = ","),
+    da$P
+)
+names(da1) <- c("`(F,M)`", "`p(f,m)`")
+da1$T <- da$F + da$M
+dT <- aggregate(da1[, 2] ~ T, data = da1, FUN = sum)
+names(dT) <- c("T", "P(T)")
+t(dT)
+```
+\endcols
+
+\begin{align*}
+E(F+M) &= 12 \times 0.3 + \cdots + 16 \times 0.05 =
+`r sum(dT$T * dT$"P(T)")` \\
+ \text{ou} & \\
+ E(F+M) &= E(F) + E(M) \\
+ &= 9.75 + 3.75 \\
+ &= 13.4
+\end{align*}
+
+### Propriedades de esperança de VAs
+
+#### Valor esperado do produto de VAs
+
+Para $X$ e $Y$ variáveis aleatórias discretas **independentes**, temos
 $$
 E(XY) = E(X)E(Y)
 $$
 
-#### Importante
+#### IMPORTANTE
 
 $X$ e $Y$ independentes $\Rightarrow$ $E(XY) = E(X)E(Y)$
+\newline
 
 No entanto:
+\newline
 
 $E(XY) = E(X)E(Y)$ $\not\Rightarrow$ $X$ e $Y$ independentes
 
-[Ver exemplo 5.13]
+### Exemplo 5.13
+
+Considere as variáveis $W$ e $Z$ com a seguinte distribuição:
+\begincols
+\column{.5\textwidth}
+```{r}
+W <- 2:4
+Z <- -1:1
+p <- c(2/12, 0, 3/12,
+       0, 1/12, 1/12,
+       1/12, 2/12, 2/12)
+tab <- matrix(p, ncol = 3, byrow = TRUE)
+rownames(tab) <- Z
+colnames(tab) <- W
+tab <- addmargins(tab)
+class(tab) <- c("table", "matrix")
+names(dimnames(tab)) <- c("W", "Z")
+round(tab, 2)
+```
+\column{.5\textwidth}
+\footnotesize
+$E(W) = -1 \times 0.42 + \cdots + 1 \times 0.42 = 0$
+$E(Z) = 2 \times 0.25 + \cdots + 4 \times 0.5 = 3.25$
+\endcols
+A variável $WZ$ terá então a distribuição
+```{r}
+WZ <- c(-4, -2, 0, 2, 3, 4)
+pWZ <- c(3/12, 2/12, 2/12, 1/12, 2/12, 2/12)
+round(rbind(WZ, pWZ), 2)
+```
+$E(WZ) = -4 \times 0.25 + \cdots + 4 \times 0.17
+ = `r round(sum(WZ * pWZ),0)`
+ = E(W)E(Z)$
+
+**Mas**, verifique que $W$ e $Z$ **não são independentes**!
 
 ### Covariância de duas VAs
 
