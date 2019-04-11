@@ -881,5 +881,6 @@ $$\rho_{XY} = \frac{Cov(X,Y)}{\sigma_X \sigma_Y} =
 
 ### Exercícios recomendados
 
-- Seção $5.1$ - $1,2,3,4$ e $6$.
-- Seção $5.2$ - $1,2,3,4$ e $5$.
+- Seção 5.1 - 1, 2, 3, 4 e 5.
+- Seção 5.2 - 1, 2, 3, 4, 5 e 6.
+- Seção 5.3 - 1, 6, 15, 17, 28, e 29.
