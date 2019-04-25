@@ -105,7 +105,8 @@ situado em qualquer ponto entre $20$ e $100$ metros.
 - Determine uma função para representar a variável $X$ (profundidade
 do lençol de água).
 - Calcule a probabilidade de encontar água em uma profundidade pelo
-menos igual a 25, mas inferior a 29 metros.
+menos igual a 25, e menor ou igual a 29 metros.
+- Qual a probabilidade de encontrar água na profundidade de 60 metros?
 
 ## Variáveis aleatórias contínuas
 
@@ -118,7 +119,8 @@ Atribuimos probabilidades à intervalos de valores, por meio de uma
 **função**. Portanto, as probabilidades são representadas por
 áreas.
 
-```{r, out.width="55%", fig.width=6, fig.height=5}
+```{r dens, out.width="55%", fig.width=6, fig.height=5}
+set.seed(11)
 x <- rnorm(1000, 50, 5)
 MASS::truehist(x, xlim = c(30,70),
                xlab = "X", ylab = "Densidade"); box()
@@ -130,7 +132,7 @@ lines(density(x))
 A **função densidade de probabilidade** (fdp) atribui probabilidades à
 intervalos de valores do tipo $[a,b]$, e é definida por
 $$
-P[a < x < b] = \int_{a}^{b} f(x) dx
+P[a < X < b] = \int_{a}^{b} f(x) dx
 $$
 com as seguintes propriedades:
 
@@ -144,11 +146,11 @@ ii. A área total sob a curva deve ser igual a 1
 
 - $P[X=x] = 0$, portanto: $$P[a \leq X \leq b] = P[a < X \leq b] = P[a
   \leq X < b] = P[a < X < b]$$
-- Qualquer função $f(\cdot)$ que seja não negativa e cuja área total sob
-a curva seja igual à unidade caracterizará uma VA contínua.
+- **Qualquer função** $f(\cdot)$ que seja não negativa e cuja área total
+sob a curva seja igual à unidade caracterizará uma VA contínua.
 - $f(x)$ **não** representa a probabilidade de ocorrência de algum
-evento. A área sob a curva entre dois pontos é que fornecerá a
-probabilidade.
+evento. **A área sob a curva entre dois pontos é que fornecerá a
+probabilidade**.
 
 ### Exemplo
 
@@ -165,18 +167,27 @@ $$
 - Verifique se essa função é uma fdp.
 - Calcule:
     - $P[X > 0]$
-    - $P[X > 0,5]$
-    - $P[-0,5 \leq X \leq 0,5]$
+    - $P[X > 1/2]$
+    - $P[-1/2 \leq X \leq 1/2]$
     - $P[X < -2]$
-    - $P[X < 0,5]$
-    - $P[X < 0 \cup X > 0,5]$
+    - $P[X < 1/2]$
+    - $P[X < 0 \cup X > 1/2]$
 
 (Ver também exemplos 6.2 e 6.3).
 
 ```{r, include=FALSE}
+## Grafico
 x <- seq(-1, 1, length = 100)
-fx <- 1.5 * x^2
-plot(x, fx, type = "l")
+fx <- function(x) 1.5 * x^2
+plot(x, fx(x), type = "l")
+
+## FDP
+integrate(fx, -1, 1)
+integrate(fx, 0, 1)
+integrate(fx, 0.5, 1)
+integrate(fx, -0.5, 0.5)
+integrate(fx, -1, 0.5)
+integrate(fx, -1, 0)$value + integrate(fx, 0.5, 1)$value
 ```
 
 <!-- ### Exemplo 6.2 -->
