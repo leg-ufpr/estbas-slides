@@ -213,7 +213,7 @@ integrate(fx, -1, 0)$value + integrate(fx, 0.5, 1)$value
 densidade $f(x)$, é dado pela expressão:
 $$E(X) = \mu = \int_{-\infty}^{\infty} x\, f(x) dx.$$
 - A mediana é o valor $Md$ que tem a propriedade de
-$$P(X \geq Md) \geq 0.5 \quad \text{e} \quad P(X \leq Md) \geq 0.5.$$
+$$P(X \geq Md) \geq 1/2 \quad \text{e} \quad P(X \leq Md) \geq 1/2.$$
 - A moda é o valor $Mo$ tal que,
 $$f(Mo) = \max_{x} f(x).$$
 
@@ -240,6 +240,13 @@ f(x)=
 $$
 
 Calcule $E(X)$, $Var(X)$, $DP(X)$.
+
+```{r, include=FALSE}
+(EX <- integrate(function(x) x * fx(x), -1, 1)$value)
+(EX2 <- integrate(function(x) x^2 * fx(x), -1, 1)$value)
+(VX <- EX2 - EX)
+(DPX <- sqrt(VX))
+```
 
 # Principais modelos contínuos
 
